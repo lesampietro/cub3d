@@ -1,12 +1,10 @@
 NAME	= cub3D
 CC		= cc
-CFLAGS	:= -Wunreachable-code -Ofast -g3 -Wextra -Wall -Werror
+CFLAGS	:= -g3 -Wextra -Wall -Werror
 LIBMLX	:= ./.lib/MLX42
 BIN		:= bin
 
-FILES	= fractal_selection.c colors.c utils.c \
-			main.c mouse_hook.c key_hook.c \
-			mandelbrot.c julia.c tricorn.c
+FILES	= main.c
 
 M_PATH	= src
 
@@ -23,9 +21,9 @@ $(NAME): $(OBJS)
 $(LIBS):
 ifeq ($(wildcard $(LIBMLX)/build/ ), )
 	@if [ ! -d "$(LIBMLX)" ]; then \
-		cd ./.lib && git clone https://github.com/codam-coding-college/MLX42.git; \
+		mkdir .lib && cd ./.lib && git clone https://github.com/codam-coding-college/MLX42.git; \
 	fi
-	@cd ./.lib/MLX42/ && sed -i "s/(VERSION 3.18.0)/(VERSION 3.16.0)/" CMakeLists.txt
+	# @cd ./.lib/MLX42/ && sed -i "s/(VERSION 3.18.0)/(VERSION 3.16.0)/" CMakeLists.txt
 	@cd ./.lib/MLX42/ && cmake -B build
 	@cd ./.lib/MLX42/ && cmake --build build -j4
 endif
