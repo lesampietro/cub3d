@@ -2,21 +2,27 @@ NAME	= cub3D
 CC		= cc
 CFLAGS	:= -g3 -Wextra -Wall -Werror
 LIBMLX	:= ./.lib/MLX42
+LIBFT	:= ./libft/libft.a
+
 BIN		:= bin
 
 FILES	= main.c init_cub3d.c
 
 M_PATH	= src
 
-HEADERS	= -I ./include -I $(LIBMLX)/include
-LIBS	= $(LIBMLX)/build/libmlx42.a -ldl -lglfw -pthread -lm
+HEADERS	= -I ./include -I $(LIBMLX)/include -I ./libft
+LIBS	= $(LIBMLX)/build/libmlx42.a $(LIBFT) -ldl -lglfw -pthread -lm
 SRCS	= $(addprefix  $(M_PATH)/, $(FILES))
 OBJS	= $(patsubst %, $(BIN)/%, $(notdir $(SRCS:.c=.o)))
 
 all: $(BIN) $(LIBS) $(NAME)
 
+libft/libft.a:
+	@make -sC ./libft
+
 $(NAME): $(OBJS)
-	@$(CC) $(OBJS) $(LIBS) $(HEADERS) -o $(NAME)
+	@$(CC) $(OBJS) $(LIBS) $(HEADERS) -o $(NAME) \
+		&& printf "\-\-\-\- COMPILED -/-/-/-/\n"
 
 $(LIBS):
 ifeq ($(wildcard $(LIBMLX)/build/ ), )
