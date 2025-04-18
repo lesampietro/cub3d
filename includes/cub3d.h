@@ -10,9 +10,15 @@
 # include <stdbool.h>
 # include "../.lib/MLX42/include/MLX42/MLX42.h"
 
+# define WINDOW_WIDTH 1920
+# define WINDOW_HEIGHT 1080
+
 typedef struct s_game
 {
 	mlx_t		*mlx;
 } t_game;
+
+int32_t	init_game(char *argv, t_game *game);
+void	init_window(t_game *game);
 
 #endif

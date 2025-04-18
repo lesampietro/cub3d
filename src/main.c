@@ -17,7 +17,7 @@ int32_t main(int argc, char **argv)
 {
 	// char **new_map;
 	// int i;
-	// t_game game;
+	t_game game;
 
 	// i = 0;
 	// init_values(&game);
@@ -27,9 +27,8 @@ int32_t main(int argc, char **argv)
 	// new_map = read_map(argv[1]);
 	// is_valid_map(new_map);
 	// free_map(new_map);
-	// init_game(argv[1], &game);
+	init_game(argv[1], &game);
 	// return (EXIT_SUCCESS);
 	(void)argc;
-	(void)argv;
 	return (EXIT_SUCCESS);
 }
