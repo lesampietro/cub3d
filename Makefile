@@ -4,7 +4,7 @@ CFLAGS	:= -g3 -Wextra -Wall -Werror
 LIBMLX	:= ./.lib/MLX42
 BIN		:= bin
 
-FILES	= main.c
+FILES	= main.c init_cub3d.c
 
 M_PATH	= src
 
