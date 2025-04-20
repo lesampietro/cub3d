@@ -39,7 +39,7 @@ int32_t init_game(char *argv, t_game *game)
 	// init_game_image(game);
 	// get_player_pos(game->map, &game->player_pos);
 	// occurence_count(game->map, &game->occ);
-	// mlx_key_hook(game->mlx, &init_move, game);
+	// mlx_key_hook(game->mlx, &init_move, game)make;
 	mlx_loop(game->mlx);
 	// free_game(game);
 	return (EXIT_SUCCESS);

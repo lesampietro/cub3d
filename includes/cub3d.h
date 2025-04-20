@@ -15,7 +15,10 @@
 
 typedef struct s_game
 {
+	char		**map;
 	mlx_t		*mlx;
+	int			col;
+	int			lin;
 } t_game;
 
 int32_t	init_game(char *argv, t_game *game);
