@@ -24,4 +24,9 @@ typedef struct s_game
 int32_t	init_game(char *argv, t_game *game);
 void	init_window(t_game *game);
 
+//MAP VALIDATION
+void    validate_map(char   **argv);
+bool	is_invalid_extn(char **file_ext);
+
+
 #endif
