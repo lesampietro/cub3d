@@ -48,11 +48,9 @@ int32_t main(int argc, char **argv)
 	t_game game;
 
 	init_values(&game);
-	// if (argc != 2)
-	// 	printf("Wrong number of arguments: needs only a map");
-	
-		// ft_error(ERROR_ARG, NULL);
+	// ft_error(ERROR_ARG, NULL);
 	// is_valid_entry(&argv[1]);
+	validate_map(argc, argv);
 	// validate_map(&argv[1]);
 	// free_map(entry_map);
 	init_game(argv[1], &game);

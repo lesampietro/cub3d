@@ -14,6 +14,10 @@
 # define WINDOW_WIDTH 800
 # define WINDOW_HEIGHT 600
 
+#define BPINK "\033[1;35m"
+#define BCYAN "\033[1;36m"
+#define RST "\033[0m"
+
 typedef struct s_game
 {
 	char		**map;
@@ -25,12 +29,12 @@ typedef struct s_game
 	int			lin;
 } t_game;
 
-int32_t	init_game(char *argv, t_game *game);
-void	init_window(t_game *game);
+int32_t			init_game(char *argv, t_game *game);
+void			init_window(t_game *game);
 
 //MAP VALIDATION
-void    validate_map(char   **argv);
-bool	is_invalid_extn(char **file_ext);
+void    		validate_map(int argc, char   **argv);
+void			is_valid_ext(char 	*file_ext);
 
 
 //GRAPHICS
