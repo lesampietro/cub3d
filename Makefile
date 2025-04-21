@@ -1,52 +1,65 @@
 NAME	= cub3D
 CC		= cc
 CFLAGS	:= -g3 -Wextra -Wall -Werror
-LIBMLX	:= ./.lib/MLX42
+
+SRC_PATH	= src
+MLX_PATH	:= ./.lib/MLX42
 LIBFT	:= ./libft/libft.a
+MLX42_LIB = $(MLX_PATH)/build/libmlx42.a
+LIBFLAGS := -ldl -lglfw -pthread -lm
+LIBS	= $(MLX42_LIB) $(LIBFT)
+
 
 BIN		:= bin
 
-FILES	= main.c init_cub3d.c
+SRCS	= $(addprefix  $(SRC_PATH)/, $(FILES))
+FILES	= main.c init_cub3d.c validation/map_parsing.c validation/map_validation.c \
+			graphics/background.c graphics/frame_loop.c graphics/ray_casting.c
 
-M_PATH	= src
 
-HEADERS	= -I ./include -I $(LIBMLX)/include -I ./libft
-LIBS	= $(LIBMLX)/build/libmlx42.a $(LIBFT) -ldl -lglfw -pthread -lm
-SRCS	= $(addprefix  $(M_PATH)/, $(FILES))
-OBJS	= $(patsubst %, $(BIN)/%, $(notdir $(SRCS:.c=.o)))
+HEADERS	= -I ./include -I $(MLX_PATH)/include -I ./libft
+OBJS = $(SRCS:$(M_PATH)/%.c=$(BIN)/%.o)
 
-all: $(BIN) $(LIBS) $(NAME)
 
-libft/libft.a:
+all: $(BIN) mlx42 $(NAME)
+
+mlx42: $(MLX42_LIB)
+
+$(LIBFT):
 	@make -sC ./libft
 
-$(NAME): $(OBJS)
-	@$(CC) $(OBJS) $(LIBS) $(HEADERS) -o $(NAME) \
+$(NAME): $(OBJS) $(MLX42_LIB) $(LIBFT)
+	@$(CC) $(OBJS) $(LIBS) $(HEADERS) -o $(NAME) $(LIBFLAGS) \
 		&& printf "\-\-\-\- COMPILED -/-/-/-/\n"
 
-$(LIBS):
-ifeq ($(wildcard $(LIBMLX)/build/ ), )
-	@if [ ! -d "$(LIBMLX)" ]; then \
+$(MLX42_LIB):
+ifeq ($(wildcard $(MLX_PATH)/build/ ), )
+	@if [ ! -d "$(MLX_PATH)" ]; then \
 		mkdir .lib && cd ./.lib && git clone https://github.com/codam-coding-college/MLX42.git; \
 	fi
-	# @cd ./.lib/MLX42/ && sed -i "s/(VERSION 3.18.0)/(VERSION 3.16.0)/" CMakeLists.txt
 	@cd ./.lib/MLX42/ && cmake -B build
-	@cd ./.lib/MLX42/ && cmake --build build -j4
+	@cd ./.lib/MLX42/ && make -s -C build -j4
 endif
 
 $(BIN):
 	@mkdir -p $(BIN)
 
-$(BIN)/%.o: $(M_PATH)/%.c | $(BIN)
+$(BIN)/%.o: $(M_PATH)/%.c
+	@mkdir -p $(dir $@)
 	@$(CC) $(CFLAGS) $(HEADERS) -c $< -o $@
 	@printf "Compiling: $(notdir $<)\n"
 
 clean:
 	@rm -rf $(BIN)
+	@make -sC ./libft clean
 
 fclean: clean
 	@rm -rf $(NAME)
+	@make -sC ./libft fclean
 
-re: clean all
+mlxclean:
+	@rm -rf ./.lib
+
+re: fclean all
 
 .PHONY: all, clean, fclean, re
