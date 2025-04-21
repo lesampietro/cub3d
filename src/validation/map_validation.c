@@ -51,25 +51,29 @@ int safe_open(char *filename)
 	return (fd);
 }
 
-void	read_map(char *map_file, t_game *game)
+void	read_map(char *map_file, t_data *data)
 {
 	int		fd;
 	char	*tmp;
 
 	tmp = NULL;
 	fd = safe_open(map_file);
-	
-		
-
+	tmp = get_next_line(fd);
+	while (tmp)
+	{
+		while (ft_isspace(*tmp))
+			tmp++;
+		printf("%s", tmp);
+		tmp = get_next_line(fd);
+	}
 }
 
-void	validate_map(int argc, char **argv, t_game *game)
+void	validate_map(int argc, char **argv, t_data *data)
 {
 	char	**map;
 
 	map = NULL;
 	check_args(argc, argv);
-
 	is_valid_ext(argv[1]);
-	read_map(argv[1], game);
+	read_map(argv[1], data);
 }
