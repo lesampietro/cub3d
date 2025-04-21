@@ -27,7 +27,7 @@ void	init_window(t_game *game);
 
 //MAP VALIDATION
 void    validate_map(char   **argv);
-bool	is_invalid_extn(char **file_ext);
+int		is_valid_ext(char 	*file_ext);
 
 
 #endif
