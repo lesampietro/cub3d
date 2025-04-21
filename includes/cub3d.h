@@ -21,10 +21,16 @@
 typedef struct s_data
 {
 	char		**map;
-	uint32_t	ceiling;
-	uint32_t	floor;
 	int			col;
 	int			lin;
+	char		*no;
+	char		*so;
+	char		*ea;
+	char		*we;
+	char		*c;
+	char		*f;
+	uint32_t	ceiling;
+	uint32_t	floor;
 } t_data;
 
 typedef struct s_game
