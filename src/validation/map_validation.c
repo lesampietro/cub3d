@@ -57,6 +57,6 @@ void    validate_map(int argc, char   **argv)
 
     map = NULL;
     check_args(argc, argv);
-    check_path(argv[1]);
+    // check_path(argv[1]);
     is_valid_ext(argv[1]); 
 }
