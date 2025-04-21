@@ -59,10 +59,16 @@ void	read_map(char *map_file, t_data *data)
 	tmp = NULL;
 	fd = safe_open(map_file);
 	tmp = get_next_line(fd);
+	if (!tmp || tmp[0] == '\n' || tmp[0] == '\0')
+	{
+		printf(BPINK"Error: file is empty"RST);
+		exit(EXIT_FAILURE);
+	}
 	while (tmp)
 	{
 		while (ft_isspace(*tmp))
 			tmp++;
+		// printf("%s", tmp);
 		tmp = get_next_line(fd);
 	}
 }
