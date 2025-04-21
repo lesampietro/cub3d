@@ -47,8 +47,10 @@ int32_t main(int argc, char **argv)
 	// int i;
 	t_game game;
 
-	init_values(&game);
-	// ft_error(ERROR_ARG, NULL);
+	// i = 0;
+	// init_values(&game);
+	// if (argc != 2)
+	// 	ft_error(ERROR_ARG, NULL);
 	// is_valid_entry(&argv[1]);
 	validate_map(argc, argv);
 	// validate_map(&argv[1]);

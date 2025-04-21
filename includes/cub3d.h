@@ -27,6 +27,8 @@ typedef struct s_game
 	uint32_t	floor;
 	int			col;
 	int			lin;
+	uint32_t	ceiling;
+	uint32_t	floor;
 } t_game;
 
 int32_t			init_game(char *argv, t_game *game);
