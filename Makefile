@@ -13,7 +13,8 @@ LIBS	= $(MLX42_LIB) $(LIBFT)
 BIN		:= bin
 
 SRCS	= $(addprefix  $(SRC_PATH)/, $(FILES))
-FILES	= main.c init_cub3d.c validation/map_parsing.c validation/map_validation.c
+FILES	= main.c init_cub3d.c validation/map_parsing.c validation/map_validation.c \
+			graphics/background.c graphics/frame_loop.c graphics/ray_casting.c
 
 
 HEADERS	= -I ./include -I $(MLX_PATH)/include -I ./libft

@@ -17,10 +17,14 @@ void init_window(t_game *game)
 
 	// moni_w = 0;
 	// moni_h = 0;
-	// mlx_set_setting(MLX_STRETCH_IMAGE, 1);
+	mlx_set_setting(MLX_STRETCH_IMAGE, 1);
 	game->mlx = mlx_init(WINDOW_WIDTH, WINDOW_HEIGHT, "Cub3D", true);
 	// if (!game->mlx)
 	// 	ft_error(ERROR_MLX_LOAD, NULL);
+	game->mlx_image = mlx_new_image(game->mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
+	// if (!game->mlx_image)
+	// 	ft_error(ERROR_MLX_LOAD, NULL);
+	mlx_image_to_window(game->mlx, game->mlx_image, 0, 0);
 	// mlx_get_monitor_size(0, &moni_w, &moni_h);
 	// mlx_set_window_limit(game->mlx, TILE, TILE, moni_w, moni_h);
 	// if (game->mlx->width > moni_w || game->mlx->height > moni_h)
@@ -40,7 +44,11 @@ int32_t init_game(char *argv, t_game *game)
 	// get_player_pos(game->map, &game->player_pos);
 	// occurence_count(game->map, &game->occ);
 	// mlx_key_hook(game->mlx, &init_move, game)make;
+	mlx_loop_hook(game->mlx, frame_loop, game);
 	mlx_loop(game->mlx);
+	// mlx_close_hook(game->mlx, 0, game);
+	mlx_close_window(game->mlx);
+	mlx_terminate(game->mlx);
 	// free_game(game);
 	return (EXIT_SUCCESS);
 }

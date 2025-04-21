@@ -1,15 +1,24 @@
 #include "../includes/cub3d.h"
 
+uint32_t	convert_rgb(int r, int g, int b)
+{
+	return (r << 24 | g << 16 | b << 8 | 255);
+}
+
 void init_values(t_game *game)
 {
 	game->map = NULL;
 	game->mlx = NULL;
 	game->col = 0;
 	game->lin = 0;
+	game->ceiling = convert_rgb(100, 149, 237);
+	game->floor = convert_rgb(107, 180, 54);
 	// game->icon = NULL;
 	// game->pos.x = 0;
 	// game->pos.y = 0;
 }
+// game->ceiling = 0xFF006872;
+// game->floor = 0xFF4B0082;
 
 char **get_map(void)
 {

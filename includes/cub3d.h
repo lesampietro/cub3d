@@ -18,6 +18,9 @@ typedef struct s_game
 {
 	char		**map;
 	mlx_t		*mlx;
+	mlx_image_t	*mlx_image;
+	uint32_t	ceiling;
+	uint32_t	floor;
 	int			col;
 	int			lin;
 } t_game;
@@ -28,6 +31,11 @@ void	init_window(t_game *game);
 //MAP VALIDATION
 void    validate_map(char   **argv);
 bool	is_invalid_extn(char **file_ext);
+
+
+//GRAPHICS
+void 	frame_loop(void *param);
+void	draw_background(t_game *game);
 
 
 #endif
