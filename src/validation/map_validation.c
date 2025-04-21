@@ -1,6 +1,6 @@
 #include "../../includes/cub3d.h"
 
-int	is_valid_ext(char *file_ext)
+void    is_valid_ext(char *file_ext)
 {
 	char	*valid_ext;
     int     i;
@@ -16,13 +16,47 @@ int	is_valid_ext(char *file_ext)
         len++;
     }
     if (valid_ext[i] == '\0' && file_ext[len] == '\0')
-        return (0);
-    return (1);
+        return ;
+    printf(BPINK"Map extension is invalid"RST);
+    exit(EXIT_FAILURE);
 }
 
-void    validate_map(char   **argv)
+// int is_empty_map(char)
+
+// int	check_path(char *path)
+// {
+// 	int	fd;
+
+// 	fd = open(path, O_RDONLY);
+// 	if (fd == -1)
+// 		return (0);
+// 	close(fd);
+// 	return (1);
+// }
+
+void    check_args(int argc, char **argv)
 {
-    if (is_valid_ext(argv[1]))
-        printf("Map extension is invalid");
+    if (argc < 2)
+	{
+		printf(BPINK"Too few arguments: please provide a path to a map"RST);
+		exit(EXIT_FAILURE);
+	}
+    else  if (argc > 2)
+    {
+        printf(BPINK"Too many arguments"RST);
+        exit(EXIT_FAILURE);
+    }
+    else
         return ;
+}
+
+void    validate_map(int argc, char   **argv)
+{
+    char    **map;
+
+    map = NULL;
+    check_args(argc, argv);
+    // check_path(argv[1])
+    is_valid_ext(argv[1]);
+    
 }
