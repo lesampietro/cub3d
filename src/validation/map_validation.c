@@ -21,18 +21,19 @@ void    is_valid_ext(char *file_ext)
     exit(EXIT_FAILURE);
 }
 
-// int is_empty_map(char)
+void	check_path(char *path)
+{
+	int	fd;
 
-// int	check_path(char *path)
-// {
-// 	int	fd;
-
-// 	fd = open(path, O_RDONLY);
-// 	if (fd == -1)
-// 		return (0);
-// 	close(fd);
-// 	return (1);
-// }
+	fd = open(path, O_RDONLY);
+	if (fd == -1)
+    {
+        printf(BPINK"Failure opening map"RST);
+		exit(EXIT_FAILURE);
+    }
+	close(fd);
+	return ;
+}
 
 void    check_args(int argc, char **argv)
 {
@@ -56,7 +57,6 @@ void    validate_map(int argc, char   **argv)
 
     map = NULL;
     check_args(argc, argv);
-    // check_path(argv[1])
-    is_valid_ext(argv[1]);
-    
+    check_path(argv[1]);
+    is_valid_ext(argv[1]); 
 }
