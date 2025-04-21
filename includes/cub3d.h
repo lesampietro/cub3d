@@ -9,6 +9,7 @@
 # include <stdint.h>
 # include <stdbool.h>
 # include "../.lib/MLX42/include/MLX42/MLX42.h"
+# include "../libft/libft.h"
 
 # define WINDOW_WIDTH 1920
 # define WINDOW_HEIGHT 1080
