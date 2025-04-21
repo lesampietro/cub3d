@@ -63,7 +63,6 @@ void	read_map(char *map_file, t_data *data)
 	{
 		while (ft_isspace(*tmp))
 			tmp++;
-		printf("%s", tmp);
 		tmp = get_next_line(fd);
 	}
 }
