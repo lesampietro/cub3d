@@ -59,6 +59,6 @@ fclean: clean
 mlxclean:
 	@rm -rf ./.lib
 
-re: clean all
+re: fclean all
 
 .PHONY: all, clean, fclean, re
