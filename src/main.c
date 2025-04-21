@@ -5,14 +5,13 @@ uint32_t	convert_rgb(int r, int g, int b)
 	return (r << 24 | g << 16 | b << 8 | 255);
 }
 
-void init_values(t_game *game)
+void init_values(t_data *data)
 {
-	game->map = NULL;
-	game->mlx = NULL;
-	game->col = 0;
-	game->lin = 0;
-	game->ceiling = convert_rgb(100, 149, 237);
-	game->floor = convert_rgb(107, 180, 54);
+	data->map = NULL;
+	data->col = 0;
+	data->lin = 0;
+	data->ceiling = convert_rgb(100, 149, 237);
+	data->floor = convert_rgb(107, 180, 54);
 	// game->icon = NULL;
 	// game->pos.x = 0;
 	// game->pos.y = 0;
@@ -46,13 +45,14 @@ int32_t main(int argc, char **argv)
 	new_map = get_map();
 	// int i;
 	t_game game;
+	t_data data;
 
 	// i = 0;
-	init_values(&game);
+	init_values(&data);
 	// if (argc != 2)
 	// 	ft_error(ERROR_ARG, NULL);
 	// is_valid_entry(&argv[1]);
-	validate_map(argc, argv);
+	validate_map(argc, argv, &data);
 	// validate_map(&argv[1]);
 	// free_map(entry_map);
 	init_game(argv[1], &game);

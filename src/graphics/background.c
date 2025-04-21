@@ -1,6 +1,6 @@
 #include "../../includes/cub3d.h"
 
-void	draw_background(t_game *game)
+void	draw_background(t_game *game, t_data *data)
 {
 	uint32_t	x;
 	uint32_t	y;
@@ -11,7 +11,7 @@ void	draw_background(t_game *game)
 		x = 0;
 		while (x < game->mlx_image->width)
 		{
-			mlx_put_pixel(game->mlx_image, x, y, game->ceiling);
+			mlx_put_pixel(game->mlx_image, x, y, data->ceiling);
 			x++;
 		}
 		y++;
@@ -21,7 +21,7 @@ void	draw_background(t_game *game)
 		x = 0;
 		while (x < game->mlx_image->width)
 		{
-			mlx_put_pixel(game->mlx_image, x, y, game->floor);
+			mlx_put_pixel(game->mlx_image, x, y, data->floor);
 			x++;
 		}
 		y++;

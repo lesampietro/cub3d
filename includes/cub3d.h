@@ -18,28 +18,33 @@
 #define BCYAN "\033[1;36m"
 #define RST "\033[0m"
 
-typedef struct s_game
+typedef struct s_data
 {
 	char		**map;
-	mlx_t		*mlx;
-	mlx_image_t	*mlx_image;
 	uint32_t	ceiling;
 	uint32_t	floor;
 	int			col;
 	int			lin;
+} t_data;
+
+typedef struct s_game
+{
+	mlx_t		*mlx;
+	mlx_image_t	*mlx_image;
+	t_data		*data;
 } t_game;
 
 int32_t			init_game(char *argv, t_game *game);
 void			init_window(t_game *game);
 
 //MAP VALIDATION
-void    		validate_map(int argc, char   **argv);
-void			is_valid_ext(char 	*file_ext);
+void			validate_map(int argc, char **argv, t_data *data);
+void			is_valid_ext(char *file_ext);
 
 
 //GRAPHICS
-void 	frame_loop(void *param);
-void	draw_background(t_game *game);
+void	frame_loop(void *param);
+void	draw_background(t_game *game, t_data *data);
 void	draw_raycasting(t_game *game);
 
 
