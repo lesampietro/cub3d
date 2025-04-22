@@ -1,9 +1,9 @@
 NO ./textures/air.png
-SO ./textures/fire.png  
+SO ./textures/fire.png
 WE  ./textures/water.png
 EA ./textures/earth.png
 
-WE  ./textures/water.png
+WE       ./textures/water.png
 
 F 220,100,0
 C 225,30,0

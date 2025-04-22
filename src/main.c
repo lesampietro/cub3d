@@ -5,35 +5,35 @@ uint32_t	convert_rgb(int r, int g, int b)
 	return (r << 24 | g << 16 | b << 8 | 255);
 }
 
-void init_values(t_data *data)
-{
-	data->map = NULL;
-	data->col = 0;
-	data->lin = 0;
-	data->ceiling = convert_rgb(100, 149, 237);
-	data->floor = convert_rgb(107, 180, 54);
-	// game->icon = NULL;
-	// game->pos.x = 0;
-	// game->pos.y = 0;
-}
+// void init_values(t_data *data)
+// {
+// 	data->map = NULL;
+// 	data->col = 0;
+// 	data->lin = 0;
+// 	data->no = NULL;
+// 	data->so = NULL;
+// 	data->ea = NULL;
+// 	data->we = NULL;
+// 	data->ceiling = NULL;
+// 	data->floor = NULL;
+// 	// game->icon = NULL;
+// 	// game->pos.x = 0;
+// 	// game->pos.y = 0;
+// }
 // game->ceiling = 0xFF006872;
 // game->floor = 0xFF4B0082;
 
 char **get_map(void)
 {
 	static char *map[] = {
-	"1111111111111",
-	"1100001000011",
-	"1000000000001",
-	"100000S000001",
-	"1000000000001",
-	"1100001000011",
-	"1000000000001",
-	"1000000000001",
-	"1000000000001",
-	"1100001000011",
-	"1111111111111",
-	NULL
+		"1111111111111",
+		"1100001000011",
+		"1000000000001",
+		"100000S000001",
+		"1000000000001",
+		"1100001000011",
+		"1000000000001",
+		"1000000000001",
 	};
 	return (map);
 }
@@ -43,21 +43,16 @@ int32_t main(int argc, char **argv)
 	char **new_map;
 
 	new_map = get_map();
-	// int i;
 	t_game game;
 	t_data data;
 
-	// i = 0;
-	init_values(&data);
+	game = (t_game){0};
+	data = (t_data){0};
 	game.data = &data;
-	// if (argc != 2)
-	// 	ft_error(ERROR_ARG, NULL);
-	// is_valid_entry(&argv[1]);
-	// validate_map(argc, argv, &data);
-	// validate_map(&argv[1]);
-	// free_map(entry_map);
+	// init_values(&data);
+	validate_map(argc, argv, &data);
+	data.ceiling = convert_rgb(100, 149, 237);
+	data.floor = convert_rgb(107, 180, 54);
 	init_game(argv[1], &game);
-	// return (EXIT_SUCCESS);
-	(void)argc;
 	return (EXIT_SUCCESS);
 }
