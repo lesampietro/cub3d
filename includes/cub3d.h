@@ -21,9 +21,9 @@
 typedef struct s_data
 {
 	char		**map;
+	int			col;
 	uint32_t	ceiling;
 	uint32_t	floor;
-	int			col;
 	int			lin;
 } t_data;
 
@@ -34,6 +34,24 @@ typedef struct s_game
 	t_data		*data;
 } t_game;
 
+typedef struct s_vector
+{
+	float	x;
+	float	y;
+}	t_vector;
+
+typedef struct s_coord
+{
+	int		x;
+	int		y;
+}	t_coord;
+
+typedef struct s_raycasting
+{
+	t_vector direction;
+	t_coord		map;
+} t_raycasting;
+
 int32_t			init_game(char *argv, t_game *game);
 void			init_window(t_game *game);
 
@@ -43,9 +61,10 @@ void			is_valid_ext(char *file_ext);
 
 
 //GRAPHICS
-void	frame_loop(void *param);
-void	draw_background(t_game *game, t_data *data);
-void	draw_raycasting(t_game *game);
+void		frame_loop(void *param);
+void		draw_background(t_game *game, t_data *data);
+void		draw_raycasting(t_game *game);
+uint32_t	convert_rgb(int r, int g, int b);
 
 
 #endif

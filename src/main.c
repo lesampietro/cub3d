@@ -49,10 +49,11 @@ int32_t main(int argc, char **argv)
 
 	// i = 0;
 	init_values(&data);
+	game.data = &data;
 	// if (argc != 2)
 	// 	ft_error(ERROR_ARG, NULL);
 	// is_valid_entry(&argv[1]);
-	validate_map(argc, argv, &data);
+	// validate_map(argc, argv, &data);
 	// validate_map(&argv[1]);
 	// free_map(entry_map);
 	init_game(argv[1], &game);
