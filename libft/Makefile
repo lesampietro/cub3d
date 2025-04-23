@@ -83,7 +83,7 @@ YELLOW      := \033[1;33m
 all: $(BIN) $(BIN_SUBDIRS) $(OBJS) $(NAME)
 
 $(BIN)/%.o: %.c
-	@$(CC) $(CFLAGS) -c $< -o $@  && printf "$(YELLOW)Compiling: $(ORANGE)$(notdir $<)$(RESET)\n"
+	@$(CC) $(CFLAGS) -c $< -o $@  && printf "$(YELLOW)Compiling: $(RESET)$(notdir $<)\n"
 
 $(NAME): $(OBJS) $(HEADER)
 	@ar -rc $(NAME) $(OBJS)

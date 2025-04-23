@@ -50,7 +50,9 @@ $(LIBFT):
 
 $(NAME): $(LIBFT) $(OBJS) $(MLX42_LIB)
 	@$(CC) $(OBJS) $(LIBS) $(HEADERS) -o $(NAME) $(LIBFLAGS) \
-		&& printf "$(BOLD)$(GREEN)\-\-\-\- COMPILED -/-/-/-/$(RESET)\n"
+		&& printf "⬜️⬜️⬜️⬜️⬜️⬜️⬜️⬜️⬜️⬜️⬜️⬜️⬜️⬜️⬜️\n" \
+		&& printf "⬜️$(BOLD)$(RED)\/\/\/\/ $(YELLOW)COMPILED$(RED) \/\/\/\/$(RESET)⬜️\n" \
+		&& printf "⬜️⬜️⬜️⬜️⬜️⬜️⬜️⬜️⬜️⬜️⬜️⬜️⬜️⬜️⬜️\n"
 
 $(MLX42_LIB):
 ifeq ($(wildcard $(MLX_PATH)/build/ ), )
