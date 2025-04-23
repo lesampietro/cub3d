@@ -13,13 +13,28 @@
 
 # define WINDOW_WIDTH 800
 # define WINDOW_HEIGHT 600
+
+# define MOVE_SPEED 0.08
+# define ROTATE_SPEED 3.5
+
 # define VERTICAL 0
 # define HORIZONTAL 1
+
 # define PI 3.141592653589793
 
 # define BPINK "\033[1;35m"
 # define BCYAN "\033[1;36m"
 # define RST "\033[0m"
+
+typedef struct s_keys
+{
+	bool w;
+	bool a;
+	bool s;
+	bool d;
+	bool left;
+	bool right;
+}	t_keys;
 
 typedef struct s_vector
 {
@@ -69,6 +84,7 @@ typedef struct s_game
 	mlx_image_t		*mlx_image;
 	t_data			*data;
 	t_raycasting	*raycasting;
+	t_keys			keys;
 	t_vector		player_pos;
 	t_vector		player_dir;
 	t_vector		camera_plane;
@@ -105,5 +121,6 @@ void		draw_wall(t_game *game, t_raycasting *ray, int pixel);
 
 //MOVEMENT
 void		key_hook(mlx_key_data_t keydata, void *param);
+void		move_player(t_game *game);
 
 #endif
