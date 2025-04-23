@@ -43,11 +43,10 @@ int32_t init_game(char *argv, t_game *game)
 	// init_game_image(game);
 	// get_player_pos(game->map, &game->player_pos);
 	// occurence_count(game->map, &game->occ);
-	// mlx_key_hook(game->mlx, &init_move, game)make;
-	// mlx_key_hook(game->mlx, key_hook, game);
+	mlx_key_hook(game->mlx, key_hook, game);
 	mlx_loop_hook(game->mlx, frame_loop, game);
-	mlx_loop(game->mlx);
 	// mlx_close_hook(game->mlx, 0, game);
+	mlx_loop(game->mlx);
 	mlx_close_window(game->mlx);
 	mlx_terminate(game->mlx);
 	// free_game(game);

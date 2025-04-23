@@ -19,9 +19,8 @@ FILES	= main.c \
 			graphics/frame_loop.c \
 			graphics/raycasting.c \
 			graphics/utils.c \
-			graphics/walls.c 
-
-			#movement/move_hooks.c \
+			graphics/walls.c \
+			movement/move_hooks.c \
 
 			# validation/map_parsing.c \
 			# validation/map_validation.c \
