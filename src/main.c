@@ -46,12 +46,15 @@ int32_t main(int argc, char **argv)
 	t_game			game;
 	t_data			data;
 	t_raycasting 	raycasting;
-	
+	t_keys			keys;
+
+	keys = (t_keys){0};
 	game = (t_game){0};
 	data = (t_data){0};
 	raycasting = (t_raycasting){0};
 	game.data = &data;
 	game.raycasting = &raycasting;
+	game.keys = &keys;
 	// init_values(&data);
 	// validate_map(argc, argv, &data);
 
