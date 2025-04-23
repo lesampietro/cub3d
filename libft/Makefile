@@ -76,10 +76,14 @@ SUBDIRS := file lst mem nbr is str get_next_line ft_printf
 
 BIN_SUBDIRS := $(addprefix $(BIN)/,$(SUBDIRS))
 
+RESET       := \033[0m
+ORANGE      := \033[38;2;255;165;0m
+YELLOW      := \033[1;33m
+
 all: $(BIN) $(BIN_SUBDIRS) $(OBJS) $(NAME)
 
 $(BIN)/%.o: %.c
-	@$(CC) $(CFLAGS) -c $< -o $@  && printf "Compiling: $(notdir $<)\n"
+	@$(CC) $(CFLAGS) -c $< -o $@  && printf "$(YELLOW)Compiling: $(ORANGE)$(notdir $<)$(RESET)\n"
 
 $(NAME): $(OBJS) $(HEADER)
 	@ar -rc $(NAME) $(OBJS)

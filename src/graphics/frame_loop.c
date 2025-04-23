@@ -6,5 +6,5 @@ void frame_loop(void *param)
 
 	game = (t_game *)param;
 	draw_background(game, game->data);
-	// draw_raycasting(game, game->data);
+	draw_raycasting(game);
 }

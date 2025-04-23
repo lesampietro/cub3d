@@ -70,11 +70,11 @@ void	check_duplicate_textures(t_data *data)
 {
 	if (data->no && data->so && data->ea && data->we && data->c && data->f)
 	{
-		if (num > 6)
-		{
-			printf(BPINK"Error: duplicate texture or colour identifier\n"RST);
-			exit(EXIT_FAILURE);
-		}
+		// if (num > 6)
+		// {
+		// 	printf(BPINK"Error: duplicate texture or colour identifier\n"RST);
+		// 	exit(EXIT_FAILURE);
+		// }
 	}
 }
 

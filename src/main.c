@@ -34,25 +34,40 @@ char **get_map(void)
 		"1100001000011",
 		"1000000000001",
 		"1000000000001",
+		"1000000000001",
+		"1100001000011",
+		"1111111111111",
 	};
 	return (map);
 }
 
 int32_t main(int argc, char **argv)
 {
-	char **new_map;
-
-	new_map = get_map();
-	t_game game;
-	t_data data;
-
+	t_game			game;
+	t_data			data;
+	t_raycasting 	raycasting;
+	
 	game = (t_game){0};
 	data = (t_data){0};
+	raycasting = (t_raycasting){0};
 	game.data = &data;
+	game.raycasting = &raycasting;
 	// init_values(&data);
-	validate_map(argc, argv, &data);
+	// validate_map(argc, argv, &data);
+
+	// MOCK:
+	(void)argc;
+	data.map = get_map();
+	data.col = 13;
+	data.lin = 11;
+	game.player_pos.x = 6.5;
+	game.player_pos.y = 3.5;
+	game.player_dir.x = 0;
+	game.player_dir.y = -1;
 	data.ceiling = convert_rgb(100, 149, 237);
 	data.floor = convert_rgb(107, 180, 54);
+
+
 	init_game(argv[1], &game);
 	return (EXIT_SUCCESS);
 }
