@@ -29,7 +29,7 @@ char **get_map(void)
 		"1111111111111",
 		"1100001000011",
 		"1000000000001",
-		"100000S000001",
+		"100100S001001",
 		"1000000000001",
 		"1100001000011",
 		"1000000000001",
@@ -62,8 +62,13 @@ int32_t main(int argc, char **argv)
 	data.lin = 11;
 	game.player_pos.x = 6.5;
 	game.player_pos.y = 3.5;
-	game.player_dir.x = 0;
-	game.player_dir.y = -1;
+
+	game.player_dir.x = 1;
+	game.player_dir.y = 0;
+
+	game.camera_plane.x = 0;
+	game.camera_plane.y = 0.66;
+
 	data.ceiling = convert_rgb(100, 149, 237);
 	data.floor = convert_rgb(107, 180, 54);
 
