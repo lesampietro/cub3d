@@ -17,6 +17,7 @@ void init_window(t_game *game)
 
 	// moni_w = 0;
 	// moni_h = 0;
+	init_textures(game);
 	mlx_set_setting(MLX_STRETCH_IMAGE, 1);
 	game->mlx = mlx_init(WINDOW_WIDTH, WINDOW_HEIGHT, "Cub3D", true);
 	// if (!game->mlx)

@@ -22,6 +22,7 @@ FILES	= main.c \
 			graphics/walls.c \
 			movement/move_key_hook.c \
 			movement/move_logic.c \
+			init/image.c
 
 			# validation/map_parsing.c \
 			# validation/map_validation.c \

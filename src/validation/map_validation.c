@@ -68,7 +68,7 @@ int	save_texture_path(char *identifier, char *tmp, char **path)
 // int	convert_n_save_colours(char *identifier, char *tmp, uint32_t *colour)
 void	check_duplicate_textures(t_data *data)
 {
-	if (data->no && data->so && data->ea && data->we && data->c && data->f)
+	if (data->direction[0] && data->direction[1] && data->direction[2] && data->direction[3] && data->c && data->f)
 	{
 		// if (num > 6)
 		// {
@@ -82,13 +82,13 @@ void	check_duplicate_textures(t_data *data)
 {
 	int		num;
 	if (!ft_strncmp("NO", tmp, 2))
-		num += save_texture_path("NO", tmp, &(data->no));
+		num += save_texture_path("NO", tmp, &(data->direction[NORTH]));
 	else if (!ft_strncmp("SO", tmp, 2))
-		num += save_texture_path("SO", tmp, &(data->so));
+		num += save_texture_path("SO", tmp, &(data->direction[SOUTH]));
 	else if (!ft_strncmp("EA", tmp, 2))
-		num += save_texture_path("EA", tmp, &(data->ea));
+		num += save_texture_path("EA", tmp, &(data->direction[EAST]));
 	else if (!ft_strncmp("WE", tmp, 2))
-		num += save_texture_path("WE", tmp, &(data->we));
+		num += save_texture_path("WE", tmp, &(data->direction[WEST]));
 	else if (!ft_strncmp("C", tmp, 1))
 		num += save_texture_path("C", tmp, &(data->c));
 	else if (!ft_strncmp("F", tmp, 1))

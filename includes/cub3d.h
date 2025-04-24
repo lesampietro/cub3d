@@ -70,10 +70,7 @@ typedef struct s_data
 	char		**map;
 	int			col;
 	int			lin;
-	char		*no;
-	char		*so;
-	char		*ea;
-	char		*we;
+	char		*direction[4];
 	char		*c;
 	char		*f;
 	uint32_t	ceiling;
@@ -84,11 +81,8 @@ typedef struct s_game
 {
 	mlx_t			*mlx;
 	mlx_image_t		*mlx_image;
-	mlx_texture_t	*texture;
-	mlx_texture_t	*north;
-	mlx_texture_t	*south;
-	mlx_texture_t	*east;
-	mlx_texture_t	*west;
+	mlx_texture_t	*texture_buf;
+	mlx_texture_t	*texture[4];
 	t_data			*data;
 	t_raycasting	*raycasting;
 	t_keys			keys;
@@ -105,8 +99,19 @@ typedef struct s_wall
 	int		line_start;
 	int		line_end;
 	t_coord	texture;
+	float	resize;
+	float	texture_pos;
 	float	point;
+
 }	t_wall;
+
+typedef enum e_dir
+{
+	NORTH,
+	EAST,
+	SOUTH,
+	WEST
+}	t_dir;
 
 int32_t			init_game(char *argv, t_game *game);
 void			init_window(t_game *game);
@@ -125,6 +130,8 @@ t_vector	multiply_vector(t_vector vector, double factor);
 t_vector	add_vector(t_vector vector1, t_vector vector2);
 t_vector	rotate_vector(t_vector v, float angle);
 void		draw_wall(t_game *game, t_raycasting *ray, int pixel);
+void		init_textures(t_game *game);
+uint32_t	get_texture_pixel(mlx_texture_t *texture, int x, int y);
 
 //MOVEMENT
 void		key_hook(mlx_key_data_t keydata, void *param);
