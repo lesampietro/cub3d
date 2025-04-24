@@ -14,8 +14,8 @@
 # define WINDOW_WIDTH 800
 # define WINDOW_HEIGHT 600
 
-# define MOVE_SPEED 0.08
-# define ROTATE_SPEED 3.5
+# define MOVE_SPEED 0.04
+# define ROTATE_SPEED 2
 
 # define VERTICAL 0
 # define HORIZONTAL 1
