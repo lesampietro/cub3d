@@ -76,8 +76,8 @@ int32_t main(int argc, char **argv)
 	// MOCK:
 	(void)argc;
 	data.map = get_map();
-	data.col = 13;
-	data.lin = 11;
+	data.col = 19;
+	data.lin = 13;
 	game.player_pos.x = 5.5;
 	game.player_pos.y = 1.5;
 
@@ -87,8 +87,10 @@ int32_t main(int argc, char **argv)
 	game.camera_plane.x = 0;
 	game.camera_plane.y = -0.66;
 
-	data.ceiling = convert_rgb(100, 149, 237);
-	data.floor = convert_rgb(107, 180, 54);
+	// data.ceiling = convert_rgb(100, 149, 237);
+	// data.floor = convert_rgb(107, 180, 54);
+	data.ceiling = convert_rgb(174, 31, 193);
+	data.floor = convert_rgb(107, 202, 11);
 
 
 	init_game(argv[1], &game);

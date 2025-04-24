@@ -16,6 +16,7 @@
 
 # define MOVE_SPEED 0.04
 # define ROTATE_SPEED 2
+# define SPRINT_MULTIPLIER 1.5
 
 # define VERTICAL 0
 # define HORIZONTAL 1
@@ -34,6 +35,7 @@ typedef struct s_keys
 	bool d;
 	bool left;
 	bool right;
+	bool shift;
 }	t_keys;
 
 typedef struct s_vector

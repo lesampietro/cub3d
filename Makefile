@@ -20,7 +20,8 @@ FILES	= main.c \
 			graphics/raycasting.c \
 			graphics/utils.c \
 			graphics/walls.c \
-			movement/move_hooks.c \
+			movement/move_key_hook.c \
+			movement/move_logic.c \
 
 			# validation/map_parsing.c \
 			# validation/map_validation.c \

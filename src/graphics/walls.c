@@ -8,19 +8,9 @@ void render(t_game *game, t_wall *wall, int pixel)
 	while (y < wall->line_end)
 	{
 		if (game->hit_side == VERTICAL)
-		{
-			if (pixel % 2 == 0)
-				mlx_put_pixel(game->mlx_image, pixel, y, 0xFF83B4FF);
-			else
-				mlx_put_pixel(game->mlx_image, pixel, y, 0xFF1C5C8E);
-		}
+			mlx_put_pixel(game->mlx_image, pixel, y, convert_rgb(255, 105, 0));
 		else
-		{
-			if (pixel % 2 == 0)
-				mlx_put_pixel(game->mlx_image, pixel, y, 0xFF605257);
-			else
-				mlx_put_pixel(game->mlx_image, pixel, y, 0xFF16140C);
-		}
+			mlx_put_pixel(game->mlx_image, pixel, y, convert_rgb(28, 9, 3));
 		y++;
 	}
 }
