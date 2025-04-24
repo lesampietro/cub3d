@@ -132,6 +132,7 @@ t_vector	rotate_vector(t_vector v, float angle);
 void		draw_wall(t_game *game, t_raycasting *ray, int pixel);
 void		init_textures(t_game *game);
 uint32_t	get_texture_pixel(mlx_texture_t *texture, int x, int y);
+void		draw_minimap(void *param);
 
 //MOVEMENT
 void		key_hook(mlx_key_data_t keydata, void *param);

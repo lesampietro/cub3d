@@ -20,6 +20,7 @@ FILES	= main.c \
 			graphics/raycasting.c \
 			graphics/utils.c \
 			graphics/walls.c \
+			graphics/minimap.c \
 			movement/move_key_hook.c \
 			movement/move_logic.c \
 			init/image.c

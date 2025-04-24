@@ -8,4 +8,5 @@ void frame_loop(void *param)
 	move_player(game);
 	draw_background(game, game->data);
 	draw_raycasting(game);
+	draw_minimap(game);
 }
