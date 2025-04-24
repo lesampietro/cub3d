@@ -16,7 +16,7 @@
 
 # define MOVE_SPEED 0.04
 # define ROTATE_SPEED 2
-# define SPRINT_MULTIPLIER 1.5
+# define SPRINT_MULTIPLIER 2
 
 # define VERTICAL 0
 # define HORIZONTAL 1
@@ -84,6 +84,11 @@ typedef struct s_game
 {
 	mlx_t			*mlx;
 	mlx_image_t		*mlx_image;
+	mlx_texture_t	*texture;
+	mlx_texture_t	*north;
+	mlx_texture_t	*south;
+	mlx_texture_t	*east;
+	mlx_texture_t	*west;
 	t_data			*data;
 	t_raycasting	*raycasting;
 	t_keys			keys;
