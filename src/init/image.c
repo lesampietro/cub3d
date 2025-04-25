@@ -19,10 +19,10 @@ void load_texture(t_game *game)
 
 void init_textures(t_game *game)
 {
-	game->data->direction[NORTH] = "./textures/pattern1.png";
-	game->data->direction[SOUTH] = "./textures/pattern2.png";
-	game->data->direction[EAST] = "./textures/pattern3.png";
-	game->data->direction[WEST] = "./textures/pattern4.png";
+	game->data->direction[NORTH] = "./textures/wall.png";
+	game->data->direction[SOUTH] = "./textures/wall.png";
+	game->data->direction[EAST] = "./textures/wall.png";
+	game->data->direction[WEST] = "./textures/wall.png";
 	load_texture(game);
 }
 

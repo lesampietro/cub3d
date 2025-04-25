@@ -15,7 +15,7 @@
 # define WINDOW_HEIGHT 600
 
 # define MOVE_SPEED 0.04
-# define ROTATE_SPEED 2
+# define ROTATE_SPEED 2.8
 # define SPRINT_MULTIPLIER 2
 
 # define VERTICAL 0
