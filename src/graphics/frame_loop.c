@@ -9,6 +9,6 @@ void frame_loop(void *param)
 	move_player(game);
 	draw_background(game, game->data);
 	draw_raycasting(game);
-	render_enemy(game, game->enemy);
+	render_elements(game);
 	draw_minimap(game);
 }

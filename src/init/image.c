@@ -15,12 +15,23 @@ void load_texture(t_game *game)
 		}
 		i++;
 	}
-	game->enemy[0].texture = mlx_load_png(game->enemy[0].texture_path);
-	if (!game->enemy[0].texture)
+	i = 0;
+	while (i < game->element_count)
 	{
-		printf("Error loading enemy texture: %s\n", game->enemy[0].texture_path);
-		exit(EXIT_FAILURE);
+		game->element[i].texture = mlx_load_png(game->element[i].texture_path);
+		if (!game->element[i].texture)
+		{
+			printf("Error loading element texture: %s\n", game->element[i].texture_path);
+			exit(EXIT_FAILURE);
+		}
+		i++;
 	}
+	// game->element[0].texture = mlx_load_png(game->element[0].texture_path);
+	// if (!game->element[0].texture)
+	// {
+	// 	printf("Error loading element texture: %s\n", game->element[0].texture_path);
+	// 	exit(EXIT_FAILURE);
+	// }
 }
 
 void init_textures(t_game *game)
@@ -29,7 +40,6 @@ void init_textures(t_game *game)
 	game->data->direction[SOUTH] = "./textures/pattern2.png";
 	game->data->direction[EAST] = "./textures/pattern3.png";
 	game->data->direction[WEST] = "./textures/pattern4.png";
-	game->enemy[0].texture_path = "./assets/enemies/wizard idle.png";
 	load_texture(game);
 }
 

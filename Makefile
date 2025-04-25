@@ -21,7 +21,7 @@ FILES	= main.c \
 			graphics/utils.c \
 			graphics/walls.c \
 			graphics/minimap.c \
-			graphics/enemy_raycast.c \
+			graphics/element_raycast.c \
 			movement/move_key_hook.c \
 			movement/move_logic.c \
 			movement/mouse_hook.c \

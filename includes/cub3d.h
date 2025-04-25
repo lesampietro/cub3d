@@ -28,15 +28,23 @@
 # define BCYAN "\033[1;36m"
 # define RST "\033[0m"
 
-typedef struct s_enemy
+typedef enum e_element_id
+{
+	ENEMY,
+	TREASURE,
+	EXIT
+}	t_element_id;
+
+typedef struct s_element
 {
 	mlx_texture_t	*texture;
 	char			*texture_path;
 	float			x;
 	float			y;
 	int				health;
+	int				type;
 	bool 			alive;
-}	t_enemy;
+}	t_element;
 
 typedef struct s_keys
 {
@@ -104,8 +112,8 @@ typedef struct s_game
 	t_vector		camera_plane;
 	int				hit_side;
 	int				mouse_prev_x;
-	t_enemy			enemy[2];
-	int				enemy_count;
+	int				element_count;
+	t_element		element[10];
 } t_game;
 
 typedef struct s_wall
@@ -149,7 +157,7 @@ void		init_textures(t_game *game);
 uint32_t	get_texture_pixel(mlx_texture_t *texture, int x, int y);
 void		draw_minimap(void *param);
 
-void		render_enemy(t_game *game, t_enemy *enemy);
+void		render_elements(t_game *game);
 
 //MOVEMENT
 void		key_hook(mlx_key_data_t keydata, void *param);

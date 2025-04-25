@@ -116,11 +116,23 @@ int32_t main(int argc, char **argv)
 	data.map = get_map();
 	get_map_size(&data);
 
-	game.enemy_count = 1;
-	game.enemy[0].alive = true;
-	game.enemy[0].x = 9.5;
-	game.enemy[0].y = 10.5;
-	game.enemy[0].health = 100;
+	game.element_count = 2;
+	// ENEMY 1
+	game.element[0].alive = true;
+	game.element[0].x = 12;
+	game.element[0].y = 11;
+	game.element[0].health = 100;
+	game.element[0].type = ENEMY;
+	game.element[0].texture_path = "./assets/enemies/wizard idle.png";
+
+	// ITEM 1
+	game.element[1].alive = true;
+	game.element[1].x = 14;
+	game.element[1].y = 13;
+	game.element[1].health = 100;
+	game.element[1].type = TREASURE;
+	game.element[1].texture_path = "./assets/items/star.png";
+
 	game.player_pos.x = 11.5;
 	game.player_pos.y = 5.5;
 
@@ -130,10 +142,13 @@ int32_t main(int argc, char **argv)
 	game.camera_plane.x = -0.66;
 	game.camera_plane.y = 0;
 
-	// data.ceiling = convert_rgb(100, 149, 237);
-	// data.floor = convert_rgb(107, 180, 54);
-	data.floor = convert_rgb(216, 137, 29);
-	data.ceiling = convert_rgb(218, 218, 218);
+	// PSYCHODELIC
+	data.ceiling = convert_rgb(147, 249, 23);
+	data.floor = convert_rgb(207, 18, 254);
+
+	// MICROSOFT
+	// data.floor = convert_rgb(216, 137, 29);
+	// data.ceiling = convert_rgb(218, 218, 218);
 
 
 	init_game(argv[1], &game);
