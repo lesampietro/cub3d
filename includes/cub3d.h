@@ -16,6 +16,7 @@
 
 # define MOVE_SPEED 0.04
 # define ROTATE_SPEED 2.8
+# define SENSITIVITY 0.06
 # define SPRINT_MULTIPLIER 2
 
 # define VERTICAL 0
@@ -90,7 +91,7 @@ typedef struct s_game
 	t_vector		player_dir;
 	t_vector		camera_plane;
 	int				hit_side;
-
+	int				mouse_prev_x;
 } t_game;
 
 typedef struct s_wall
@@ -136,6 +137,7 @@ void		draw_minimap(void *param);
 
 //MOVEMENT
 void		key_hook(mlx_key_data_t keydata, void *param);
+void		mouse_rotation(t_game *game);
 void		move_player(t_game *game);
 
 #endif

@@ -23,6 +23,7 @@ FILES	= main.c \
 			graphics/minimap.c \
 			movement/move_key_hook.c \
 			movement/move_logic.c \
+			movement/mouse_hook.c \
 			init/image.c
 
 			# validation/map_parsing.c \
