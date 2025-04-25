@@ -15,6 +15,7 @@ void load_texture(t_game *game)
 		}
 		i++;
 	}
+	// game->enemy[0].texture = mlx_load_png(game->enemy[0].texture_path);
 }
 
 void init_textures(t_game *game)
@@ -23,6 +24,7 @@ void init_textures(t_game *game)
 	game->data->direction[SOUTH] = "./textures/wall.png";
 	game->data->direction[EAST] = "./textures/wall.png";
 	game->data->direction[WEST] = "./textures/wall.png";
+	// game->enemy[0].texture_path = "./assets/enemies/wizard attack.png";
 	load_texture(game);
 }
 
