@@ -32,8 +32,8 @@ typedef struct s_enemy
 {
 	mlx_texture_t	*texture;
 	char			*texture_path;
-	int				x;
-	int				y;
+	float			x;
+	float			y;
 	int				health;
 	bool 			alive;
 }	t_enemy;

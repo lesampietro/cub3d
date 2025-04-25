@@ -80,7 +80,7 @@ void	draw_raycasting(t_game *game)
 		side_distance(game, ray);
 		dda(game, ray);
 		draw_wall(game, ray, pix);
-		// ray->z_buffer[pix] = ray->perp_wall_dist;
+		ray->z_buffer[pix] = ray->perp_wall_dist;
 		// printf("pix = %d\n", pix);
 		pix++;	
 	}

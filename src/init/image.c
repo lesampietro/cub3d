@@ -15,16 +15,21 @@ void load_texture(t_game *game)
 		}
 		i++;
 	}
-	// game->enemy[0].texture = mlx_load_png(game->enemy[0].texture_path);
+	game->enemy[0].texture = mlx_load_png(game->enemy[0].texture_path);
+	if (!game->enemy[0].texture)
+	{
+		printf("Error loading enemy texture: %s\n", game->enemy[0].texture_path);
+		exit(EXIT_FAILURE);
+	}
 }
 
 void init_textures(t_game *game)
 {
-	game->data->direction[NORTH] = "./textures/wall.png";
-	game->data->direction[SOUTH] = "./textures/wall.png";
-	game->data->direction[EAST] = "./textures/wall.png";
-	game->data->direction[WEST] = "./textures/wall.png";
-	// game->enemy[0].texture_path = "./assets/enemies/wizard attack.png";
+	game->data->direction[NORTH] = "./textures/pattern1.png";
+	game->data->direction[SOUTH] = "./textures/pattern2.png";
+	game->data->direction[EAST] = "./textures/pattern3.png";
+	game->data->direction[WEST] = "./textures/pattern4.png";
+	game->enemy[0].texture_path = "./assets/enemies/wizard idle.png";
 	load_texture(game);
 }
 

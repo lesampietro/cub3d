@@ -2,12 +2,14 @@
 
 void	render_enemy(t_game *game, t_enemy *enemy)
 {
-	if (!enemy->alive || !enemy->texture)
+	enemy[0].x = 9.5;
+	enemy[0].y = 10.5;
+	if (!enemy[0].alive || !enemy[0].texture)
 		return;
 
 	// Posição relativa ao jogador
-	float sprite_x = enemy->x + 0.5f - game->player_pos.x;
-	float sprite_y = enemy->y + 0.5f - game->player_pos.y;
+	float sprite_x = enemy[0].x + 0.5f - game->player_pos.x;
+	float sprite_y = enemy[0].y + 0.5f - game->player_pos.y;
 
 	// Inverso da matriz de rotação da câmera
 	float inv_det = 1.0f / (game->camera_plane.x * game->player_dir.y - game->player_dir.x * game->camera_plane.y);
@@ -32,8 +34,8 @@ void	render_enemy(t_game *game, t_enemy *enemy)
 	int draw_end_x = sprite_width / 2 + sprite_screen_x;
 	if (draw_end_x >= WINDOW_WIDTH) draw_end_x = WINDOW_WIDTH - 1;
 
-	int tex_width = enemy->texture->width;
-	int tex_height = enemy->texture->height;
+	int tex_width = enemy[0].texture->width;
+	int tex_height = enemy[0].texture->height;
 
 	for (int stripe = draw_start_x; stripe < draw_end_x; stripe++)
 	{
@@ -48,7 +50,7 @@ void	render_enemy(t_game *game, t_enemy *enemy)
 				int d = (y) * 256 - WINDOW_HEIGHT * 128 + sprite_height * 128;
 				int tex_y = ((d * tex_height) / sprite_height) / 256;
 
-				uint32_t color = get_texture_pixel(enemy->texture, tex_x, tex_y);
+				uint32_t color = get_texture_pixel(enemy[0].texture, tex_x, tex_y);
 
 				if ((color & 0x00FFFFFF) != 0)
 					mlx_put_pixel(game->mlx_image, stripe, y, color);
