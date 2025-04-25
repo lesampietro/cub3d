@@ -50,11 +50,14 @@ void	render_element(t_game *game, int i)
 			{
 				int d = (y) * 256 - WINDOW_HEIGHT * 128 + sprite_height * 128;
 				int tex_y = ((d * tex_height) / sprite_height) / 256;
-
+				
 				uint32_t color = get_texture_pixel(element[i].texture, tex_x, tex_y);
-
+				
 				if ((color & 0x00FFFFFF) != 0)
+				{
+					game->raycasting->z_buffer[stripe] = transform_y;
 					mlx_put_pixel(game->mlx_image, stripe, y, color);
+				}
 			}
 		}
 	}

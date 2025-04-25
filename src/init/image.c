@@ -36,10 +36,10 @@ void load_texture(t_game *game)
 
 void init_textures(t_game *game)
 {
-	game->data->direction[NORTH] = "./textures/pattern1.png";
-	game->data->direction[SOUTH] = "./textures/pattern2.png";
-	game->data->direction[EAST] = "./textures/pattern3.png";
-	game->data->direction[WEST] = "./textures/pattern4.png";
+	game->data->direction[NORTH] = "./assets/textures/50 Free Stylized Wall Textures/1-16/Asset 3.png";
+	game->data->direction[EAST] = "./assets/textures/50 Free Stylized Wall Textures/17-32/Asset 2.png";
+	game->data->direction[SOUTH] = "./assets/textures/50 Free Stylized Wall Textures/1-16/Asset 6.png";
+	game->data->direction[WEST] = "./assets/textures/50 Free Stylized Wall Textures/17-32/Asset 2.png";
 	load_texture(game);
 }
 

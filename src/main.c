@@ -143,8 +143,12 @@ int32_t main(int argc, char **argv)
 	game.camera_plane.y = 0;
 
 	// PSYCHODELIC
-	data.ceiling = convert_rgb(147, 249, 23);
-	data.floor = convert_rgb(207, 18, 254);
+	// data.ceiling = convert_rgb(147, 249, 23);
+	// data.floor = convert_rgb(207, 18, 254);
+
+	// DUNGEON
+	data.ceiling = convert_rgb(60, 30, 60);
+	data.floor = convert_rgb(60, 50, 55);
 
 	// MICROSOFT
 	// data.floor = convert_rgb(216, 137, 29);

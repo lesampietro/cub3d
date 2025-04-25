@@ -11,8 +11,8 @@
 # include "../.lib/MLX42/include/MLX42/MLX42.h"
 # include "../libft/libft.h"
 
-# define WINDOW_WIDTH 800
-# define WINDOW_HEIGHT 600
+# define WINDOW_WIDTH 1900
+# define WINDOW_HEIGHT 1200
 
 # define MOVE_SPEED 0.04
 # define ROTATE_SPEED 2.8
