@@ -66,17 +66,17 @@ int	save_texture_path(char *identifier, char *tmp, char **path)
 }
 
 // int	convert_n_save_colours(char *identifier, char *tmp, uint32_t *colour)
-void	check_duplicate_textures(t_data *data)
-{
-	if (data->no && data->so && data->ea && data->we && data->c && data->f)
-	{
-		if (num > 6)
-		{
-			printf(BPINK"Error: duplicate texture or colour identifier\n"RST);
-			exit(EXIT_FAILURE);
-		}
-	}
-}
+// void	check_duplicate_textures(t_data *data)
+// {
+// 	if (data->no && data->so && data->ea && data->we && data->c && data->f)
+// 	{
+// 		if (num > 6)
+// 		{
+// 			printf(BPINK"Error: duplicate texture or colour identifier\n"RST);
+// 			exit(EXIT_FAILURE);
+// 		}
+// 	}
+// }
 
 	void	read_textures_n_colours(char *tmp, t_data *data)
 {
@@ -94,7 +94,18 @@ void	check_duplicate_textures(t_data *data)
 	else if (!ft_strncmp("F", tmp, 1))
 		num += save_texture_path("F", tmp, &(data->f));
 }
-	
+
+void	is_empty(char *tmp)
+{
+	while (tmp && ft_isspace(*tmp))
+		tmp++;
+	if (!tmp)
+	{
+		printf(BPINK"Error: file is empty\n"RST);
+		exit(EXIT_FAILURE);
+	}
+}
+
 void	check_map_metadata(char *map_file, t_data *data)
 {
 	int		fd;
@@ -103,11 +114,7 @@ void	check_map_metadata(char *map_file, t_data *data)
 	tmp = NULL;
 	fd = safe_open(map_file);
 	tmp = get_next_line(fd);
-	if (!tmp || tmp[0] == '\n' || tmp[0] == '\0')
-	{
-		printf(BPINK"Error: file is empty\n"RST);
-		exit(EXIT_FAILURE);
-	}
+	is_empty(tmp);
 	while (tmp)
 	{
 		while (ft_isspace(*tmp))
