@@ -53,6 +53,7 @@ int safe_open(char *filename)
 
 int	save_texture_path(char *identifier, char *tmp, char **path)
 {
+	//CHECAR ESPAÇOS E LETRAS SOBRANDO APÓS O NOME DO TEXTURE
 	while (tmp && ft_isspace(*tmp))
 	tmp++;
 	if (!ft_strncmp(identifier, tmp, 2))
@@ -80,25 +81,24 @@ int	save_texture_path(char *identifier, char *tmp, char **path)
 
 	void	read_textures_n_colours(char *tmp, t_data *data)
 {
-	int		num;
 	if (!ft_strncmp("NO", tmp, 2))
-		num += save_texture_path("NO", tmp, &(data->no));
+		save_texture_path("NO", tmp, &(data->no));
 	else if (!ft_strncmp("SO", tmp, 2))
-		num += save_texture_path("SO", tmp, &(data->so));
+		save_texture_path("SO", tmp, &(data->so));
 	else if (!ft_strncmp("EA", tmp, 2))
-		num += save_texture_path("EA", tmp, &(data->ea));
+		save_texture_path("EA", tmp, &(data->ea));
 	else if (!ft_strncmp("WE", tmp, 2))
-		num += save_texture_path("WE", tmp, &(data->we));
+		save_texture_path("WE", tmp, &(data->we));
 	else if (!ft_strncmp("C", tmp, 1))
-		num += save_texture_path("C", tmp, &(data->c));
+		save_texture_path("C", tmp, &(data->c));
 	else if (!ft_strncmp("F", tmp, 1))
-		num += save_texture_path("F", tmp, &(data->f));
-}
-
-void	is_empty(char *tmp)
+		save_texture_path("F", tmp, &(data->f));
+	}
+	
+	void	is_empty(char *tmp)
 {
 	while (tmp && ft_isspace(*tmp))
-		tmp++;
+	tmp++;
 	if (!tmp)
 	{
 		printf(BPINK"Error: file is empty\n"RST);
@@ -106,13 +106,32 @@ void	is_empty(char *tmp)
 	}
 }
 
+// void	count_textures_n_colours(char *tmp, t_data *data, int *count)
+// {
+// 	if (!ft_strncmp("NO", tmp, 2))
+// 		count[0]++;
+// 	else if (!ft_strncmp("SO", tmp, 2))
+// 		count[1]++;
+// 	else if (!ft_strncmp("EA", tmp, 2))
+// 		count[2]++;
+// 	else if (!ft_strncmp("WE", tmp, 2))
+// 		count[3]++;
+// 	else if (!ft_strncmp("C", tmp, 1))
+// 		count[4]++;
+// 	else if (!ft_strncmp("F", tmp, 1))
+// 		count[5]++;
+// }
+
+
 void	check_map_metadata(char *map_file, t_data *data)
 {
+	int		count[6];
 	int		fd;
 	char	*tmp;
 	
-	tmp = NULL;
+	ft_memset(count, 0, sizeof(count));
 	fd = safe_open(map_file);
+	tmp = NULL;
 	tmp = get_next_line(fd);
 	is_empty(tmp);
 	while (tmp)
@@ -120,9 +139,10 @@ void	check_map_metadata(char *map_file, t_data *data)
 		while (ft_isspace(*tmp))
 		tmp++;
 		read_textures_n_colours(tmp, data);
-		// printf("%s", tmp);
+		count_textures_n_colours(tmp, data, count);
 		tmp = get_next_line(fd);
 	}
+	check_invalid_count(data);
 }
 
 void	validate_map(int argc, char **argv, t_data *data)
