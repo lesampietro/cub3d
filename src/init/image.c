@@ -36,10 +36,14 @@ void load_texture(t_game *game)
 
 void init_textures(t_game *game)
 {
-	game->data->direction[NORTH] = "./assets/textures/50 Free Stylized Wall Textures/1-16/Asset 3.png";
-	game->data->direction[EAST] = "./assets/textures/50 Free Stylized Wall Textures/17-32/Asset 2.png";
-	game->data->direction[SOUTH] = "./assets/textures/50 Free Stylized Wall Textures/1-16/Asset 6.png";
-	game->data->direction[WEST] = "./assets/textures/50 Free Stylized Wall Textures/17-32/Asset 2.png";
+	// game->data->direction[NORTH] = "./assets/textures/50 Free Stylized Wall Textures/1-16/Asset 3.png";
+	// game->data->direction[EAST] = "./assets/textures/50 Free Stylized Wall Textures/17-32/Asset 2.png";
+	// game->data->direction[SOUTH] = "./assets/textures/50 Free Stylized Wall Textures/1-16/Asset 6.png";
+	// game->data->direction[WEST] = "./assets/textures/50 Free Stylized Wall Textures/17-32/Asset 2.png";
+	game->data->direction[NORTH] = "./assets/textures/Torment Textures/True Colour/str_metalpan8.png";
+	game->data->direction[EAST] = "./assets/textures/Torment Textures/True Colour/str_metalgen4.png";
+	game->data->direction[SOUTH] = "./assets/textures/Torment Textures/True Colour/str_metalgrbl4.png";
+	game->data->direction[WEST] = "./assets/textures/Torment Textures/True Colour/str_metalgen6.png";
 	load_texture(game);
 }
 
