@@ -79,23 +79,46 @@ int	save_texture_path(char *identifier, char *tmp, char **path)
 // 	}
 // }
 
-	void	read_textures_n_colours(char *tmp, t_data *data)
+void	check_invalid_count(int count, t_data *data)
+{
+	if (count < 6)
+	{
+		printf(BPINK"Error: missing texture/colour information"RST);
+		exit(EXIT_FAILURE);
+	}
+	if (count > 6)
+	{
+		printf(BPINK"Error: duplicated texture/colour information"RST);
+		exit(EXIT_FAILURE);
+	}
+	if (count == 6 && \
+		(data->no && data->so && data->we && data->ea && data->c && data->f))
+			return ;
+	else
+	{
+		printf(BPINK"Error: missing or duplicated texture/colour info"RST);
+		exit(EXIT_FAILURE);
+	}
+}
+
+int	read_textures_n_colours(int count, char *tmp, t_data *data)
 {
 	if (!ft_strncmp("NO", tmp, 2))
-		save_texture_path("NO", tmp, &(data->no));
+		count += save_texture_path("NO", tmp, &(data->no));
 	else if (!ft_strncmp("SO", tmp, 2))
-		save_texture_path("SO", tmp, &(data->so));
+		count += save_texture_path("SO", tmp, &(data->so));
 	else if (!ft_strncmp("EA", tmp, 2))
-		save_texture_path("EA", tmp, &(data->ea));
+		count += save_texture_path("EA", tmp, &(data->ea));
 	else if (!ft_strncmp("WE", tmp, 2))
-		save_texture_path("WE", tmp, &(data->we));
+		count += save_texture_path("WE", tmp, &(data->we));
 	else if (!ft_strncmp("C", tmp, 1))
-		save_texture_path("C", tmp, &(data->c));
+		count += save_texture_path("C", tmp, &(data->c));
 	else if (!ft_strncmp("F", tmp, 1))
-		save_texture_path("F", tmp, &(data->f));
-	}
+		count += save_texture_path("F", tmp, &(data->f));
+	return (count);
+}
 	
-	void	is_empty(char *tmp)
+void	is_empty(char *tmp)
 {
 	while (tmp && ft_isspace(*tmp))
 	tmp++;
@@ -105,44 +128,27 @@ int	save_texture_path(char *identifier, char *tmp, char **path)
 		exit(EXIT_FAILURE);
 	}
 }
-
-// void	count_textures_n_colours(char *tmp, t_data *data, int *count)
-// {
-// 	if (!ft_strncmp("NO", tmp, 2))
-// 		count[0]++;
-// 	else if (!ft_strncmp("SO", tmp, 2))
-// 		count[1]++;
-// 	else if (!ft_strncmp("EA", tmp, 2))
-// 		count[2]++;
-// 	else if (!ft_strncmp("WE", tmp, 2))
-// 		count[3]++;
-// 	else if (!ft_strncmp("C", tmp, 1))
-// 		count[4]++;
-// 	else if (!ft_strncmp("F", tmp, 1))
-// 		count[5]++;
-// }
-
-
+	
+	
 void	check_map_metadata(char *map_file, t_data *data)
 {
-	int		count[6];
 	int		fd;
 	char	*tmp;
+	int		count;
 	
-	ft_memset(count, 0, sizeof(count));
 	fd = safe_open(map_file);
 	tmp = NULL;
 	tmp = get_next_line(fd);
 	is_empty(tmp);
-	while (tmp)
+	while (tmp && *tmp != '1')
 	{
 		while (ft_isspace(*tmp))
 		tmp++;
-		read_textures_n_colours(tmp, data);
-		count_textures_n_colours(tmp, data, count);
+		count = read_textures_n_colours(count, tmp, data);
 		tmp = get_next_line(fd);
 	}
-	check_invalid_count(data);
+	printf("Count= %d\n", count);
+	check_invalid_count(count, data);
 }
 
 void	validate_map(int argc, char **argv, t_data *data)

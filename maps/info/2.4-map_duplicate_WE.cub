@@ -4,6 +4,7 @@ WE  ./textures/water.png
 NO ./textures/air.txt
 SO ./textures/fire.png
        EA ./textures/earth.png
+F 
 
 1111111111111111111111111
 1000000000110000000000001
