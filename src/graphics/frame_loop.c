@@ -11,4 +11,5 @@ void frame_loop(void *param)
 	draw_raycasting(game);
 	render_elements(game);
 	draw_minimap(game);
+	draw_weapon(game);
 }

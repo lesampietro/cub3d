@@ -16,7 +16,7 @@
 
 # define MOVE_SPEED 0.04
 # define ROTATE_SPEED 2.8
-# define SENSITIVITY 0.06
+# define SENSITIVITY 0.04
 # define SPRINT_MULTIPLIER 2
 
 # define VERTICAL 0
@@ -69,7 +69,6 @@ typedef struct s_coord
 	int		y;
 }	t_coord;
 
-
 typedef struct s_raycasting
 {
 	t_vector	direction;
@@ -103,6 +102,8 @@ typedef struct s_game
 	mlx_image_t		*mlx_image;
 	mlx_texture_t	*texture_buf;
 	mlx_texture_t	*texture[4];
+	mlx_texture_t	*weapon_texture;
+	char			*weapon_text_path;
 	t_data			*data;
 	t_raycasting	*raycasting;
 	t_keys			keys;
@@ -156,6 +157,8 @@ void		draw_wall(t_game *game, t_raycasting *ray, int pixel);
 void		init_textures(t_game *game);
 uint32_t	get_texture_pixel(mlx_texture_t *texture, int x, int y);
 void		draw_minimap(void *param);
+
+void		draw_weapon(t_game *game);
 
 void		render_elements(t_game *game);
 
