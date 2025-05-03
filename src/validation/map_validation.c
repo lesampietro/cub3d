@@ -51,18 +51,58 @@ int	safe_open(char *filename)
 	return (fd);
 }
 
+// int		count_map_size(char *filename)
+// {
+// 	int		fd;
+// 	int		count;
+// 	char	*line;
+
+// 	fd = safe_open(filename);
+// 	count = 0;
+// 	while (get_next_line(fd) > 0)
+// 	{
+// 		count++;
+// 		free(line);
+// 	}
+// 	close(fd);
+// 	return (count);
+// }
+
+// char	**get_map(char *filename)
+// {
+// 	int		fd;
+// 	char	*line;
+// 	char	**map;
+
+// 	fd = safe_open(filename);
+// 	line = get_next_line(fd);
+// 	while (line)
+// 	{
+// 		if (ft_strchr(line, '1'))
+// 			break ;
+// 		break ;
+// 		line = get_next_line(fd);
+// 	}
+// 	return (map);
+// }
+
+
+
 void	validate_map(int argc, char **argv, t_data *data)
 {
-	char	**map;
+	char	*map_line;
 
-	map = NULL;
+	map_line = NULL;
 	check_args(argc);
 	is_valid_ext(argv[1]);
-	check_map_metadata(argv[1], data);
-	// printf("Path for NO = %s\n", data->);
-	// printf("Path for SO = %s\n", data->so);
-	// printf("Path for WE = %s\n", data->we);
-	// printf("Path for EA = %s\n", data->ea);
-	// printf("Path for C = %s\n", data->c);
-	// printf("Path for F = %s\n", data->f);
+	check_map_metadata(argv[1], data, map_line);
+	// data->map = get_map(argv[1]);
+	// //printf("Map size: %d\n", count_map_size(argv[1]));
+	// while(data->map[data->lin])
+	// {
+	// 	printf("Map: %s\n", data->map[data->lin]);
+	// 	data->lin++;
+	// }
+	//printf("Map: %s\n", data->map[0]);
+	// check_map(data->map, data);
 }

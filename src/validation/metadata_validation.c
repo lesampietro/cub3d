@@ -75,25 +75,26 @@ int	read_textures_n_colours(int count, char *line, t_data *data)
 	return (count);
 }
 
-void	check_map_metadata(char *map_file, t_data *data)
+void	check_map_metadata(char *map_file, t_data *data, char *map_line)
 {
 	int		fd;
-	char	*line;
 	int		count;
 	
 	fd = safe_open(map_file);
-	line = NULL;
-	line = get_next_line(fd);
-	is_empty(line);
-	while (line)
+	map_line = get_next_line(fd);
+	is_empty(map_line);
+	while (map_line)
 	{
-		while (ft_isspace(*line))
-		line++;
-		count = read_textures_n_colours(count, line, data);
-		line = get_next_line(fd);
+		while (ft_isspace(*map_line))
+			map_line++;
+		count = read_textures_n_colours(count, map_line, data);
 		if (count == 6 && (data->direction[NORTH] && data->direction[SOUTH] && data->direction[WEST] && data->direction[EAST] \
 			&& data->c && data->f ))
 			break ;
+		map_line = get_next_line(fd);
 	}
 	check_invalid_count(count);
+	map_line = get_next_line(fd);
+	map_line = get_next_line(fd);
+	printf("Map Line: %s\n", map_line);
 }
