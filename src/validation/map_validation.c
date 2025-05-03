@@ -37,7 +37,7 @@ void	check_args(int argc, char **argv)
 		return ;
 }
 
-int safe_open(char *filename)
+int	safe_open(char *filename)
 {
 	int fd;
 
@@ -51,84 +51,93 @@ int safe_open(char *filename)
 	return (fd);
 }
 
-void	check_path_ext(char *path_ext)
+char	*check_line_info(char *line)
 {
-	char	*valid_ext;
+	char	**split;
+	char	*path;
+
+	split = NULL;
+	split = ft_split(line, ' ');
+	path = NULL;
+	if (split[2])
+	{
+		printf(BPINK "Error: too much texture info\n" RST);
+		ft_free_split(split);
+		return (NULL);
+	}
+	if (split[1])
+	{
+		path = ft_strdup(split[1]);
+		ft_free_split(split);
+		return (path);
+	}
+	else
+	{
+		printf(BPINK "Error: missing texture info\n" RST);
+		ft_free_split(split);
+		return (NULL);
+	}
+}
+
+void	check_color(char *line)
+{
 	int		i;
-	int		len;
+	int		j;
+	char	**split;
 
-	i = 0;
-	valid_ext = ".png";
-	len = ft_strlen(path_ext);
-	len = len - 4;
-	while (path_ext[len] && valid_ext[i] && path_ext[len] == valid_ext[i])
+	i = -1;
+	j = 0;
+	split = ft_split(line, ',');
+	while (split[++i])
 	{
-		i++;
-		len++;
+		if (!ft_isdigit(split[i][j]))
+		break ;
 	}
-	if (valid_ext[i] == '\0' && path_ext[len] == '\0')
-		return ;
-	printf(BPINK"Texture extension is invalid\n"RST);
-	exit(EXIT_FAILURE);
-}
-
-void check_extra_text(char *line)
-{
-	int i;
-
-	i = 0;
-	if (ft_strncmp("./", line, 2) != 0)
+	if (i != 3 || split[3])
 	{
-		printf(BPINK "Error: text before texture information\n" RST);
+		printf(BPINK "Error: invalid colour info\n" RST);
+		ft_free_split(split);
 		exit(EXIT_FAILURE);
 	}
-	while (line[i] && !ft_isspace(line[i]))
-		i++;
-	while (line[i] && ft_isspace(line[i]))
-		i++;
-	if (line[i])
-	{
-		printf(BPINK "Error: text after texture information\n" RST);
-		exit(EXIT_FAILURE);
-	}
-}
-
-void	check_texture_path(char *id, char *line)
-{
-	check_extra_text(line);
-	check_path_ext(line);
+	ft_free_split(split);
 }
 
 int	save_texture_path(char *identifier, char *line, char **path)
 {
-	while (line && ft_isspace(*line))
-	line++;
-	if (!ft_strncmp(identifier, line, 2))
-		line += 2;
-	while (line && ft_isspace(*line))
-		line++;
-	if (line)
+	line = check_line_info(line);
+	if (!line)
 	{
-		check_texture_path(identifier, line);
-		*path = strdup(line);
+		printf(BPINK "Error: invalid texture/colour info\n" RST);
+		free(line);
+		exit(EXIT_FAILURE);
 	}
-	printf("Path for %s texture: %s", identifier, *path);
+	if (ft_strncmp("./", line, 2) != 0)
+	{
+		printf(BPINK "Error: invalid texture path\n" RST);
+		free(line);
+		exit(EXIT_FAILURE);
+	}
+	else
+		*path = strdup(line);
+	free(line);
 	return (1);
 }
 
 int	save_colour_path(char *identifier, char *line, char **path)
 {
-	while (line && ft_isspace(*line))
-	line++;
-	if (!ft_strncmp(identifier, line, 2))
-		line += 2;
-	while (line && ft_isspace(*line))
-		line++;
-	if (line) //adicionar checagem específica de cores
-		*path = strdup(line);
-	printf("Path for %s colour: %s", identifier, *path);
+	line = check_line_info(line);
+	if (!line)
+	{
+		printf(BPINK "Error: invalid texture/colour info\n" RST);
+		free(line);
+		exit(EXIT_FAILURE);
+	}
+	check_color(line);
+	*path = strdup(line);
+	free(line);
 	return (1);
 }
+
 
 int	read_textures_n_colours(int count, char *line, t_data *data)
 {
@@ -198,4 +207,10 @@ void	validate_map(int argc, char **argv, t_data *data)
 	check_args(argc, argv);
 	is_valid_ext(argv[1]);
 	check_map_metadata(argv[1], data);
+	// printf("Path for NO = %s", data->no);
+	// printf("Path for SO = %s", data->so);
+	// printf("Path for WE = %s", data->we);
+	// printf("Path for EA = %s", data->ea);
+	// printf("Path for C = %s", data->c);
+	// printf("Path for F = %s", data->f);
 }
