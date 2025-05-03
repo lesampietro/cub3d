@@ -143,13 +143,13 @@ int	save_colour_path(char *identifier, char *line, char **path)
 int	read_textures_n_colours(int count, char *line, t_data *data)
 {
 	if (!ft_strncmp("NO", line, 2))
-		count += save_texture_path("NO", line, &(data->no));
+		count += save_texture_path("NO", line, &(data->direction[NORTH]));
 	else if (!ft_strncmp("SO", line, 2))
-		count += save_texture_path("SO", line, &(data->so));
+		count += save_texture_path("SO", line, &(data->direction[SOUTH]));
 	else if (!ft_strncmp("EA", line, 2))
-		count += save_texture_path("EA", line, &(data->ea));
+		count += save_texture_path("EA", line, &(data->direction[EAST]));
 	else if (!ft_strncmp("WE", line, 2))
-		count += save_texture_path("WE", line, &(data->we));
+		count += save_texture_path("WE", line, &(data->direction[WEST]));
 	else if (!ft_strncmp("C", line, 1))
 		count += save_colour_path("C", line, &(data->c));
 	else if (!ft_strncmp("F", line, 1))
@@ -193,7 +193,7 @@ void	check_map_metadata(char *map_file, t_data *data)
 		line++;
 		count = read_textures_n_colours(count, line, data);
 		line = get_next_line(fd);
-		if (count == 6 && (data->no && data->so && data->we && data->ea \
+		if (count == 6 && (data->direction[NORTH] && data->direction[SOUTH] && data->direction[WEST] && data->direction[EAST] \
 			&& data->c && data->f))
 			break ;
 	}
@@ -208,10 +208,10 @@ void	validate_map(int argc, char **argv, t_data *data)
 	check_args(argc, argv);
 	is_valid_ext(argv[1]);
 	check_map_metadata(argv[1], data);
-	printf("Path for NO = %s\n", data->no);
-	printf("Path for SO = %s\n", data->so);
-	printf("Path for WE = %s\n", data->we);
-	printf("Path for EA = %s\n", data->ea);
-	printf("Path for C = %s\n", data->c);
-	printf("Path for F = %s\n", data->f);
+	// printf("Path for NO = %s\n", data->);
+	// printf("Path for SO = %s\n", data->so);
+	// printf("Path for WE = %s\n", data->we);
+	// printf("Path for EA = %s\n", data->ea);
+	// printf("Path for C = %s\n", data->c);
+	// printf("Path for F = %s\n", data->f);
 }
