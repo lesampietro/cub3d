@@ -37,7 +37,7 @@ void	check_args(int argc, char **argv)
 		return ;
 }
 
-int safe_open(char *filename)
+int	safe_open(char *filename)
 {
 	int fd;
 
@@ -51,71 +51,153 @@ int safe_open(char *filename)
 	return (fd);
 }
 
-int	save_texture_path(char *identifier, char *tmp, char **path)
+char	*check_line_info(char *line)
 {
-	while (tmp && ft_isspace(*tmp))
-	tmp++;
-	if (!ft_strncmp(identifier, tmp, 2))
-		tmp += 2;
-	while (tmp && ft_isspace(*tmp))
-		tmp++;
-	if (tmp)
-		*path = strdup(tmp);
-	printf("Path for %s texture: %s", identifier, *path); // --> DEBUG
-	return (1);
-}
+	char	**split;
+	char	*path;
 
-// int	convert_n_save_colours(char *identifier, char *tmp, uint32_t *colour)
-void	check_duplicate_textures(t_data *data)
-{
-	if (data->direction[0] && data->direction[1] && data->direction[2] && data->direction[3] && data->c && data->f)
+	split = NULL;
+	line = ft_strtrim(line, " \n");
+	split = ft_split(line, ' ');
+	path = NULL;
+	if (split[2])
 	{
-		// if (num > 6)
-		// {
-		// 	printf(BPINK"Error: duplicate texture or colour identifier\n"RST);
-		// 	exit(EXIT_FAILURE);
-		// }
+		printf(BPINK "Error: too much texture info\n" RST);
+		ft_free_split(split);
+		return (NULL);
+	}
+	if (split[1])
+	{
+		path = ft_strdup(split[1]);
+		ft_free_split(split);
+		return (path);
+	}
+	else
+	{
+		printf(BPINK "Error: missing texture info\n" RST);
+		ft_free_split(split);
+		return (NULL);
 	}
 }
 
-	void	read_textures_n_colours(char *tmp, t_data *data)
+void	check_color(char *line)
 {
-	int		num;
-	if (!ft_strncmp("NO", tmp, 2))
-		num += save_texture_path("NO", tmp, &(data->direction[NORTH]));
-	else if (!ft_strncmp("SO", tmp, 2))
-		num += save_texture_path("SO", tmp, &(data->direction[SOUTH]));
-	else if (!ft_strncmp("EA", tmp, 2))
-		num += save_texture_path("EA", tmp, &(data->direction[EAST]));
-	else if (!ft_strncmp("WE", tmp, 2))
-		num += save_texture_path("WE", tmp, &(data->direction[WEST]));
-	else if (!ft_strncmp("C", tmp, 1))
-		num += save_texture_path("C", tmp, &(data->c));
-	else if (!ft_strncmp("F", tmp, 1))
-		num += save_texture_path("F", tmp, &(data->f));
+	int		i;
+	int		j;
+	char	**split;
+
+	i = -1;
+	j = 0;
+	split = ft_split(line, ',');
+	while (split[++i])
+	{
+		if (!ft_isdigit(split[i][j]))
+		break ;
+	}
+	if (i != 3 || split[3])
+	{
+		printf(BPINK "Error: invalid colour info\n" RST);
+		ft_free_split(split);
+		exit(EXIT_FAILURE);
+	}
+	ft_free_split(split);
 }
-	
-void	check_map_metadata(char *map_file, t_data *data)
+
+int	save_texture_path(char *identifier, char *line, char **path)
 {
-	int		fd;
-	char	*tmp;
-	
-	tmp = NULL;
-	fd = safe_open(map_file);
-	tmp = get_next_line(fd);
-	if (!tmp || tmp[0] == '\n' || tmp[0] == '\0')
+	line = check_line_info(line);
+	if (!line)
+	{
+		printf(BPINK "Error: invalid texture/colour info\n" RST);
+		free(line);
+		exit(EXIT_FAILURE);
+	}
+	if (ft_strncmp("./", line, 2) != 0)
+	{
+		printf(BPINK "Error: invalid texture path\n" RST);
+		free(line);
+		exit(EXIT_FAILURE);
+	}
+	else
+		*path = strdup(line);
+	free(line);
+	return (1);
+}
+
+int	save_colour_path(char *identifier, char *line, char **path)
+{
+	line = check_line_info(line);
+	if (!line)
+	{
+		printf(BPINK "Error: invalid texture/colour info\n" RST);
+		free(line);
+		exit(EXIT_FAILURE);
+	}
+	check_color(line);
+	*path = strdup(line);
+	free(line);
+	return (1);
+}
+
+
+int	read_textures_n_colours(int count, char *line, t_data *data)
+{
+	if (!ft_strncmp("NO", line, 2))
+		count += save_texture_path("NO", line, &(data->no));
+	else if (!ft_strncmp("SO", line, 2))
+		count += save_texture_path("SO", line, &(data->so));
+	else if (!ft_strncmp("EA", line, 2))
+		count += save_texture_path("EA", line, &(data->ea));
+	else if (!ft_strncmp("WE", line, 2))
+		count += save_texture_path("WE", line, &(data->we));
+	else if (!ft_strncmp("C", line, 1))
+		count += save_colour_path("C", line, &(data->c));
+	else if (!ft_strncmp("F", line, 1))
+		count += save_colour_path("F", line, &(data->f));
+	return (count);
+}
+
+void	check_invalid_count(int count, t_data *data)
+{
+	if (count != 6)
+	{
+		printf(BPINK"Error: missing or duplicated texture/colour info"RST);
+		exit(EXIT_FAILURE);
+	}
+}
+
+void	is_empty(char *line)
+{
+	while (line && ft_isspace(*line))
+	line++;
+	if (!line)
 	{
 		printf(BPINK"Error: file is empty\n"RST);
 		exit(EXIT_FAILURE);
 	}
-	while (tmp)
+}
+
+void	check_map_metadata(char *map_file, t_data *data)
+{
+	int		fd;
+	char	*line;
+	int		count;
+	
+	fd = safe_open(map_file);
+	line = NULL;
+	line = get_next_line(fd);
+	is_empty(line);
+	while (line)
 	{
-		while (ft_isspace(*tmp))
-		tmp++;
-		read_textures_n_colours(tmp, data);
-		// printf("%s", tmp);
-		tmp = get_next_line(fd);
+		while (ft_isspace(*line))
+		line++;
+		count = read_textures_n_colours(count, line, data);
+		line = get_next_line(fd);
+		if (count == 6 && (data->no && data->so && data->we && data->ea \
+			&& data->c && data->f))
+			break ;
 	}
+	check_invalid_count(count, data);
 }
 
 void	validate_map(int argc, char **argv, t_data *data)
@@ -126,4 +208,10 @@ void	validate_map(int argc, char **argv, t_data *data)
 	check_args(argc, argv);
 	is_valid_ext(argv[1]);
 	check_map_metadata(argv[1], data);
+	printf("Path for NO = %s\n", data->no);
+	printf("Path for SO = %s\n", data->so);
+	printf("Path for WE = %s\n", data->we);
+	printf("Path for EA = %s\n", data->ea);
+	printf("Path for C = %s\n", data->c);
+	printf("Path for F = %s\n", data->f);
 }

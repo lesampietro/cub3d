@@ -1,12 +1,12 @@
-F                                       200,200,9
+F                                       200,200,9    
 
 
 
-C 244,233,,120
+C 244,1,0
 
 WE               ./textures/air.png
 NO ./textures/earth.png
-SO               .textures/water.png 
+SO               .textures/water.png
         EA       ./textures/fire.png
 
 1111111111111111111111111
