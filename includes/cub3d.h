@@ -146,7 +146,11 @@ void		init_window(t_game *game);
 
 //MAP VALIDATION
 void		validate_map(int argc, char **argv, t_data *data);
-void		is_valid_ext(char *file_ext);
+void		check_map_metadata(char *map_file, t_data *data);
+int			safe_open(char *filename);
+void		check_invalid_count(int count);
+void		check_color(char *line);
+char		*check_line_info(char *line);
 
 
 //GRAPHICS

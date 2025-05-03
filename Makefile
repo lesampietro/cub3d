@@ -30,6 +30,8 @@ FILES	= main.c \
 			init/image.c \
 			validation/map_parsing.c \
 			validation/map_validation.c \
+			validation/metadata_validation.c \
+			validation/metadata_validation_utils.c \
 
 HEADERS	= -I ./include -I $(MLX_PATH)/include -I ./libft
 OBJS = $(SRCS:$(SRC_PATH)/%.c=$(BIN)/%.o)
