@@ -5,24 +5,6 @@ uint32_t	convert_rgb(int r, int g, int b)
 	return (r << 24 | g << 16 | b << 8 | 255);
 }
 
-// void init_values(t_data *data)
-// {
-// 	data->map = NULL;
-// 	data->col = 0;
-// 	data->lin = 0;
-// 	data->no = NULL;
-// 	data->so = NULL;
-// 	data->ea = NULL;
-// 	data->we = NULL;
-// 	data->ceiling = NULL;
-// 	data->floor = NULL;
-// 	// game->icon = NULL;
-// 	// game->pos.x = 0;
-// 	// game->pos.y = 0;
-// }
-// game->ceiling = 0xFF006872;
-// game->floor = 0xFF4B0082;
-
 char **get_map(void)
 {
 	// static char *map[] = {
@@ -108,7 +90,6 @@ int32_t main(int argc, char **argv)
 	raycasting = (t_raycasting){0};
 	game.data = &data;
 	game.raycasting = &raycasting;
-	// init_values(&data);
 	// validate_map(argc, argv, &data);
 
 	// MOCK:

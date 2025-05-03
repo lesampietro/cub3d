@@ -208,10 +208,10 @@ void	validate_map(int argc, char **argv, t_data *data)
 	check_args(argc, argv);
 	is_valid_ext(argv[1]);
 	check_map_metadata(argv[1], data);
-	// printf("Path for NO = %s\n", data->);
-	// printf("Path for SO = %s\n", data->so);
-	// printf("Path for WE = %s\n", data->we);
-	// printf("Path for EA = %s\n", data->ea);
-	// printf("Path for C = %s\n", data->c);
-	// printf("Path for F = %s\n", data->f);
+	// printf("Path for NO = %s", data->no);
+	// printf("Path for SO = %s", data->so);
+	// printf("Path for WE = %s", data->we);
+	// printf("Path for EA = %s", data->ea);
+	// printf("Path for C = %s", data->c);
+	// printf("Path for F = %s", data->f);
 }
