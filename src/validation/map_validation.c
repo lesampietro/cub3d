@@ -57,6 +57,7 @@ char	*check_line_info(char *line)
 	char	*path;
 
 	split = NULL;
+	line = ft_strtrim(line, " \n");
 	split = ft_split(line, ' ');
 	path = NULL;
 	if (split[2])
@@ -207,10 +208,10 @@ void	validate_map(int argc, char **argv, t_data *data)
 	check_args(argc, argv);
 	is_valid_ext(argv[1]);
 	check_map_metadata(argv[1], data);
-	// printf("Path for NO = %s", data->no);
-	// printf("Path for SO = %s", data->so);
-	// printf("Path for WE = %s", data->we);
-	// printf("Path for EA = %s", data->ea);
-	// printf("Path for C = %s", data->c);
-	// printf("Path for F = %s", data->f);
+	printf("Path for NO = %s\n", data->no);
+	printf("Path for SO = %s\n", data->so);
+	printf("Path for WE = %s\n", data->we);
+	printf("Path for EA = %s\n", data->ea);
+	printf("Path for C = %s\n", data->c);
+	printf("Path for F = %s\n", data->f);
 }
