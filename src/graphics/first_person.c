@@ -1,8 +1,8 @@
 #include "../../includes/cub3d.h"
 
-#define SCALE 2
+#define SCALE 3
 
-void	draw_weapon(t_game *game)
+static void render_weapon(t_game *game, mlx_texture_t *texture)
 {
 	uint32_t x;
 	uint32_t y;
@@ -10,20 +10,17 @@ void	draw_weapon(t_game *game)
 	int offset_x;
 	int offset_y;
 
-	offset_x = (WINDOW_WIDTH - game->weapon_texture->width) / 2 + 120;
-	offset_y = WINDOW_HEIGHT - game->weapon_texture->height - 200;
+	offset_x = (WINDOW_WIDTH - texture->width) / 2 + 20;
+	offset_y = WINDOW_HEIGHT - texture->height - 400;
 	x = 0;
-	while (x < game->weapon_texture->width)
+	while (x < texture->width)
 	{
 		y = 0;
-		while (y < game->weapon_texture->height)
+		while (y < texture->height)
 		{
-			uint32_t color = get_texture_pixel(game->weapon_texture, game->weapon_texture->width - 1 - x, y);
-
-			// Se tiver transparência, ignora o pixel
-			if ((color & 0x00FFFFFF) != 0) // ou ((color >> 24) & 0xFF > 0) se preferir
+			uint32_t color = get_texture_pixel(texture, texture->width - 1 - x, y);
+			if ((color & 0x00FFFFFF) != 0)
 			{
-				// Desenha bloco SCALE x SCALE na tela
 				int dx = 0;
 				while (dx < SCALE)
 				{
@@ -47,5 +44,12 @@ void	draw_weapon(t_game *game)
 		}
 		x++;
 	}
+}
 
+void	draw_weapon(t_game *game)
+{
+	if (game->keys.mouse_left)
+		render_weapon(game, game->weapon_shooting_texture);
+	else
+		render_weapon(game, game->weapon_texture);
 }

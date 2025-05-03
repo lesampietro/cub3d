@@ -55,6 +55,7 @@ typedef struct s_keys
 	bool left;
 	bool right;
 	bool shift;
+	bool mouse_left;
 }	t_keys;
 
 typedef struct s_vector
@@ -104,6 +105,8 @@ typedef struct s_game
 	mlx_texture_t	*texture[4];
 	mlx_texture_t	*weapon_texture;
 	char			*weapon_text_path;
+	mlx_texture_t	*weapon_shooting_texture;
+	char			*weapon_shooting_text_path;
 	t_data			*data;
 	t_raycasting	*raycasting;
 	t_keys			keys;
@@ -137,12 +140,12 @@ typedef enum e_dir
 	WEST
 }	t_dir;
 
-int32_t			init_game(char *argv, t_game *game);
-void			init_window(t_game *game);
+int32_t		init_game(char *argv, t_game *game);
+void		init_window(t_game *game);
 
 //MAP VALIDATION
-void			validate_map(int argc, char **argv, t_data *data);
-void			is_valid_ext(char *file_ext);
+void		validate_map(int argc, char **argv, t_data *data);
+void		is_valid_ext(char *file_ext);
 
 
 //GRAPHICS
@@ -166,5 +169,9 @@ void		render_elements(t_game *game);
 void		key_hook(mlx_key_data_t keydata, void *param);
 void		mouse_rotation(t_game *game);
 void		move_player(t_game *game);
+void		mouse_hook(mouse_key_t button, action_t action, modifier_key_t mods, void *param);
+
+//ACTION
+void		shoot_hit(t_game *game);
 
 #endif

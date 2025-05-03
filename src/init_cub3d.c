@@ -44,9 +44,9 @@ int32_t init_game(char *argv, t_game *game)
 	// init_game_image(game);
 	// get_player_pos(game->map, &game->player_pos);
 	// occurence_count(game->map, &game->occ);
-	mlx_set_cursor_mode(game->mlx, MLX_MOUSE_HIDDEN);
+	mlx_set_cursor_mode(game->mlx, MLX_MOUSE_DISABLED);
 	mlx_key_hook(game->mlx, key_hook, game);
-	// mlx_mouse_hook(game->mlx, mouse_hook, game);
+	mlx_mouse_hook(game->mlx, mouse_hook, game);
 	mlx_loop_hook(game->mlx, frame_loop, game);
 	// mlx_close_hook(game->mlx, 0, game);
 	mlx_loop(game->mlx);

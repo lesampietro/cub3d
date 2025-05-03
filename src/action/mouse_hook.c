@@ -41,3 +41,31 @@ void mouse_rotation(t_game *game)
 	mlx_set_mouse_pos(game->mlx, WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2);
 	game->mouse_prev_x = WINDOW_WIDTH / 2;
 }
+// void mouse_hook(void *param)
+// {
+// 	t_game *game;
+
+// 	game = (t_game *)param;
+// 	if (mlx_is_mouse_down(game->mlx, MLX_MOUSE_BUTTON_LEFT))
+// 	{
+// 		game->keys.mouse_left = true;
+// 	}
+// 	else
+// 	{
+// 		game->keys.mouse_left = false;
+// 	}
+// }
+
+void mouse_hook(mouse_key_t button, action_t action, modifier_key_t mods, void *param)
+{
+	(void)mods;
+	t_game *game = (t_game *)param;
+
+	if (button == MLX_MOUSE_BUTTON_LEFT && action == MLX_PRESS)
+	{
+		shoot_hit(game);
+		game->keys.mouse_left = true;
+	}
+	else if (button == MLX_MOUSE_BUTTON_LEFT && action == MLX_RELEASE)
+		game->keys.mouse_left = false;
+}

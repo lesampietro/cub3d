@@ -6,7 +6,8 @@ void load_texture(t_game *game)
 
 	i = 0;
 	game->weapon_texture = mlx_load_png(game->weapon_text_path);
-	if (!game->weapon_texture)
+	game->weapon_shooting_texture = mlx_load_png(game->weapon_shooting_text_path);
+	if (!game->weapon_texture || !game->weapon_shooting_texture)
 	{
 		printf("Error loading texture: %s\n", game->weapon_text_path);
 		exit(EXIT_FAILURE);
@@ -47,7 +48,8 @@ void init_textures(t_game *game)
 	game->data->direction[SOUTH] = "./assets/textures/50 Free Stylized Wall Textures/1-16/Asset 6.png";
 	game->data->direction[WEST] = "./assets/textures/50 Free Stylized Wall Textures/17-32/Asset 2.png";
 
-	game->weapon_text_path = "./assets/wand_shooting.png";
+	game->weapon_shooting_text_path = "./assets/wand_shooting.png";
+	game->weapon_text_path = "./assets/wand.png";
 	// game->data->direction[NORTH] = "./assets/textures/Torment Textures/True Colour/str_metalpan8.png";
 	// game->data->direction[EAST] = "./assets/textures/Torment Textures/True Colour/str_metalgen4.png";
 	// game->data->direction[SOUTH] = "./assets/textures/Torment Textures/True Colour/str_metalgrbl4.png";

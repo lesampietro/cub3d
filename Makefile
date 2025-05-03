@@ -23,9 +23,10 @@ FILES	= main.c \
 			graphics/minimap.c \
 			graphics/element_raycast.c \
 			graphics/first_person.c \
-			movement/move_key_hook.c \
-			movement/move_logic.c \
-			movement/mouse_hook.c \
+			action/action_key_hook.c \
+			action/move_logic.c \
+			action/mouse_hook.c \
+			action/shooting.c \
 			init/image.c
 
 			# validation/map_parsing.c \
