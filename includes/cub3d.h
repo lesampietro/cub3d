@@ -1,5 +1,6 @@
 #ifndef CUB3D_H
 # define CUB3D_H
+
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
@@ -91,8 +92,8 @@ typedef struct s_data
 	int			col;
 	int			lin;
 	char		*direction[4];
-	char		*c;
-	char		*f;
+	int			*c;
+	int			*f;
 	uint32_t	ceiling;
 	uint32_t	floor;
 } t_data;

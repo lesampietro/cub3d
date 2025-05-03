@@ -108,8 +108,7 @@ int32_t main(int argc, char **argv)
 	raycasting = (t_raycasting){0};
 	game.data = &data;
 	game.raycasting = &raycasting;
-	// init_values(&data);
-	// validate_map(argc, argv, &data);
+	validate_map(argc, argv, &data);
 
 	// MOCK:
 	(void)argc;
@@ -136,11 +135,11 @@ int32_t main(int argc, char **argv)
 	game.player_pos.x = 11.5;
 	game.player_pos.y = 5.5;
 
-	game.player_dir.x = 0;
-	game.player_dir.y = 1;
+	game.player_dir.x = -1;
+	game.player_dir.y = 0;
 
-	game.camera_plane.x = -0.66;
-	game.camera_plane.y = 0;
+	game.camera_plane.x = 0;
+	game.camera_plane.y = -0.66;
 
 	// PSYCHODELIC
 	// data.ceiling = convert_rgb(147, 249, 23);

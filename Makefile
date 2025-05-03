@@ -27,10 +27,9 @@ FILES	= main.c \
 			action/move_logic.c \
 			action/mouse_hook.c \
 			action/shooting.c \
-			init/image.c
-
-			# validation/map_parsing.c \
-			# validation/map_validation.c \
+			init/image.c \
+			validation/map_parsing.c \
+			validation/map_validation.c \
 
 HEADERS	= -I ./include -I $(MLX_PATH)/include -I ./libft
 OBJS = $(SRCS:$(SRC_PATH)/%.c=$(BIN)/%.o)
