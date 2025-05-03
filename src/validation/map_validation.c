@@ -124,7 +124,7 @@ int	save_texture_path(char *line, char **path)
 	return (1);
 }
 
-int	save_colour_path(char *line, int *color_ptr)
+int	save_colour_path(char *line, int **color_ptr)
 {
 	char	**split;
 	line = check_line_info(line);
@@ -136,19 +136,21 @@ int	save_colour_path(char *line, int *color_ptr)
 	}
 	check_color(line);
 	split = ft_split(line, ',');
-	color_ptr = malloc(sizeof(int) * 3);
-	if (!color_ptr)
+	*color_ptr = malloc(sizeof(int) * 3);
+	if (!*color_ptr)
 	{
 		printf(BPINK "Error: memory allocation failed\n" RST);
 		free(line);
 		exit(EXIT_FAILURE);
 	}
-	color_ptr[0] = ft_atoi(split[0]);
-	color_ptr[1] = ft_atoi(split[1]);
-	color_ptr[2] = ft_atoi(split[2]);
+	(*color_ptr)[0] = ft_atoi(split[0]);
+	(*color_ptr)[1] = ft_atoi(split[1]);
+	(*color_ptr)[2] = ft_atoi(split[2]);
+
 	free(line);
 	return (1);
 }
+
 
 
 int	read_textures_n_colours(int count, char *line, t_data *data)
@@ -162,9 +164,9 @@ int	read_textures_n_colours(int count, char *line, t_data *data)
 	else if (!ft_strncmp("WE", line, 2))
 		count += save_texture_path(line, &(data->direction[WEST]));
 	else if (!ft_strncmp("C", line, 1))
-		count += save_colour_path(line, data->c);
+		count += save_colour_path(line, &data->c);
 	else if (!ft_strncmp("F", line, 1))
-		count += save_colour_path(line, data->f);
+		count += save_colour_path(line, &data->f);
 	return (count);
 }
 
@@ -219,10 +221,8 @@ void	validate_map(int argc, char **argv, t_data *data)
 	check_args(argc);
 	is_valid_ext(argv[1]);
 	check_map_metadata(argv[1], data);
-	// printf("Path for NO = %s\n", data->);
-	// printf("Path for SO = %s\n", data->so);
-	// printf("Path for WE = %s\n", data->we);
-	// printf("Path for EA = %s\n", data->ea);
-	// printf("Path for C = %s\n", data->c);
-	// printf("Path for F = %s\n", data->f);
+
+	// MOVE TO PARSING
+	data->ceiling = convert_rgb((data->c)[0], (data->c)[1], (data->c)[2]);
+	data->floor = convert_rgb((data->f)[0], (data->f)[1], (data->f)[2]);
 }

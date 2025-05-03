@@ -35,7 +35,7 @@ void mouse_rotation(t_game *game)
 		game->camera_plane = rotate_vector(game->camera_plane, angle);
 	}
 
-	game->mouse_prev_x = x;
+
 
 	// (Opcional) Resetar para o centro da tela após ler o movimento:
 	mlx_set_mouse_pos(game->mlx, WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2);
