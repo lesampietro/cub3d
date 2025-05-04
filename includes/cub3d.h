@@ -148,6 +148,14 @@ typedef struct s_game
 	t_element		element[10];
 } t_game;
 
+typedef struct s_weapon_render
+{
+	t_game			*game;
+	mlx_texture_t	*texture;
+	int				offset_x;
+	int				offset_y;
+}	t_weapon_render;
+
 typedef struct s_wall
 {
 	int		height;

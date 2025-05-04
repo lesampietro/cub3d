@@ -1,48 +1,73 @@
 #include "../../includes/cub3d.h"
 
-static void render_weapon(t_game *game, mlx_texture_t *texture)
+static void	draw_scaled_pixel(t_weapon_render *ctx, int base_x, int base_y, uint32_t color)
 {
-	uint32_t x;
-	uint32_t y;
+	int dx;
+	int dy;
+	int screen_x;
+	int screen_y;
 
-	int offset_x;
-	int offset_y;
+	dx = 0;
+	while (dx < WEAPON_SCALE)
+	{
+		dy = 0;
+		while (dy < WEAPON_SCALE)
+		{
+			screen_x = base_x + dx;
+			screen_y = base_y + dy;
+			if (screen_x >= 0 && screen_x < WINDOW_WIDTH
+				&& screen_y >= 0 && screen_y < WINDOW_HEIGHT)
+			{
+				mlx_put_pixel(ctx->game->mlx_image, screen_x, screen_y, color);
+			}
+			dy++;
+		}
+		dx++;
+	}
+}
 
-	offset_x = WINDOW_WIDTH  / 2;
-	offset_y = WINDOW_HEIGHT / 2;
+static void	draw_texture_pixel(t_weapon_render *ctx, uint32_t x, uint32_t y)
+{
+	uint32_t tex_x;
+	uint32_t tex_y;
+	uint32_t color;
+
+	tex_x = ctx->texture->width - 1 - x;
+	tex_y = y;
+	color = get_texture_pixel(ctx->texture, tex_x, tex_y);
+	if ((color & 0x00FFFFFF) != 0)
+	{
+		draw_scaled_pixel(ctx, (ctx->offset_x + x * WEAPON_SCALE),
+			(ctx->offset_y + y * WEAPON_SCALE), color);
+	}
+}
+
+void	render_weapon(t_game *game, mlx_texture_t *texture)
+{
+	t_weapon_render	ctx;
+	uint32_t		x;
+	uint32_t		y;
+
+	ctx = (t_weapon_render){
+		.game = game,
+		.texture = texture,
+		.offset_x = WINDOW_WIDTH / 2,
+		.offset_y = WINDOW_HEIGHT / 2
+	};
+
 	x = 0;
 	while (x < texture->width)
 	{
 		y = 0;
 		while (y < texture->height)
 		{
-			uint32_t color = get_texture_pixel(texture, texture->width - 1 - x, y);
-			if ((color & 0x00FFFFFF) != 0)
-			{
-				int dx = 0;
-				while (dx < WEAPON_SCALE)
-				{
-					int dy = 0;
-					while (dy < WEAPON_SCALE)
-					{
-						int screen_x = offset_x + x * WEAPON_SCALE + dx;
-						int screen_y = offset_y + y * WEAPON_SCALE + dy;
-	
-						if (screen_x >= 0 && screen_x < WINDOW_WIDTH &&
-							screen_y >= 0 && screen_y < WINDOW_HEIGHT)
-						{
-							mlx_put_pixel(game->mlx_image, screen_x, screen_y, color);
-						}
-						dy++;
-					}
-					dx++;
-				}
-			}
+			draw_texture_pixel(&ctx, x, y);
 			y++;
 		}
 		x++;
 	}
 }
+
 
 void	draw_weapon(t_game *game)
 {
