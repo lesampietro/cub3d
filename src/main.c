@@ -114,22 +114,38 @@ int32_t main(int argc, char **argv)
 	data.map = get_map();
 	get_map_size(&data);
 
-	game.element_count = 2;
+	game.element_count = 4;
 	// ENEMY 1
 	game.element[0].alive = true;
-	game.element[0].x = 12;
-	game.element[0].y = 11;
+	game.element[0].x = 12.5;
+	game.element[0].y = 11.5;
 	game.element[0].health = 100;
 	game.element[0].type = ENEMY;
 	game.element[0].texture_path = "./assets/enemies/wizard idle.png";
 
-	// ITEM 1
+	// ENEMY 2
 	game.element[1].alive = true;
-	game.element[1].x = 14;
-	game.element[1].y = 13;
+	game.element[1].x = 14.5;
+	game.element[1].y = 11.5;
 	game.element[1].health = 100;
-	game.element[1].type = TREASURE;
-	game.element[1].texture_path = "./assets/items/star.png";
+	game.element[1].type = ENEMY;
+	game.element[1].texture_path = "./assets/enemies/wizard idle.png";
+
+	// ENEMY 3
+	game.element[2].alive = true;
+	game.element[2].x = 9.5;
+	game.element[2].y = 9.5;
+	game.element[2].health = 100;
+	game.element[2].type = ENEMY;
+	game.element[2].texture_path = "./assets/enemies/wizard idle.png";
+
+	// ITEM 1
+	game.element[3].alive = true;
+	game.element[3].x = 14.5;
+	game.element[3].y = 13.5;
+	game.element[3].health = 100;
+	game.element[3].type = TREASURE;
+	game.element[3].texture_path = "./assets/items/star.png";
 
 	game.player_pos.x = 11.5;
 	game.player_pos.y = 5.5;

@@ -1,65 +1,104 @@
 #include "../../includes/cub3d.h"
 
-static int shot_id(t_game *game)
+static bool	is_alive_and_in_front(t_game *g, int i, float *tr_x, float *tr_y)
 {
-    int   hit_index = -1;
-    float min_dist   = INFINITY;
-    int   shot_x     = WINDOW_WIDTH / 2;
+	t_element	*e;
+	float		inv_det;
+	float		rel_x;
+	float		rel_y;
 
-    for (int i = 0; i < game->element_count; i++)
-    {
-        t_element *e = &game->element[i];
-        if (!e->alive)
-            continue;
-
-        // 1) posição relativa
-        float rel_x = e->x + 0.5f - game->player_pos.x;
-        float rel_y = e->y + 0.5f - game->player_pos.y;
-
-        // 2) projeção no plano da câmera
-        float inv_det = 1.0f / (game->camera_plane.x * game->player_dir.y
-                              - game->player_dir.x * game->camera_plane.y);
-        float tr_x = inv_det * ( game->player_dir.y * rel_x
-                               - game->player_dir.x * rel_y);
-        float tr_y = inv_det * (-game->camera_plane.y * rel_x
-                               + game->camera_plane.x * rel_y);
-
-        if (tr_y <= 0.0f)  // atrás da câmera
-            continue;
-
-        // 3) largura do sprite em pixels
-        int sprite_w = abs((int)(WINDOW_HEIGHT / tr_y));
-
-        // 4) limites horizontais na tela
-        int sprite_screen_x = (int)((WINDOW_WIDTH / 2) * (1 + tr_x / tr_y));
-        int start_x = sprite_screen_x - sprite_w / 2;
-        int end_x   = sprite_screen_x + sprite_w / 2;
-
-        if (shot_x < start_x || shot_x > end_x)
-            continue;
-
-        // 5) profundidade contra paredes
-        if (tr_y < game->raycasting->z_buffer[shot_x])
-        {
-            if (tr_y < min_dist)
-            {
-                min_dist  = tr_y;
-                hit_index = i;
-            }
-        }
-    }
-    return hit_index;
+	e = &g->element[i];
+	if (!e->alive)
+		return (false);
+	rel_x = e->x - g->player_pos.x;
+	rel_y = e->y - g->player_pos.y;
+	inv_det = 1.0f / (g->camera_plane.x * g->player_dir.y
+			- g->player_dir.x * g->camera_plane.y);
+	*tr_x = inv_det * (g->player_dir.y * rel_x
+			- g->player_dir.x * rel_y);
+	*tr_y = inv_det * (-g->camera_plane.y * rel_x
+			+ g->camera_plane.x * rel_y);
+	if (*tr_y <= 0.0f)
+		return (false);
+	return (true);
 }
 
+
+static bool	is_within_beam(float tr_x, float tr_y)
+{
+	int	sprite_x;
+	int	dx;
+	int	margin;
+
+	sprite_x = (int)((WINDOW_WIDTH / 2) * (1 + tr_x / tr_y));
+	dx = sprite_x - (WINDOW_WIDTH / 2);
+	margin = (int)((WINDOW_HEIGHT / tr_y) * 0.8f) / 2;
+	if (abs(dx) > margin)
+		return (false);
+	return (true);
+}
+
+
+static bool	is_not_blocked_by_wall(t_game *g, float tr_y)
+{
+	if (tr_y - 0.5f < g->raycasting->z_buffer[WINDOW_WIDTH / 2])
+		return (true);
+	return (false);
+}
+
+
+static void	update_hit_if_closer(int *hit_index, float *min_dist,
+    float tr_y, int i)
+{
+    if (tr_y < *min_dist)
+    {
+        *min_dist = tr_y;
+        *hit_index = i;
+    }
+}
+
+
+static bool	check_target(t_game *g, int i, int *hit_index, float *min_dist)
+{
+	float	tr_x;
+	float	tr_y;
+
+	if (!is_alive_and_in_front(g, i, &tr_x, &tr_y))
+		return (false);
+	if (!is_within_beam(tr_x, tr_y))
+		return (false);
+	if (!is_not_blocked_by_wall(g, tr_y))
+		return (false);
+	update_hit_if_closer(hit_index, min_dist, tr_y, i);
+	return (true);
+}
+
+
+static int	shot_id(t_game *game)
+{
+	int		i;
+	int		hit_index;
+	float	min_dist;
+
+	i = 0;
+	hit_index = -1;
+	min_dist = INFINITY;
+	while (i < game->element_count)
+	{
+		check_target(game, i, &hit_index, &min_dist);
+		i++;
+	}
+	return (hit_index);
+}
 
 void shoot_hit(t_game *game)
 {
 	int hit_index;
 
 	hit_index = shot_id(game);
-	if (hit_index >= 0 && game->element->type == ENEMY)
+	if (hit_index >= 0 && game->element[hit_index].type == ENEMY)
 	{
-		game->element[hit_index].health -= 10;
+		game->element[hit_index].health -= 25;
 		printf("Hit! Element %d health: %d\n", hit_index, game->element[hit_index].health);
 		if (game->element[hit_index].health <= 0)
 			game->element[hit_index].alive = false;

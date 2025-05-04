@@ -9,8 +9,8 @@ void	render_element(t_game *game, int i)
 		return;
 
 	// Posição relativa ao jogador
-	float sprite_x = element[i].x + 0.5f - game->player_pos.x;
-	float sprite_y = element[i].y + 0.5f - game->player_pos.y;
+	float sprite_x = element[i].x - game->player_pos.x;
+	float sprite_y = element[i].y - game->player_pos.y;
 
 	// Inverso da matriz de rotação da câmera
 	float inv_det = 1.0f / (game->camera_plane.x * game->player_dir.y - game->player_dir.x * game->camera_plane.y);
