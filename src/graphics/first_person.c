@@ -1,7 +1,5 @@
 #include "../../includes/cub3d.h"
 
-#define SCALE 3
-
 static void render_weapon(t_game *game, mlx_texture_t *texture)
 {
 	uint32_t x;
@@ -10,8 +8,8 @@ static void render_weapon(t_game *game, mlx_texture_t *texture)
 	int offset_x;
 	int offset_y;
 
-	offset_x = (WINDOW_WIDTH - texture->width) / 2 + 20;
-	offset_y = WINDOW_HEIGHT - texture->height - 400;
+	offset_x = WINDOW_WIDTH  / 2;
+	offset_y = WINDOW_HEIGHT / 2;
 	x = 0;
 	while (x < texture->width)
 	{
@@ -22,13 +20,13 @@ static void render_weapon(t_game *game, mlx_texture_t *texture)
 			if ((color & 0x00FFFFFF) != 0)
 			{
 				int dx = 0;
-				while (dx < SCALE)
+				while (dx < WEAPON_SCALE)
 				{
 					int dy = 0;
-					while (dy < SCALE)
+					while (dy < WEAPON_SCALE)
 					{
-						int screen_x = offset_x + x * SCALE + dx;
-						int screen_y = offset_y + y * SCALE + dy;
+						int screen_x = offset_x + x * WEAPON_SCALE + dx;
+						int screen_y = offset_y + y * WEAPON_SCALE + dy;
 	
 						if (screen_x >= 0 && screen_x < WINDOW_WIDTH &&
 							screen_y >= 0 && screen_y < WINDOW_HEIGHT)

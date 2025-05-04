@@ -14,6 +14,7 @@
 
 # define WINDOW_WIDTH 1900
 # define WINDOW_HEIGHT 1200
+# define WEAPON_SCALE 2.5
 
 # define MOVE_SPEED 0.04
 # define ROTATE_SPEED 2.8
