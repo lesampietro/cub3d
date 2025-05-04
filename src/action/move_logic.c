@@ -1,10 +1,12 @@
 #include "../../includes/cub3d.h"
 
-void try_move(t_game *game, t_vector dir, float speed)
+void	try_move(t_game *game, t_vector dir, float speed)
 {
-	float new_x = game->player_pos.x + dir.x * speed;
-	float new_y = game->player_pos.y + dir.y * speed;
+	float	new_x;
+	float	new_y;
 
+	new_x = game->player_pos.x + dir.x * speed;
+	new_y = game->player_pos.y + dir.y * speed;
 	if (game->data->map[(int)(game->player_pos.y)][(int)new_x] != '1')
 		game->player_pos.x += dir.x * speed;
 	if (game->data->map[(int)new_y][(int)(game->player_pos.x)] != '1')
@@ -23,7 +25,7 @@ void	handle_movement(t_game *game, float speed)
 		try_move(game, game->camera_plane, speed);
 }
 
-void move_player(t_game *game)
+void	move_player(t_game *game)
 {
 	if (game->keys.shift)
 		handle_movement(game, MOVE_SPEED * SPRINT_MULTIPLIER);

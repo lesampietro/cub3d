@@ -18,7 +18,7 @@ FILES	= main.c \
 			graphics/background.c \
 			graphics/frame_loop.c \
 			graphics/raycasting.c \
-			graphics/utils.c \
+			graphics/vector_operations.c \
 			graphics/walls.c \
 			graphics/minimap.c \
 			graphics/element_raycast.c \
@@ -28,6 +28,7 @@ FILES	= main.c \
 			action/move_logic.c \
 			action/mouse_hook.c \
 			action/shooting.c \
+			action/shooting_utils.c \
 			init/image.c \
 			validation/map_parsing.c \
 			validation/map_validation.c \

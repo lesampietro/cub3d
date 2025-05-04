@@ -1,11 +1,12 @@
 #include "../../includes/cub3d.h"
 
-static void	draw_scaled_pixel(t_weapon_render *ctx, int base_x, int base_y, uint32_t color)
+static void	draw_scaled_pixel(t_weapon_render *ctx, int base_x,
+	int base_y, uint32_t color)
 {
-	int dx;
-	int dy;
-	int screen_x;
-	int screen_y;
+	int	dx;
+	int	dy;
+	int	screen_x;
+	int	screen_y;
 
 	dx = 0;
 	while (dx < WEAPON_SCALE)
@@ -28,9 +29,9 @@ static void	draw_scaled_pixel(t_weapon_render *ctx, int base_x, int base_y, uint
 
 static void	draw_texture_pixel(t_weapon_render *ctx, uint32_t x, uint32_t y)
 {
-	uint32_t tex_x;
-	uint32_t tex_y;
-	uint32_t color;
+	uint32_t	tex_x;
+	uint32_t	tex_y;
+	uint32_t	color;
 
 	tex_x = ctx->texture->width - 1 - x;
 	tex_y = y;
@@ -54,7 +55,6 @@ void	render_weapon(t_game *game, mlx_texture_t *texture)
 		.offset_x = WINDOW_WIDTH / 2,
 		.offset_y = WINDOW_HEIGHT / 2
 	};
-
 	x = 0;
 	while (x < texture->width)
 	{
@@ -67,7 +67,6 @@ void	render_weapon(t_game *game, mlx_texture_t *texture)
 		x++;
 	}
 }
-
 
 void	draw_weapon(t_game *game)
 {

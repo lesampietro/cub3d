@@ -20,6 +20,9 @@
 // # define WINDOW_HEIGHT 1200
 // # define WEAPON_SCALE 2.5
 
+# define MAP_SIZE 8
+# define MAP_IND 10
+
 # define MOVE_SPEED 0.04
 # define ROTATE_SPEED 2.8
 # define SENSITIVITY 0.04
@@ -49,19 +52,19 @@ typedef struct s_element
 	float			y;
 	int				health;
 	int				type;
-	bool 			alive;
+	bool			alive;
 }	t_element;
 
 typedef struct s_keys
 {
-	bool w;
-	bool a;
-	bool s;
-	bool d;
-	bool left;
-	bool right;
-	bool shift;
-	bool mouse_left;
+	bool	w;
+	bool	a;
+	bool	s;
+	bool	d;
+	bool	left;
+	bool	right;
+	bool	shift;
+	bool	mouse_left;
 }	t_keys;
 
 typedef struct s_vector
@@ -105,7 +108,7 @@ typedef struct s_raycasting
 	t_vector	ray_dir;
 	t_vector	camera_pixel;
 	float		perp_wall_dist;
-	float 		z_buffer[WINDOW_WIDTH];
+	float		z_buffer[WINDOW_WIDTH];
 	float		plane_multiply;
 	int			hit_side;
 	t_coord		map_pos;
@@ -123,7 +126,7 @@ typedef struct s_data
 	char		pov;
 	uint32_t	ceiling;
 	uint32_t	floor;
-} t_data;
+}	t_data;
 
 typedef struct s_game
 {
@@ -146,7 +149,7 @@ typedef struct s_game
 	int				mouse_prev_x;
 	int				element_count;
 	t_element		element[10];
-} t_game;
+}	t_game;
 
 typedef struct s_weapon_render
 {
@@ -183,7 +186,6 @@ void		init_window(t_game *game);
 void		validate_map(int argc, char **argv, t_data *data);
 void		is_valid_ext(char *file_ext);
 
-
 //GRAPHICS
 void		frame_loop(void *param);
 void		draw_background(t_game *game, t_data *data);
@@ -201,15 +203,20 @@ void		draw_minimap(void *param);
 void		draw_weapon(t_game *game);
 
 void		render_elements(t_game *game);
-void		compute_sprite_data(t_game *game, t_element *e, t_element_raycast *d);
+void		compute_sprite_data(t_game *game, t_element *e,
+				t_element_raycast *d);
 
 //MOVEMENT
 void		key_hook(mlx_key_data_t keydata, void *param);
 void		mouse_rotation(t_game *game);
 void		move_player(t_game *game);
-void		mouse_hook(mouse_key_t button, action_t action, modifier_key_t mods, void *param);
+void		mouse_hook(mouse_key_t button, action_t action,
+				modifier_key_t mods, void *param);
 
 //ACTION
 void		shoot_hit(t_game *game);
+
+//SHOOTING
+bool		check_target(t_game *g, int i, int *hit_index, float *min_dist);
 
 #endif

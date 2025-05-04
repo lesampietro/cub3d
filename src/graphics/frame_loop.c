@@ -1,6 +1,6 @@
 #include "../../includes/cub3d.h"
 
-void frame_loop(void *param)
+void	frame_loop(void *param)
 {
 	t_game	*game;
 

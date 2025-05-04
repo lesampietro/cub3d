@@ -7,10 +7,10 @@ static bool	is_valid_element(t_element *element)
 
 static void	draw_sprite_stripe(t_game *game, t_sprite_draw *draw_ctx)
 {
-	int tex_height;
-	int y;
-	int d;
-	int tex_y;
+	int	tex_height;
+	int	y;
+	int	d;
+	int	tex_y;
 
 	y = draw_ctx->raycast->draw_start_y;
 	tex_height = draw_ctx->element->texture->height;
@@ -28,22 +28,22 @@ static void	draw_sprite_stripe(t_game *game, t_sprite_draw *draw_ctx)
 	}
 }
 
-static void render_sprite_stripes(t_game *game, t_element *e, t_element_raycast *d)
+static void	render_sprite_stripes(t_game *game, t_element *e,
+	t_element_raycast *d)
 {
-	int tex_width;
-	int stripe;
-	int tex_x;
-	t_sprite_draw draw_ctx;
+	int				tex_width;
+	int				stripe;
+	int				tex_x;
+	t_sprite_draw	draw_ctx;
 
 	tex_width = e->texture->width;
 	stripe = d->draw_start_x;
 	while (stripe < d->draw_end_x)
 	{
 		tex_x = (int)(256 * (stripe + (d->width / 2) - d->screen_x)
-		* tex_width / d->width) / 256;
-
-		if (d->transform_y > 0 && stripe >= 0 && stripe < WINDOW_WIDTH &&
-			d->transform_y < game->raycasting->z_buffer[stripe])
+				* tex_width / d->width) / 256;
+		if (d->transform_y > 0 && stripe >= 0 && stripe < WINDOW_WIDTH
+			&& d->transform_y < game->raycasting->z_buffer[stripe])
 		{
 			draw_ctx = (t_sprite_draw){e, d, tex_x, stripe};
 			draw_sprite_stripe(game, &draw_ctx);
@@ -52,24 +52,23 @@ static void render_sprite_stripes(t_game *game, t_element *e, t_element_raycast 
 	}
 }
 
-static void render_element(t_game *game, int i)
+static void	render_element(t_game *game, int i)
 {
-	t_element *e = &game->element[i];
-	t_element_raycast d;
+	t_element			*e;
+	t_element_raycast	d;
 
+	e = &game->element[i];
 	if (!is_valid_element(e))
-		return;
-
+		return ;
 	compute_sprite_data(game, e, &d);
 	if (d.transform_y <= 0)
-		return;
-
+		return ;
 	render_sprite_stripes(game, e, &d);
 }
 
 void	render_elements(t_game *game)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (i < game->element_count)
