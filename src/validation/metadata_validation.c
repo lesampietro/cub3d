@@ -92,4 +92,5 @@ void	check_map_metadata(int fd, t_data *data, char **map_line)
 		*map_line = get_next_line(fd);
 	}
 	check_invalid_count(count);
+	close(fd);
 }

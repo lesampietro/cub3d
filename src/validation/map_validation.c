@@ -88,6 +88,7 @@ void	count_map_size(int fd, t_data *data, char **map_line)
 	size_t		i;
 
 	max_col = 0;
+	*map_line = get_next_line(fd);
 	find_map_first_line(fd, map_line);
 	while (*map_line && **map_line != '\0' && **map_line != '\n')
 	{
@@ -105,7 +106,6 @@ void	count_map_size(int fd, t_data *data, char **map_line)
 		data->lin++;
 	}
 	data->col = max_col;
-	// printf("Map size: %d x %d\n", data->lin, data->col);
 	close(fd);
 }
 
@@ -142,17 +142,18 @@ void	process_map(int argc, char **argv, t_data *data)
 	is_valid_ext(argv[1]);
 	fd = safe_open(argv[1]);
 	check_map_metadata(fd, data, &map_line);
+	fd = safe_open(argv[1]);
 	count_map_size(fd, data, &map_line);
 	fd = safe_open(argv[1]);
 	get_map(fd, data, &map_line);
-	// // PRINT DEBUG
-	// int i = 0;
-	// printf("Map size: %d x %d\n", data->lin, data->col);
-	// while (data->map[i])
-	// {
-	// 	printf("%s\n", data->map[i]);
-	// 	i++;
-	// }
+	// PRINT DEBUG
+	int i = 0;
+	printf("Map size: %d x %d\n", data->lin, data->col);
+	while (data->map[i])
+	{
+		printf("%s\n", data->map[i]);
+		i++;
+	}
 	// check_map(data->map, data); //TO BE DONE
 	close(fd);
 	free(map_line);
