@@ -1,14 +1,14 @@
-NO ./textures/air.png
+NO ./assets/textures/walls/1-16/Asset3.png
 
-EA ./textures/water.png
+SO ./assets/textures/walls/17-32/Asset2.png
 
-SO ./textures/earth.png
+WE ./assets/textures/walls/1-16/Asset6.png
 
-WE ./textures/fire.png
+EA ./assets/textures/walls/17-32/Asset2.png
 
-   C 60,30,60
+C 60,30,60
 
-F      60,50,55
+F 60,50,55
 
 1111111111111111111111111111
 1000000000001000000000000101
@@ -33,4 +33,3 @@ F      60,50,55
 1010101111111111000111111111
 1000101000010000000000000001
 1111111111111111111111111111
-

@@ -21,7 +21,7 @@ void	is_valid_ext(char *file_ext)
 	exit(EXIT_FAILURE);
 }
 
-void	check_args(int argc, char **argv)
+void	check_args(int argc)
 {
 	if (argc < 2)
 	{
@@ -51,167 +51,109 @@ int	safe_open(char *filename)
 	return (fd);
 }
 
-char	*check_line_info(char *line)
+int	is_valid_char(char c)
 {
-	char	**split;
-	char	*path;
-
-	split = NULL;
-	line = ft_strtrim(line, " \n");
-	split = ft_split(line, ' ');
-	path = NULL;
-	if (split[2])
-	{
-		printf(BPINK "Error: too much texture info\n" RST);
-		ft_free_split(split);
-		return (NULL);
-	}
-	if (split[1])
-	{
-		path = ft_strdup(split[1]);
-		ft_free_split(split);
-		return (path);
-	}
-	else
-	{
-		printf(BPINK "Error: missing texture info\n" RST);
-		ft_free_split(split);
-		return (NULL);
-	}
+	return (c == '1' || c == '0' || c == ' ' \
+		|| c == 'S' || c == 'N' || c == 'E' || c == 'W');
 }
 
-void	check_color(char *line)
+void	find_map_first_line(int fd, char **map_line)
+{
+	size_t i;
+	
+	while (*map_line)
+	{
+		i = 0;
+		if (ft_strchr(*map_line, '1'))
+		{
+			while ((*map_line)[i])
+			{
+				if ((*map_line)[i] != '1' && !ft_isspace((*map_line)[i]) && (*map_line)[i] != '\n')
+				break;
+				i++;
+			}
+			if ((*map_line)[i] == '\0' || (*map_line)[i] == '\n')
+			return;
+		}
+		free(*map_line);
+		*map_line = get_next_line(fd);
+	}
+	printf(BPINK "Error: map not found\n" RST);
+	exit(EXIT_FAILURE);
+}
+
+void	count_map_size(int fd, t_data *data, char **map_line)
+{
+	int			max_col;
+	size_t		i;
+
+	max_col = 0;
+	find_map_first_line(fd, map_line);
+	while (*map_line && **map_line != '\0' && **map_line != '\n')
+	{
+		i = 0;
+		while (is_valid_char((*map_line)[i]) || ft_isspace((*map_line)[i]))
+			i++;
+		if (i == ft_strlen(*map_line) && (*map_line)[i - 1] == '\n')
+		{
+			data->col = i;
+			if (data->col > max_col)
+				max_col = data->col;
+		}
+		free(*map_line);
+		*map_line = get_next_line(fd);
+		data->lin++;
+	}
+	data->col = max_col;
+	// printf("Map size: %d x %d\n", data->lin, data->col);
+	close(fd);
+}
+
+void	get_map(int fd, t_data *data, char **map_line)
 {
 	int		i;
 	int		j;
-	char	**split;
 
-	i = -1;
-	j = 0;
-	split = ft_split(line, ',');
-	while (split[++i])
+	i = 0;
+	*map_line = get_next_line(fd);
+	find_map_first_line(fd, map_line);
+	data->map = malloc(sizeof(char *) * (data->lin + 1));
+	//PROTECT MALLOC (SUBSTITUIR MALLOC POR SAFE_MALLOC - ECONOMIA DE LINHAS)
+	while (*map_line && i < data->lin)
 	{
-		if (!ft_isdigit(split[i][j]))
-		break ;
+		j = 0;
+		data->map[i] = malloc(sizeof(char) * (data->col + 1));
+		// PROTECT MALLOC (SUBSTITUIR MALLOC POR SAFE_MALLOC - ECONOMIA DE LINHAS)
+		data->map[i] = ft_strtrim(*map_line, "\n");
+		free(*map_line);
+		*map_line = get_next_line(fd);
+		i++;
 	}
-	if (i != 3 || split[3])
-	{
-		printf(BPINK "Error: invalid colour info\n" RST);
-		ft_free_split(split);
-		exit(EXIT_FAILURE);
-	}
-	ft_free_split(split);
+	data->map[i] = NULL;
 }
 
-int	save_texture_path(char *identifier, char *line, char **path)
-{
-	line = check_line_info(line);
-	if (!line)
-	{
-		printf(BPINK "Error: invalid texture/colour info\n" RST);
-		free(line);
-		exit(EXIT_FAILURE);
-	}
-	if (ft_strncmp("./", line, 2) != 0)
-	{
-		printf(BPINK "Error: invalid texture path\n" RST);
-		free(line);
-		exit(EXIT_FAILURE);
-	}
-	else
-		*path = strdup(line);
-	free(line);
-	return (1);
-}
-
-int	save_colour_path(char *identifier, char *line, char **path)
-{
-	line = check_line_info(line);
-	if (!line)
-	{
-		printf(BPINK "Error: invalid texture/colour info\n" RST);
-		free(line);
-		exit(EXIT_FAILURE);
-	}
-	check_color(line);
-	*path = strdup(line);
-	free(line);
-	return (1);
-}
-
-
-int	read_textures_n_colours(int count, char *line, t_data *data)
-{
-	if (!ft_strncmp("NO", line, 2))
-		count += save_texture_path("NO", line, &(data->direction[NORTH]));
-	else if (!ft_strncmp("SO", line, 2))
-		count += save_texture_path("SO", line, &(data->direction[SOUTH]));
-	else if (!ft_strncmp("EA", line, 2))
-		count += save_texture_path("EA", line, &(data->direction[EAST]));
-	else if (!ft_strncmp("WE", line, 2))
-		count += save_texture_path("WE", line, &(data->direction[WEST]));
-	else if (!ft_strncmp("C", line, 1))
-		count += save_colour_path("C", line, &(data->c));
-	else if (!ft_strncmp("F", line, 1))
-		count += save_colour_path("F", line, &(data->f));
-	return (count);
-}
-
-void	check_invalid_count(int count, t_data *data)
-{
-	if (count != 6)
-	{
-		printf(BPINK"Error: missing or duplicated texture/colour info"RST);
-		exit(EXIT_FAILURE);
-	}
-}
-
-void	is_empty(char *line)
-{
-	while (line && ft_isspace(*line))
-	line++;
-	if (!line)
-	{
-		printf(BPINK"Error: file is empty\n"RST);
-		exit(EXIT_FAILURE);
-	}
-}
-
-void	check_map_metadata(char *map_file, t_data *data)
+void	process_map(int argc, char **argv, t_data *data)
 {
 	int		fd;
-	char	*line;
-	int		count;
+	char	*map_line;
 	
-	fd = safe_open(map_file);
-	line = NULL;
-	line = get_next_line(fd);
-	is_empty(line);
-	while (line)
-	{
-		while (ft_isspace(*line))
-		line++;
-		count = read_textures_n_colours(count, line, data);
-		line = get_next_line(fd);
-		if (count == 6 && (data->direction[NORTH] && data->direction[SOUTH] && data->direction[WEST] && data->direction[EAST] \
-			&& data->c && data->f))
-			break ;
-	}
-	check_invalid_count(count, data);
-}
-
-void	validate_map(int argc, char **argv, t_data *data)
-{
-	char	**map;
-
-	map = NULL;
-	check_args(argc, argv);
+	map_line = NULL;
+	check_args(argc);
 	is_valid_ext(argv[1]);
-	check_map_metadata(argv[1], data);
-	// printf("Path for NO = %s", data->no);
-	// printf("Path for SO = %s", data->so);
-	// printf("Path for WE = %s", data->we);
-	// printf("Path for EA = %s", data->ea);
-	// printf("Path for C = %s", data->c);
-	// printf("Path for F = %s", data->f);
+	fd = safe_open(argv[1]);
+	check_map_metadata(fd, data, &map_line);
+	count_map_size(fd, data, &map_line);
+	fd = safe_open(argv[1]);
+	get_map(fd, data, &map_line);
+	// // PRINT DEBUG
+	// int i = 0;
+	// printf("Map size: %d x %d\n", data->lin, data->col);
+	// while (data->map[i])
+	// {
+	// 	printf("%s\n", data->map[i]);
+	// 	i++;
+	// }
+	// check_map(data->map, data); //TO BE DONE
+	close(fd);
+	free(map_line);
 }

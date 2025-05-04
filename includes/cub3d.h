@@ -1,5 +1,6 @@
 #ifndef CUB3D_H
 # define CUB3D_H
+
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
@@ -91,8 +92,8 @@ typedef struct s_data
 	int			col;
 	int			lin;
 	char		*direction[4];
-	char		*c;
-	char		*f;
+	int			*c;
+	int			*f;
 	uint32_t	ceiling;
 	uint32_t	floor;
 } t_data;
@@ -144,8 +145,12 @@ int32_t		init_game(char *argv, t_game *game);
 void		init_window(t_game *game);
 
 //MAP VALIDATION
-void		validate_map(int argc, char **argv, t_data *data);
-void		is_valid_ext(char *file_ext);
+void		process_map(int argc, char **argv, t_data *data);
+void		check_map_metadata(int fd, t_data *data, char **map_line);
+int			safe_open(char *filename);
+void		check_invalid_count(int count);
+void		check_color(char *line);
+char		*check_line_info(char *line);
 
 
 //GRAPHICS
