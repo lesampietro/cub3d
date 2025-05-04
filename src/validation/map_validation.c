@@ -51,42 +51,52 @@ int	safe_open(char *filename)
 	return (fd);
 }
 
-// int		count_map_size(char *filename)
-// {
-// 	int		fd;
-// 	int		count;
-// 	char	*line;
-
-// 	fd = safe_open(filename);
-// 	count = 0;
-// 	while (get_next_line(fd) > 0)
-// 	{
-// 		count++;
-// 		free(line);
-// 	}
-// 	close(fd);
-// 	return (count);
-// }
-
-void	get_map(char *filename, t_data *data, char **map_line)
+int	is_valid_char(char c)
 {
-	int		fd;
-	int		i;
-	char	**tmp_line;
+	return (c == '1' || c == '0' || c == ' ' \
+		|| c == 'S' || c == 'N' || c == 'E' || c == 'W');
+}
 
-	i = 0;
-	fd = safe_open(filename);
-	tmp_line = map_line;
-	while (*tmp_line)
+void	count_map_size(int fd, t_data *data, char **map_line)
+{
+	int		max_col;
+
+	max_col = 0;
+	while (*map_line)
 	{
-		while(*tmp_line && ft_isspace(**tmp_line))
-			(*tmp_line)++;
-		while (*tmp_line && **tmp_line == '1' || **tmp_line == '0' || **tmp_line == ' ' || **tmp_line == 'S' || **tmp_line == 'N' || **tmp_line == 'E' || **tmp_line == 'W')
-			data->map[i][j++] = **tmp_line++;
-		*tmp_line = get_next_line(fd);
-		data->map[i++];
+		while (is_valid_char(**map_line))
+		{
+			data->lin++;
+			(*map_line)++;
+		
+		data->col = ft_strlen(*map_line);
+		if (data->col > max_col)
+			max_col = data->col;
+		*map_line = get_next_line(fd);
 	}
-	data->map[i] = NULL;
+	data->col = max_col;
+	printf("lin: %d\n", data->lin);
+	printf("col: %d\n", max_col);
+}
+
+// void	get_map(int fd, t_data *data, char **map_line)
+// {
+// 	int		i;
+// 	char	**tmp_line;
+
+// 	i = 0;
+// 	tmp_line = map_line;
+// 	count_map_size(fd, data);
+// 	while (*tmp_line)
+// 	{
+// 		while(*tmp_line && ft_isspace(**tmp_line))
+// 			(*tmp_line)++;
+// 		while (*tmp_line && **tmp_line == '1' || **tmp_line == '0' || **tmp_line == ' ' || **tmp_line == 'S' || **tmp_line == 'N' || **tmp_line == 'E' || **tmp_line == 'W')
+// 			data->map[i][j++] = **tmp_line++;
+// 		*tmp_line = get_next_line(fd);
+// 		data->map[i++];
+// 	}
+// 	data->map[i] = NULL;
 	// while (*map_line && )
 	// {
 	// 	data->lin++;
@@ -97,14 +107,46 @@ void	get_map(char *filename, t_data *data, char **map_line)
 	// }
 }
 
+void find_map_first_line(int fd, char **map_line)
+{
+	size_t i;
+
+	while (*map_line)
+	{
+		i = 0;
+		if (ft_strchr(*map_line, '1'))
+		{
+			while ((*map_line)[i])
+			{
+				if ((*map_line)[i] != '1' && !ft_isspace((*map_line)[i]) && (*map_line)[i] != '\n')
+					break;
+				i++;
+			}
+			if ((*map_line)[i] == '\0' || (*map_line)[i] == '\n')
+				return;
+		}
+		free(*map_line);
+		*map_line = get_next_line(fd);
+	}
+	printf(BPINK "Error: map not found\n" RST);
+	exit(EXIT_FAILURE);
+}
+
 void	validate_map(int argc, char **argv, t_data *data)
 {
+	int		fd;
 	char	*map_line;
 
 	map_line = NULL;
 	check_args(argc);
 	is_valid_ext(argv[1]);
-	check_map_metadata(argv[1], data, &map_line);
-	data->map = get_map(argv[1], data, &map_line);
+	fd = safe_open(argv[1]);
+	check_map_metadata(fd, data, &map_line);
+	find_map_first_line(fd, &map_line);
+	printf("map_line: %s\n", map_line);
+	// count_map_size(fd, data, &map_line);
+	// get_map(fd, data, &map_line);
 	// check_map(data->map, data); //TO BE DONE
+	close(fd);
+	free(map_line);
 }

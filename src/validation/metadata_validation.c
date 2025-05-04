@@ -74,13 +74,11 @@ void	read_textures_n_colours(int *count, char *line, t_data *data)
 		save_colour_path(line, &data->f, count);
 }
 
-void	check_map_metadata(char *map_file, t_data *data, char **map_line)
-{
-	int		fd;
+void	check_map_metadata(int fd, t_data *data, char **map_line)
+{;
 	int		count;
 
 	count = 0;
-	fd = safe_open(map_file);
 	*map_line = get_next_line(fd);
 	is_empty(*map_line);
 	while (*map_line)
@@ -91,8 +89,8 @@ void	check_map_metadata(char *map_file, t_data *data, char **map_line)
 		if (count == 6 && (data->direction[NORTH] && data->direction[SOUTH] && data->direction[WEST] && data->direction[EAST] \
 			&& data->c && data->f ))
 				break ;
+		free(*map_line);
 		*map_line = get_next_line(fd);
 	}
 	check_invalid_count(count);
-	close(fd);
 }
