@@ -28,3 +28,12 @@ t_vector	rotate_vector(t_vector v, float angle)
 	vector.y = v.x * sin(rad) + v.y * cos(rad);
 	return (vector);
 }
+
+t_vector	create_vector(float x, float y)
+{
+	t_vector	vector;
+
+	vector.x = x;
+	vector.y = y;
+	return (vector);
+}

@@ -1,14 +1,28 @@
 #include "../includes/cub3d.h"
 
-// void init_game_image(t_game *game)
-// {
-// 	display_img(game);
-// 	put_floor_n_walls(game);
-// 	put_collects_n_exit(game);
-// 	game->img.exit->enabled = false;
-// 	put_player(game);
-// 	display_icon(game);
-// }
+static void	define_initial_plane(t_game *game)
+{
+	if (game->data->pov == 'N')
+	{
+		game->player_dir = create_vector(0, -1);
+		game->camera_plane = create_vector(0.66, 0);
+	}
+	else if (game->data->pov == 'S')
+	{
+		game->player_dir = create_vector(0, 1);
+		game->camera_plane = create_vector(-0.66, 0);
+	}
+	else if (game->data->pov == 'W')
+	{
+		game->player_dir = create_vector(-1, 0);
+		game->camera_plane = create_vector(0, -0.66);
+	}
+	else if (game->data->pov == 'E')
+	{
+		game->player_dir = create_vector(1, 0);
+		game->camera_plane = create_vector(0, 0.66);
+	}
+}
 
 void init_window(t_game *game)
 {
@@ -17,7 +31,9 @@ void init_window(t_game *game)
 
 	// moni_w = 0;
 	// moni_h = 0;
+
 	init_textures(game);
+	define_initial_plane(game);
 	mlx_set_setting(MLX_STRETCH_IMAGE, 1);
 	game->mlx = mlx_init(WINDOW_WIDTH, WINDOW_HEIGHT, "Cub3D", true);
 	// if (!game->mlx)
@@ -45,6 +61,11 @@ int32_t init_game(char *argv, t_game *game)
 	// get_player_pos(game->map, &game->player_pos);
 	// occurence_count(game->map, &game->occ);
 	mlx_set_cursor_mode(game->mlx, MLX_MOUSE_DISABLED);
+	// Depois de criar `game->mlx` e abrir a janela:
+	mlx_set_mouse_pos(game->mlx, WINDOW_WIDTH/2, WINDOW_HEIGHT/2);
+	// “Semeia” o último x do mouse como o centro
+	game->mouse_prev_x = WINDOW_WIDTH/2;
+
 	mlx_key_hook(game->mlx, key_hook, game);
 	mlx_mouse_hook(game->mlx, mouse_hook, game);
 	mlx_loop_hook(game->mlx, frame_loop, game);

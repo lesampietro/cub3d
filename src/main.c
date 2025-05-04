@@ -117,25 +117,25 @@ int32_t main(int argc, char **argv)
 	// game.player_pos.x = 11.5;
 	// game.player_pos.y = 5.5;
 
-	// game.player_dir.x = -1;
-	// game.player_dir.y = 0;
+	game.player_dir.x = -1;
+	game.player_dir.y = 0;
 
-	// game.camera_plane.x = 0;
-	// game.camera_plane.y = -0.66;
+	game.camera_plane.x = 0;
+	game.camera_plane.y = -0.66;
 
-	// // PSYCHODELIC
-	// // data.ceiling = convert_rgb(147, 249, 23);
-	// // data.floor = convert_rgb(207, 18, 254);
+	// PSYCHODELIC
+	// data.ceiling = convert_rgb(147, 249, 23);
+	// data.floor = convert_rgb(207, 18, 254);
 
-	// // DUNGEON
-	// data.ceiling = convert_rgb(60, 30, 60);
-	// data.floor = convert_rgb(60, 50, 55);
+	// DUNGEON
+	data.ceiling = convert_rgb(60, 30, 60);
+	data.floor = convert_rgb(60, 50, 55);
 
 	// // MICROSOFT
 	// // data.floor = convert_rgb(216, 137, 29);
 	// // data.ceiling = convert_rgb(218, 218, 218);
 
 
-	// init_game(argv[1], &game);
+	init_game(argv[1], &game);
 	return (EXIT_SUCCESS);
 }

@@ -14,6 +14,7 @@
 
 # define WINDOW_WIDTH 1900
 # define WINDOW_HEIGHT 1200
+# define WEAPON_SCALE 2.5
 
 # define MOVE_SPEED 0.04
 # define ROTATE_SPEED 2.8
@@ -94,6 +95,7 @@ typedef struct s_data
 	char		*direction[4];
 	int			*c;
 	int			*f;
+	char		pov;
 	uint32_t	ceiling;
 	uint32_t	floor;
 } t_data;
@@ -161,6 +163,7 @@ uint32_t	convert_rgb(int r, int g, int b);
 t_vector	multiply_vector(t_vector vector, double factor);
 t_vector	add_vector(t_vector vector1, t_vector vector2);
 t_vector	rotate_vector(t_vector v, float angle);
+t_vector	create_vector(float x, float y);
 void		draw_wall(t_game *game, t_raycasting *ray, int pixel);
 void		init_textures(t_game *game);
 uint32_t	get_texture_pixel(mlx_texture_t *texture, int x, int y);
