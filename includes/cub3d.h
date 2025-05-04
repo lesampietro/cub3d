@@ -12,20 +12,21 @@
 # include "../.lib/MLX42/include/MLX42/MLX42.h"
 # include "../libft/libft.h"
 
-# define WINDOW_WIDTH 800
-# define WINDOW_HEIGHT 600
-# define WEAPON_SCALE 1.5
+// # define WINDOW_WIDTH 800
+// # define WINDOW_HEIGHT 600
+// # define WEAPON_SCALE 1.5
 
-// # define WINDOW_WIDTH 1900
-// # define WINDOW_HEIGHT 1200
-// # define WEAPON_SCALE 2.5
+# define WINDOW_WIDTH 1900
+# define WINDOW_HEIGHT 1200
+# define WEAPON_SCALE 2.5
 
 # define MAP_SIZE 8
 # define MAP_IND 10
 
+# define ENEMY_SHOOT_INTERVAL 1000
 # define MOVE_SPEED 0.04
 # define ROTATE_SPEED 2.8
-# define SENSITIVITY 0.04
+# define SENSITIVITY 0.02
 # define SPRINT_MULTIPLIER 2
 
 # define VERTICAL 0
@@ -40,19 +41,26 @@
 typedef enum e_element_id
 {
 	ENEMY,
-	TREASURE,
+	ITEM,
 	EXIT
 }	t_element_id;
 
 typedef struct s_element
 {
 	mlx_texture_t	*texture;
+	mlx_texture_t	*shooting_texture;
+	mlx_texture_t	*idle_texture;
 	char			*texture_path;
+	char			*shooting_texture_path;
+	char			*idle_texture_path;
 	float			x;
 	float			y;
 	int				health;
 	int				type;
 	bool			alive;
+	bool			visible;
+	uint64_t		last_shot_time;
+	uint64_t		first_visible_time;
 }	t_element;
 
 typedef struct s_keys
@@ -187,6 +195,7 @@ void		validate_map(int argc, char **argv, t_data *data);
 void		is_valid_ext(char *file_ext);
 
 //GRAPHICS
+void		ui_init(t_game *game);
 void		frame_loop(void *param);
 void		draw_background(t_game *game, t_data *data);
 void		draw_raycasting(t_game *game);
@@ -215,8 +224,10 @@ void		mouse_hook(mouse_key_t button, action_t action,
 
 //ACTION
 void		shoot_hit(t_game *game);
+void		check_player_life(void *param);
 
 //SHOOTING
 bool		check_target(t_game *g, int i, int *hit_index, float *min_dist);
+void		enemy_shots(t_game *game);
 
 #endif

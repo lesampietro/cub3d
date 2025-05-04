@@ -45,9 +45,12 @@ static void	render_sprite_stripes(t_game *game, t_element *e,
 		if (d->transform_y > 0 && stripe >= 0 && stripe < WINDOW_WIDTH
 			&& d->transform_y < game->raycasting->z_buffer[stripe])
 		{
+			e->visible = true;
 			draw_ctx = (t_sprite_draw){e, d, tex_x, stripe};
 			draw_sprite_stripe(game, &draw_ctx);
 		}
+		else
+			e->visible = false;
 		stripe++;
 	}
 }
