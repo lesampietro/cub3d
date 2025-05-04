@@ -145,7 +145,7 @@ void	process_map(int argc, char **argv, t_data *data)
 	count_map_size(fd, data, &map_line);
 	fd = safe_open(argv[1]);
 	get_map(fd, data, &map_line);
-	// // PRINT DEBUG
+	// PRINT DEBUG
 	// int i = 0;
 	// printf("Map size: %d x %d\n", data->lin, data->col);
 	// while (data->map[i])
