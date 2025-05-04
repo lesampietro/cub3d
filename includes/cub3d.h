@@ -145,7 +145,7 @@ int32_t		init_game(char *argv, t_game *game);
 void		init_window(t_game *game);
 
 //MAP VALIDATION
-void		validate_map(int argc, char **argv, t_data *data);
+void		process_map(int argc, char **argv, t_data *data);
 void		check_map_metadata(int fd, t_data *data, char **map_line);
 int			safe_open(char *filename);
 void		check_invalid_count(int count);

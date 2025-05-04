@@ -108,7 +108,7 @@ int32_t main(int argc, char **argv)
 	raycasting = (t_raycasting){0};
 	game.data = &data;
 	game.raycasting = &raycasting;
-	validate_map(argc, argv, &data);
+	process_map(argc, argv, &data);
 
 	// MOCK:
 	(void)argc;

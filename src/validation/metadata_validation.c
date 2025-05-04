@@ -3,7 +3,7 @@
 void	is_empty(char *line)
 {
 	while (line && ft_isspace(*line))
-	line++;
+		line++;
 	if (!line)
 	{
 		printf(BPINK"Error: file is empty\n"RST);
@@ -75,7 +75,7 @@ void	read_textures_n_colours(int *count, char *line, t_data *data)
 }
 
 void	check_map_metadata(int fd, t_data *data, char **map_line)
-{;
+{
 	int		count;
 
 	count = 0;
@@ -84,12 +84,11 @@ void	check_map_metadata(int fd, t_data *data, char **map_line)
 	while (*map_line)
 	{
 		while (ft_isspace(**map_line))
-			map_line++;
+			(*map_line)++;
 		read_textures_n_colours(&count, *map_line, data);
 		if (count == 6 && (data->direction[NORTH] && data->direction[SOUTH] && data->direction[WEST] && data->direction[EAST] \
 			&& data->c && data->f ))
 				break ;
-		free(*map_line);
 		*map_line = get_next_line(fd);
 	}
 	check_invalid_count(count);
