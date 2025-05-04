@@ -22,6 +22,7 @@ FILES	= main.c \
 			graphics/walls.c \
 			graphics/minimap.c \
 			graphics/element_raycast.c \
+			graphics/element_raycast_utils.c \
 			graphics/first_person.c \
 			action/action_key_hook.c \
 			action/move_logic.c \

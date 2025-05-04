@@ -145,7 +145,7 @@ int32_t main(int argc, char **argv)
 	game.element[3].y = 13.5;
 	game.element[3].health = 100;
 	game.element[3].type = TREASURE;
-	game.element[3].texture_path = "./assets/items/star.png";
+	game.element[3].texture_path = "./assets/items/health.png";
 
 	game.player_pos.x = 11.5;
 	game.player_pos.y = 5.5;

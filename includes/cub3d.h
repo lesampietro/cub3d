@@ -76,6 +76,27 @@ typedef struct s_coord
 	int		y;
 }	t_coord;
 
+typedef struct s_element_raycast
+{
+	int		screen_x;
+	int		width;
+	int		height;
+	int		draw_start_x;
+	int		draw_end_x;
+	int		draw_start_y;
+	int		draw_end_y;
+	float	transform_x;
+	float	transform_y;
+}	t_element_raycast;
+
+typedef struct s_sprite_draw
+{
+	t_element			*element;
+	t_element_raycast	*raycast;
+	int					tex_x;
+	int					stripe;
+}	t_sprite_draw;
+
 typedef struct s_raycasting
 {
 	t_vector	direction;
@@ -172,6 +193,7 @@ void		draw_minimap(void *param);
 void		draw_weapon(t_game *game);
 
 void		render_elements(t_game *game);
+void		compute_sprite_data(t_game *game, t_element *e, t_element_raycast *d);
 
 //MOVEMENT
 void		key_hook(mlx_key_data_t keydata, void *param);
