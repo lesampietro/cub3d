@@ -68,25 +68,34 @@ int	safe_open(char *filename)
 // 	return (count);
 // }
 
-// char	**get_map(char *filename)
-// {
-// 	int		fd;
-// 	char	*line;
-// 	char	**map;
+void	get_map(char *filename, t_data *data, char **map_line)
+{
+	int		fd;
+	int		i;
+	char	**tmp_line;
 
-// 	fd = safe_open(filename);
-// 	line = get_next_line(fd);
-// 	while (line)
-// 	{
-// 		if (ft_strchr(line, '1'))
-// 			break ;
-// 		break ;
-// 		line = get_next_line(fd);
-// 	}
-// 	return (map);
-// }
+	i = 0;
+	fd = safe_open(filename);
+	tmp_line = map_line;
+	while (*tmp_line)
+	{
+		while(*tmp_line && ft_isspace(**tmp_line))
+			(*tmp_line)++;
+		while (*tmp_line && **tmp_line == '1' || **tmp_line == '0' || **tmp_line == ' ' || **tmp_line == 'S' || **tmp_line == 'N' || **tmp_line == 'E' || **tmp_line == 'W')
+			data->map[i][j++] = **tmp_line++;
+		*tmp_line = get_next_line(fd);
+		data->map[i++];
+	}
+	data->map[i] = NULL;
+	// while (*map_line && )
+	// {
+	// 	data->lin++;
+	// 	data->col = ft_strlen(*map_line);
 
-
+	// 	free(*map_line);
+	// 	*map_line = get_next_line(fd);
+	// }
+}
 
 void	validate_map(int argc, char **argv, t_data *data)
 {
@@ -95,14 +104,7 @@ void	validate_map(int argc, char **argv, t_data *data)
 	map_line = NULL;
 	check_args(argc);
 	is_valid_ext(argv[1]);
-	check_map_metadata(argv[1], data, map_line);
-	// data->map = get_map(argv[1]);
-	// //printf("Map size: %d\n", count_map_size(argv[1]));
-	// while(data->map[data->lin])
-	// {
-	// 	printf("Map: %s\n", data->map[data->lin]);
-	// 	data->lin++;
-	// }
-	//printf("Map: %s\n", data->map[0]);
-	// check_map(data->map, data);
+	check_map_metadata(argv[1], data, &map_line);
+	data->map = get_map(argv[1], data, &map_line);
+	// check_map(data->map, data); //TO BE DONE
 }
