@@ -57,35 +57,6 @@ int	is_valid_char(char c)
 		|| c == 'S' || c == 'N' || c == 'E' || c == 'W');
 }
 
-
-// void	get_map(int fd, t_data *data, char **map_line)
-// {
-	// 	int		i;
-	// 	char	**tmp_line;
-	
-	// 	i = 0;
-	// 	tmp_line = map_line;
-	// 	count_map_size(fd, data);
-	// 	while (*tmp_line)
-	// 	{
-		// 		while(*tmp_line && ft_isspace(**tmp_line))
-		// 			(*tmp_line)++;
-		// 		while (*tmp_line && **tmp_line == '1' || **tmp_line == '0' || **tmp_line == ' ' || **tmp_line == 'S' || **tmp_line == 'N' || **tmp_line == 'E' || **tmp_line == 'W')
-		// 			data->map[i][j++] = **tmp_line++;
-		// 		*tmp_line = get_next_line(fd);
-		// 		data->map[i++];
-		// 	}
-		// 	data->map[i] = NULL;
-		// while (*map_line && )
-		// {
-			// 	data->lin++;
-			// 	data->col = ft_strlen(*map_line);
-			
-			// 	free(*map_line);
-			// 	*map_line = get_next_line(fd);
-			// }
-// }
-		
 void	find_map_first_line(int fd, char **map_line)
 {
 	size_t i;
@@ -134,7 +105,31 @@ void	count_map_size(int fd, t_data *data, char **map_line)
 		data->lin++;
 	}
 	data->col = max_col;
-	printf("Map size: %d x %d\n", data->lin, data->col);
+	// printf("Map size: %d x %d\n", data->lin, data->col);
+	close(fd);
+}
+
+void	get_map(int fd, t_data *data, char **map_line)
+{
+	int		i;
+	int		j;
+
+	i = 0;
+	*map_line = get_next_line(fd);
+	find_map_first_line(fd, map_line);
+	data->map = malloc(sizeof(char *) * (data->lin + 1));
+	//PROTECT MALLOC (SUBSTITUIR MALLOC POR SAFE_MALLOC - ECONOMIA DE LINHAS)
+	while (*map_line && i < data->lin)
+	{
+		j = 0;
+		data->map[i] = malloc(sizeof(char) * (data->col + 1));
+		// PROTECT MALLOC (SUBSTITUIR MALLOC POR SAFE_MALLOC - ECONOMIA DE LINHAS)
+		data->map[i] = ft_strtrim(*map_line, "\n");
+		free(*map_line);
+		*map_line = get_next_line(fd);
+		i++;
+	}
+	data->map[i] = NULL;
 }
 
 void	process_map(int argc, char **argv, t_data *data)
@@ -148,7 +143,16 @@ void	process_map(int argc, char **argv, t_data *data)
 	fd = safe_open(argv[1]);
 	check_map_metadata(fd, data, &map_line);
 	count_map_size(fd, data, &map_line);
-	// get_map(fd, data, &map_line);
+	fd = safe_open(argv[1]);
+	get_map(fd, data, &map_line);
+	// // PRINT DEBUG
+	// int i = 0;
+	// printf("Map size: %d x %d\n", data->lin, data->col);
+	// while (data->map[i])
+	// {
+	// 	printf("%s\n", data->map[i]);
+	// 	i++;
+	// }
 	// check_map(data->map, data); //TO BE DONE
 	close(fd);
 	free(map_line);
