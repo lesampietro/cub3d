@@ -1,6 +1,6 @@
 #include "../../includes/cub3d.h"
 
-static void pressed(mlx_key_data_t keydata, t_game *game)
+static void	pressed(mlx_key_data_t keydata, t_game *game)
 {
 	if (keydata.key == MLX_KEY_LEFT)
 		game->keys.left = true;
@@ -16,11 +16,9 @@ static void pressed(mlx_key_data_t keydata, t_game *game)
 		game->keys.a = true;
 	if (keydata.key == MLX_KEY_LEFT_SHIFT)
 		game->keys.shift = true;
-	// if (mlx_is_mouse_down(game->mlx, MLX_MOUSE_BUTTON_LEFT))
-	// 	game->keys.mouse_left = true;
 }
 
-static void released(mlx_key_data_t keydata, t_game *game)
+static void	released(mlx_key_data_t keydata, t_game *game)
 {
 	if (keydata.key == MLX_KEY_LEFT)
 		game->keys.left = false;
@@ -36,8 +34,6 @@ static void released(mlx_key_data_t keydata, t_game *game)
 		game->keys.a = false;
 	if (keydata.key == MLX_KEY_LEFT_SHIFT)
 		game->keys.shift = false;
-	// if (!mlx_is_mouse_down(game->mlx, MLX_MOUSE_BUTTON_LEFT))
-	// 	game->keys.mouse_left = false;
 }
 
 void	key_hook(mlx_key_data_t keydata, void *param)

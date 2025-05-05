@@ -69,8 +69,8 @@ int32_t init_game(char *argv, t_game *game)
 	mlx_key_hook(game->mlx, key_hook, game);
 	mlx_mouse_hook(game->mlx, mouse_hook, game);
 	mlx_loop_hook(game->mlx, frame_loop, game);
-	// mlx_close_hook(game->mlx, 0, game);
 	mlx_loop(game->mlx);
+	// mlx_close_hook(game->mlx, 0, game);
 	mlx_close_window(game->mlx);
 	mlx_terminate(game->mlx);
 	// free_game(game);

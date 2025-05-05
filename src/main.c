@@ -91,31 +91,63 @@ int32_t main(int argc, char **argv)
 	game.data = &data;
 	game.raycasting = &raycasting;
 	process_map(argc, argv, &data);
+	data.ceiling = convert_rgb(data.c[0], data.c[1], data.c[2]);
+	data.floor = convert_rgb(data.f[0], data.f[1], data.f[2]);
 
 	// MOCK:
 	// (void)argc;
 	// data.map = get_map();
 	// get_map_size(&data);
 
-	// game.element_count = 2;
-	// // ENEMY 1
-	// game.element[0].alive = true;
-	// game.element[0].x = 12;
-	// game.element[0].y = 11;
-	// game.element[0].health = 100;
-	// game.element[0].type = ENEMY;
-	// game.element[0].texture_path = "./assets/enemies/wizard idle.png";
+	game.player_health = 100;
 
-	// // ITEM 1
-	// game.element[1].alive = true;
-	// game.element[1].x = 14;
-	// game.element[1].y = 13;
-	// game.element[1].health = 100;
-	// game.element[1].type = TREASURE;
-	// game.element[1].texture_path = "./assets/items/star.png";
+	game.element_count = 4;
+	// ENEMY 1
+	game.element[0].alive = true;
+	game.element[0].x = 12.5;
+	game.element[0].y = 11.5;
+	game.element[0].health = 100;
+	game.element[0].type = ENEMY;
+	game.element[0].idle_texture_path = "./assets/enemies/wizard idle.png";
+	game.element[0].shooting_texture_path = "./assets/enemies/wizard attack2.png";
+	game.element[0].visible = false;
+	game.element[0].first_visible_time = 0;
 
-	// game.player_pos.x = 11.5;
-	// game.player_pos.y = 5.5;
+
+	// ENEMY 2
+	game.element[1].alive = true;
+	game.element[1].x = 14.5;
+	game.element[1].y = 11.5;
+	game.element[1].health = 100;
+	game.element[1].type = ENEMY;
+	game.element[1].idle_texture_path = "./assets/enemies/wizard idle.png";
+	game.element[1].shooting_texture_path = "./assets/enemies/wizard attack2.png";
+	game.element[1].visible = false;
+	game.element[1].first_visible_time = 0;
+
+	// ENEMY 3
+	game.element[2].alive = true;
+	game.element[2].x = 9.5;
+	game.element[2].y = 9.5;
+	game.element[2].health = 100;
+	game.element[2].type = ENEMY;
+	game.element[2].idle_texture_path = "./assets/enemies/wizard idle.png";
+	game.element[2].shooting_texture_path = "./assets/enemies/wizard attack2.png";
+	game.element[2].visible = false;
+	game.element[2].first_visible_time = 0;
+
+	// ITEM 1
+	game.element[3].alive = true;
+	game.element[3].x = 14.5;
+	game.element[3].y = 13.5;
+	game.element[3].health = 100;
+	game.element[3].type = ITEM;
+	game.element[3].texture_path = "./assets/items/health.png";
+	game.element[3].visible = false;
+	game.element[3].first_visible_time = 0;
+
+	game.player_pos.x = 1.5;
+	game.player_pos.y = 1.5;
 
 	// game.player_dir.x = -1;
 	// game.player_dir.y = 0;
@@ -136,6 +168,7 @@ int32_t main(int argc, char **argv)
 	// // data.ceiling = convert_rgb(218, 218, 218);
 
 
-	// init_game(argv[1], &game);
+	game.data->pov = 'S';
+	init_game(argv[1], &game);
 	return (EXIT_SUCCESS);
 }

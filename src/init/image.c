@@ -25,14 +25,30 @@ void load_texture(t_game *game)
 	i = 0;
 	while (i < game->element_count)
 	{
-		game->element[i].texture = mlx_load_png(game->element[i].texture_path);
-		if (!game->element[i].texture)
+		if (game->element[i].type == ENEMY)
 		{
-			printf("Error loading element texture: %s\n", game->element[i].texture_path);
-			exit(EXIT_FAILURE);
+			game->element[i].idle_texture = mlx_load_png(game->element[i].idle_texture_path);
+			game->element[i].shooting_texture = mlx_load_png(game->element[i].shooting_texture_path);
+			game->element[i].texture = game->element[i].idle_texture;
+			if (!game->element[i].idle_texture || !game->element[i].shooting_texture)
+			{
+				printf("Error loading element texture: %s\n", game->element[i].texture_path);
+				exit(EXIT_FAILURE);
+			}
+		}
+		else if (game->element[i].type == ITEM)
+		{
+			game->element[i].texture = mlx_load_png(game->element[i].texture_path);
+			if (!game->element[i].texture)
+			{
+				printf("Error loading element texture: %s\n", game->element[i].texture_path);
+				exit(EXIT_FAILURE);
+			}
+			i++;
 		}
 		i++;
 	}
+
 	// game->element[0].texture = mlx_load_png(game->element[0].texture_path);
 	// if (!game->element[0].texture)
 	// {
