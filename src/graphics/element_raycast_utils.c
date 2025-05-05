@@ -32,7 +32,7 @@ void	sort_elements(t_game *game)
 		j = i + 1;
 		while (j < game->element_count)
 		{
-			if (game->element[i].distance < game->element[j].distance)
+			if (game->element[indices[i]].distance < game->element[indices[j]].distance)
 			{
 				tmp = indices[i];
 				indices[i] = indices[j];
@@ -43,7 +43,7 @@ void	sort_elements(t_game *game)
 		i++;
 	}
 	i = 0;
-	while (i++ < game->element_count)
+	while (i < game->element_count)
 	{
 		game->element[indices[i]].dist_rank = i;
 		i++;
