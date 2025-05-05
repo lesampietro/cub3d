@@ -37,6 +37,8 @@ static void	render_sprite_stripes(t_game *game, t_element *e,
 	t_sprite_draw	draw_ctx;
 
 	tex_width = e->texture->width;
+	printf("e->type = %d, e->texture = %p\n", e->type, (void *)e->texture);
+
 	stripe = d->draw_start_x;
 	while (stripe < d->draw_end_x)
 	{

@@ -38,9 +38,14 @@
 # define BCYAN "\033[1;36m"
 # define RST "\033[0m"
 
+typedef struct s_game t_game;
+typedef struct s_data t_data;
+typedef struct s_raycasting t_raycasting;
+
 typedef enum e_element_id
 {
 	ENEMY,
+	HEALTH,
 	ITEM,
 	EXIT
 }	t_element_id;
@@ -134,6 +139,7 @@ typedef struct s_data
 	char		pov;
 	uint32_t	ceiling;
 	uint32_t	floor;
+	t_game		*game;
 }	t_data;
 
 typedef struct s_game
@@ -156,6 +162,7 @@ typedef struct s_game
 	int				hit_side;
 	int				mouse_prev_x;
 	int				element_count;
+	int				enemy_count;
 	t_element		element[10];
 }	t_game;
 
@@ -187,9 +194,10 @@ typedef enum e_dir
 	WEST
 }	t_dir;
 
-int32_t		init_game(char *argv, t_game *game);
+void		init_game(char *argv, t_game *game);
 void		init_window(t_game *game);
-
+void		init_graphics(t_game *game);
+void		init_elements(t_game *game);
 //MAP VALIDATION
 void		process_map(int argc, char **argv, t_data *data);
 void		check_map_metadata(int fd, t_data *data, char **map_line);
@@ -197,9 +205,9 @@ int			safe_open(char *filename);
 void		check_invalid_count(int count);
 void		check_color(char *line);
 char		*check_line_info(char *line);
-
 //GRAPHICS
 void		ui_init(t_game *game);
+void		define_initial_plane(t_game *game);
 void		frame_loop(void *param);
 void		draw_background(t_game *game, t_data *data);
 void		draw_raycasting(t_game *game);

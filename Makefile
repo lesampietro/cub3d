@@ -15,6 +15,8 @@ BIN		:= bin
 SRCS	= $(addprefix  $(SRC_PATH)/, $(FILES))
 FILES	= main.c \
 			init_cub3d.c \
+			graphics/init.c \
+			graphics/init_elements.c \
 			graphics/background.c \
 			graphics/frame_loop.c \
 			graphics/raycasting.c \
@@ -32,7 +34,6 @@ FILES	= main.c \
 			action/shooting_utils.c \
 			action/enemy_shots.c \
 			action/player_life.c \
-			init/image.c \
 			validation/map_parsing.c \
 			validation/map_validation.c \
 			validation/metadata_validation.c \

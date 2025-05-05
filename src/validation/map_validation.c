@@ -54,7 +54,8 @@ int	safe_open(char *filename)
 int	is_valid_char(char c)
 {
 	return (c == '1' || c == '0' || c == ' ' \
-		|| c == 'S' || c == 'N' || c == 'E' || c == 'W');
+		|| c == 'S' || c == 'N' || c == 'E' || c == 'W'
+		|| c == 'H' || c == 'I' || c == 'E');
 }
 
 void	find_map_first_line(int fd, char **map_line)
@@ -109,10 +110,94 @@ void	count_map_size(int fd, t_data *data, char **map_line)
 	close(fd);
 }
 
+void	init_enemies(t_game *game, int e)
+{	
+	game->enemy_count++;
+	game->element[e].type = ENEMY;
+	game->element[e].idle_texture_path = "./assets/enemies/wizard idle.png";
+	game->element[e].visible = false;
+	game->element[e].shooting_texture_path = "./assets/enemies/wizard attack2.png";
+	game->element[e].first_visible_time = 0;
+	printf("Enemy %d: %d at (%f, %f)\n", e, game->element[e].type, \
+		game->element[e].x, game->element[e].y);
+	
+}
+
+void	init_element_type(char c, t_game *game, int e)
+{
+	game->element[e].alive = true;
+	game->element[e].health = 100;
+
+	if (c == 'X')
+		init_enemies(game, e);
+	else if (c == 'I')
+	{
+		game->element[e].type = ITEM;
+	}
+	else if (c == 'H')
+	{
+
+		game->element[e].type = HEALTH;
+	}
+}
+
+void	get_element_pos(char *map_line, t_data *data, int i)
+{
+	int		j;
+	int		e;
+	e = data->game->element_count;
+	j = 0;
+	while (map_line[j])
+	{
+		if (map_line[j] == 'X' || map_line[j] == 'I' || \
+			map_line[j] == 'H')
+			{
+				data->game->element[e].x = j + 0.5;
+				data->game->element[e].y = i + 0.5;
+				printf("Element %d: %c at (%f, %f)\n", e, map_line[j], \
+					data->game->element[e].x, data->game->element[e].y);
+				init_element_type(map_line[j], data->game, e);
+				e++;
+			}
+			j++;
+	}
+	if (e > 15)
+	{
+		printf(BPINK "Error: too many elements. Maximum of 15\n" RST);
+		exit(EXIT_FAILURE);
+	}
+	data->game->element_count = e;
+}
+
+void	get_player_pos(char *map_line, t_data *data, int i)
+{
+	int		j;
+
+	j = 0;
+	while (map_line[j])
+	{
+		if (map_line[j] == 'N' || map_line[j] == 'S' || \
+			map_line[j] == 'E' || map_line[j] == 'W')
+		{
+			data->pov = map_line[j];
+			data->game->player_pos.x = j + 0.5;
+			data->game->player_pos.y = i + 0.5;
+			return ;
+		}
+		j++;
+	}
+}
+
+void	get_positions(char *map_line, t_data *data, int i)
+{
+	get_player_pos(map_line, data, i);
+	get_element_pos(map_line, data, i);
+}
+
 void	get_map(int fd, t_data *data, char **map_line)
 {
 	int		i;
-	int		j;
+	// int		j;
 
 	i = 0;
 	*map_line = get_next_line(fd);
@@ -121,10 +206,11 @@ void	get_map(int fd, t_data *data, char **map_line)
 	//PROTECT MALLOC (SUBSTITUIR MALLOC POR SAFE_MALLOC - ECONOMIA DE LINHAS)
 	while (*map_line && i < data->lin)
 	{
-		j = 0;
+		// j = 0;
 		data->map[i] = malloc(sizeof(char) * (data->col + 1));
 		// PROTECT MALLOC (SUBSTITUIR MALLOC POR SAFE_MALLOC - ECONOMIA DE LINHAS)
 		data->map[i] = ft_strtrim(*map_line, "\n");
+		get_positions(data->map[i], data, i);
 		free(*map_line);
 		*map_line = get_next_line(fd);
 		i++;

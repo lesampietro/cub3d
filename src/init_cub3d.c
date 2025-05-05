@@ -1,6 +1,6 @@
 #include "../includes/cub3d.h"
 
-static void	define_initial_plane(t_game *game)
+void	define_initial_plane(t_game *game)
 {
 	if (game->data->pov == 'N')
 	{
@@ -33,7 +33,6 @@ void init_window(t_game *game)
 	// moni_h = 0;
 
 	init_textures(game);
-	define_initial_plane(game);
 	mlx_set_setting(MLX_STRETCH_IMAGE, 1);
 	game->mlx = mlx_init(WINDOW_WIDTH, WINDOW_HEIGHT, "Cub3D", true);
 	// if (!game->mlx)
@@ -51,7 +50,7 @@ void init_window(t_game *game)
 	// }
 }
 
-int32_t init_game(char *argv, t_game *game)
+void init_game(char *argv, t_game *game)
 {
 	(void)argv;
 	// game->map = read_map(argv);
@@ -74,5 +73,4 @@ int32_t init_game(char *argv, t_game *game)
 	mlx_close_window(game->mlx);
 	mlx_terminate(game->mlx);
 	// free_game(game);
-	return (EXIT_SUCCESS);
 }
