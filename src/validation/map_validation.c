@@ -112,7 +112,6 @@ void	count_map_size(int fd, t_data *data, char **map_line)
 void	get_map(int fd, t_data *data, char **map_line)
 {
 	int		i;
-	int		j;
 
 	i = 0;
 	*map_line = get_next_line(fd);
@@ -121,7 +120,6 @@ void	get_map(int fd, t_data *data, char **map_line)
 	//PROTECT MALLOC (SUBSTITUIR MALLOC POR SAFE_MALLOC - ECONOMIA DE LINHAS)
 	while (*map_line && i < data->lin)
 	{
-		j = 0;
 		data->map[i] = malloc(sizeof(char) * (data->col + 1));
 		// PROTECT MALLOC (SUBSTITUIR MALLOC POR SAFE_MALLOC - ECONOMIA DE LINHAS)
 		data->map[i] = ft_strtrim(*map_line, "\n");
