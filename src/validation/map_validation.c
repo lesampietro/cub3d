@@ -128,6 +128,9 @@ void	process_element(t_data *data, int x, int y, char c)
 	e->visible = false;
 	e->last_shot_time = 0;
 	e->first_visible_time = 0;
+	e->dist_rank = 0;
+	e->distance = 0;
+	e->id = game->element_count;
 	
 	if (c == 'X')
 	{

@@ -59,8 +59,11 @@ typedef struct s_element
 	char			*idle_texture_path;
 	float			x;
 	float			y;
+	float			distance;
 	int				health;
 	int				type;
+	int				dist_rank;
+	int				id;
 	bool			alive;
 	bool			visible;
 	uint64_t		last_shot_time;
@@ -223,6 +226,7 @@ void		draw_weapon(t_game *game);
 void		render_elements(t_game *game);
 void		compute_sprite_data(t_game *game, t_element *e,
 				t_element_raycast *d);
+void		sort_elements(t_game *game);
 
 //MOVEMENT
 void		key_hook(mlx_key_data_t keydata, void *param);

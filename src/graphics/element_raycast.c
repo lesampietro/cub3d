@@ -72,12 +72,23 @@ static void	render_element(t_game *game, int i)
 void	render_elements(t_game *game)
 {
 	int	i;
+	int	rank;
 
+	rank = 0;
 	i = 0;
-	while (i < game->element_count)
+	sort_elements(game);
+	while (rank < game->element_count)
 	{
-		if (game->element[i].alive)
-			render_element(game, i);
-		i++;
+		i = 0;
+		while (i < game->element_count)
+		{
+			if (game->element[i].dist_rank == rank)
+			{
+				render_element(game, i);
+				break ;
+			}
+			i++;
+		}
+		rank++;
 	}
 }
