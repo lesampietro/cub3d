@@ -38,16 +38,20 @@
 # define BCYAN "\033[1;36m"
 # define RST "\033[0m"
 
+typedef struct s_game t_game;
+typedef struct s_data t_data;
+
 typedef enum e_element_id
 {
-	ENEMY,
+	ENEMY = 1,
+	HEALTH,
 	ITEM,
 	EXIT
 }	t_element_id;
 
 typedef struct s_element
 {
-	mlx_texture_t	*texture;
+	mlx_texture_t	*current_texture;
 	mlx_texture_t	*shooting_texture;
 	mlx_texture_t	*idle_texture;
 	char			*texture_path;
@@ -125,6 +129,7 @@ typedef struct s_raycasting
 
 typedef struct s_data
 {
+	t_game		*game;
 	char		**map;
 	int			col;
 	int			lin;
@@ -156,7 +161,7 @@ typedef struct s_game
 	int				hit_side;
 	int				mouse_prev_x;
 	int				element_count;
-	t_element		element[10];
+	t_element		element[20];
 }	t_game;
 
 typedef struct s_weapon_render

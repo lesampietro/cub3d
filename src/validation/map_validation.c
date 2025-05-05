@@ -54,7 +54,8 @@ int	safe_open(char *filename)
 int	is_valid_char(char c)
 {
 	return (c == '1' || c == '0' || c == ' ' \
-		|| c == 'S' || c == 'N' || c == 'E' || c == 'W');
+		|| c == 'S' || c == 'N' || c == 'E' || c == 'W'
+		|| c == 'X' || c == 'I' || c == 'H' );
 }
 
 void	find_map_first_line(int fd, char **map_line)
@@ -109,6 +110,77 @@ void	count_map_size(int fd, t_data *data, char **map_line)
 	close(fd);
 }
 
+void	process_element(t_data *data, int x, int y, char c)
+{
+	t_game		*game = data->game;
+	t_element	*e;
+
+	if (game->element_count >= 20)
+	{
+		printf(BPINK"Error: too many elements in the map. Max = 20\n"RST);
+		exit(EXIT_FAILURE);
+	}
+
+	e = &game->element[game->element_count];
+	e->x = (float)x + 0.5f; // centraliza na célula
+	e->y = (float)y + 0.5f;
+	e->alive = true;
+	e->visible = false;
+	e->last_shot_time = 0;
+	e->first_visible_time = 0;
+	
+	if (c == 'X')
+	{
+		e->type = ENEMY;
+		e->health = 100;
+		e->idle_texture_path = "./assets/enemies/wizard idle.png";
+		e->shooting_texture_path = "./assets/enemies/wizard attack2.png";
+		e->texture_path = NULL;
+	}
+	else if (c == 'I')
+	{
+		e->type = ITEM;
+		e->health = 100;
+		e->idle_texture_path = "./assets/items/star.png";
+		e->shooting_texture_path = "./assets/items/star.png";
+		e->texture_path = NULL;
+	}
+	else if (c == 'H')
+	{
+		e->type = HEALTH;
+		e->health = 25;
+		e->idle_texture_path = "./assets/items/health.png";
+		e->shooting_texture_path = "./assets/items/health.png";
+		e->texture_path = NULL;
+	}
+	game->element_count++;
+}
+
+
+void	process_info(char *map_line, t_data *data, int map_index)
+
+{
+	int		x;
+	char	c;
+
+	x = 0;
+	while (map_line[x] != '\0')
+	{
+		c = map_line[x];
+		if (c == 'S' || c == 'N' || c == 'E' || c == 'W')
+		{
+			data->pov = c;
+			data->game->player_pos.x = x + 0.5f; // centraliza na célula
+			data->game->player_pos.y = map_index + 0.5f;
+		}
+		if (c == 'X' || c == 'I' || c == 'H')
+			process_element(data, x, map_index, c);
+		x++;
+	}
+
+}
+
+
 void	get_map(int fd, t_data *data, char **map_line)
 {
 	int		i;
@@ -124,6 +196,7 @@ void	get_map(int fd, t_data *data, char **map_line)
 		// PROTECT MALLOC (SUBSTITUIR MALLOC POR SAFE_MALLOC - ECONOMIA DE LINHAS)
 		data->map[i] = ft_strtrim(*map_line, "\n");
 		free(*map_line);
+		process_info(data->map[i], data, i);
 		*map_line = get_next_line(fd);
 		i++;
 	}

@@ -23,13 +23,20 @@ void load_texture(t_game *game)
 		i++;
 	}
 	i = 0;
+
 	while (i < game->element_count)
 	{
+		if (!game->element[i].idle_texture_path)
+    		printf("idle_texture_path is NULL for element %d\n", i);
+		if (!game->element[i].shooting_texture_path)
+    		printf("shooting_texture_path is NULL for element %d\n", i);
+
+
 		if (game->element[i].type == ENEMY)
 		{
 			game->element[i].idle_texture = mlx_load_png(game->element[i].idle_texture_path);
 			game->element[i].shooting_texture = mlx_load_png(game->element[i].shooting_texture_path);
-			game->element[i].texture = game->element[i].idle_texture;
+			game->element[i].current_texture = game->element[i].idle_texture;
 			if (!game->element[i].idle_texture || !game->element[i].shooting_texture)
 			{
 				printf("Error loading element texture: %s\n", game->element[i].texture_path);
@@ -38,14 +45,27 @@ void load_texture(t_game *game)
 		}
 		else if (game->element[i].type == ITEM)
 		{
-			game->element[i].texture = mlx_load_png(game->element[i].texture_path);
-			if (!game->element[i].texture)
+			game->element[i].idle_texture = mlx_load_png(game->element[i].idle_texture_path);
+			game->element[i].shooting_texture = mlx_load_png(game->element[i].shooting_texture_path);
+			game->element[i].current_texture = game->element[i].idle_texture;
+			if (!game->element[i].idle_texture || !game->element[i].shooting_texture)
 			{
 				printf("Error loading element texture: %s\n", game->element[i].texture_path);
 				exit(EXIT_FAILURE);
 			}
-			i++;
 		}
+		else if (game->element[i].type == HEALTH)
+		{
+			game->element[i].idle_texture = mlx_load_png(game->element[i].idle_texture_path);
+			game->element[i].shooting_texture = mlx_load_png(game->element[i].shooting_texture_path);
+			game->element[i].current_texture = game->element[i].idle_texture;
+			if (!game->element[i].idle_texture || !game->element[i].shooting_texture)
+			{
+				printf("Error loading element texture: %s\n", game->element[i].texture_path);
+				exit(EXIT_FAILURE);
+			}
+		}
+
 		i++;
 	}
 

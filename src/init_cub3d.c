@@ -24,6 +24,14 @@ static void	define_initial_plane(t_game *game)
 	}
 }
 
+// void read_map(t_game *game)
+
+void init_default_values(t_game *game)
+{
+	game->player_health = 100;
+	// game->element_count = 0;
+}
+
 void init_window(t_game *game)
 {
 	// int32_t moni_w;
@@ -31,9 +39,11 @@ void init_window(t_game *game)
 
 	// moni_w = 0;
 	// moni_h = 0;
-
-	init_textures(game);
+	init_default_values(game);
 	define_initial_plane(game);
+	
+	// AQUI
+
 	mlx_set_setting(MLX_STRETCH_IMAGE, 1);
 	game->mlx = mlx_init(WINDOW_WIDTH, WINDOW_HEIGHT, "Cub3D", true);
 	// if (!game->mlx)

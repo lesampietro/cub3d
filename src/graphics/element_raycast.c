@@ -2,7 +2,7 @@
 
 static bool	is_valid_element(t_element *element)
 {
-	return (element->alive && element->texture);
+	return (element->alive);
 }
 
 static void	draw_sprite_stripe(t_game *game, t_sprite_draw *draw_ctx)
@@ -13,12 +13,12 @@ static void	draw_sprite_stripe(t_game *game, t_sprite_draw *draw_ctx)
 	int	tex_y;
 
 	y = draw_ctx->raycast->draw_start_y;
-	tex_height = draw_ctx->element->texture->height;
+	tex_height = draw_ctx->element->current_texture->height;
 	while (y < draw_ctx->raycast->draw_end_y)
 	{
 		d = y * 256 - WINDOW_HEIGHT * 128 + draw_ctx->raycast->height * 128;
 		tex_y = ((d * tex_height) / draw_ctx->raycast->height) / 256;
-		uint32_t color = get_texture_pixel(draw_ctx->element->texture, draw_ctx->tex_x, tex_y);
+		uint32_t color = get_texture_pixel(draw_ctx->element->current_texture, draw_ctx->tex_x, tex_y);
 		if ((color & 0x00FFFFFF) != 0)
 		{
 			game->raycasting->z_buffer[draw_ctx->stripe] = draw_ctx->raycast->transform_y;
@@ -36,7 +36,7 @@ static void	render_sprite_stripes(t_game *game, t_element *e,
 	int				tex_x;
 	t_sprite_draw	draw_ctx;
 
-	tex_width = e->texture->width;
+	tex_width = e->current_texture->width;
 	stripe = d->draw_start_x;
 	while (stripe < d->draw_end_x)
 	{

@@ -14,7 +14,7 @@ void	enemy_shoot_at_player(t_game *game, t_element *enemy)
 {
 	if (enemy->visible)
 	{
-		enemy->texture = enemy->shooting_texture;
+		enemy->current_texture = enemy->shooting_texture;
 		game->player_health -= 5;
 	}
 }
@@ -52,7 +52,7 @@ void	enemy_shots(t_game *game)
 		if (game->element[i].alive && game->element[i].type == ENEMY)
 		{
 			if (!game->element[i].visible)
-				game->element[i].texture = game->element[i].idle_texture;
+				game->element[i].current_texture = game->element[i].idle_texture;
 			update_enemy_shooting(game, &game->element[i]);
 		}
 		i++;
