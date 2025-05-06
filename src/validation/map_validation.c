@@ -54,7 +54,7 @@ int	safe_open(char *filename)
 int	is_valid_char(char c)
 {
 	return (c == '1' || c == '0' || c == ' ' \
-		|| c == 'S' || c == 'N' || c == 'E' || c == 'W');
+		|| c == 'S' || c == 'N' || c == 'E' || c == 'W' || c == '\t');
 }
 
 void	find_map_first_line(int fd, char **map_line)
@@ -140,24 +140,42 @@ void	get_map(int fd, t_data *data, char **map_line)
 	data->map[i] = NULL;
 }
 
-void	check_map_info(char **map)
+void	is_empty_line(char **line, int i)
+{
+	int		c;
+
+	c = 0;
+	if (line[i][c] == '\0')
+	{
+		while (line[i])
+		{
+			c = 0;
+			while (line[i][c] && ft_isspace(line[i][c]))
+				c++;
+			if (line[i][c] != '\0')
+			{
+				printf(BPINK"Error: empty line in map\n"RST);
+				exit(EXIT_FAILURE);
+			}
+			i++;
+		}
+	}
+
+}
+
+void	check_map_info(t_data *data)
 {
 	int		i;
 	int		j;
 
 	i = 0;
-	while (map[i])
+	while (data->map[i])
 	{
 		j = 0;
-		if (map[i][0] == '\0')
+		is_empty_line(data->map, i);
+		while (data->map[i][j])
 		{
-			printf(BPINK"Error: empty line in map\n"RST);
-			exit(EXIT_FAILURE);
-		}
-		while (map[i][j])
-		{
-			// printf("map line: %s\n", map[i]);
-			if (!is_valid_char(map[i][j]))
+			if (!is_valid_char(data->map[i][j]))
 			{
 				printf(BPINK"Error: invalid character in map\n"RST);
 				exit(EXIT_FAILURE);
@@ -206,11 +224,10 @@ void	is_surrounded_by_walls(char **map, int lin)
 
 void	validate_map(t_data *data)
 {
-	check_map_info(data->map);
+	check_map_info(data);
 	is_surrounded_by_walls(data->map, data->lin);
 	// check_map_elements - checar sem tem pelo menos 1 elemento de player, mas 
 }
-
 
 void	process_map(int argc, char **argv, t_data *data)
 {
@@ -226,14 +243,6 @@ void	process_map(int argc, char **argv, t_data *data)
 	count_map_size(fd, data, &map_line);
 	fd = safe_open(argv[1]);
 	get_map(fd, data, &map_line);
-	// // PRINT DEBUG
-	// int i = 0;
-	// printf("Map size: %d x %d\n", data->lin, data->col);
-	// while (data->map[i])
-	// {
-	// 	printf("%s\n", data->map[i]);
-	// 	i++;
-	// }
 	validate_map(data);
 	close(fd);
 	free(map_line);
