@@ -91,7 +91,7 @@ void	count_map_size(int fd, t_data *data, char **map_line)
 	max_col = 0;
 	*map_line = get_next_line(fd);
 	find_map_first_line(fd, map_line);
-	while (*map_line && **map_line != '\0' && **map_line != '\n')
+	while (*map_line && **map_line != '\0')
 	{
 		i = 0;
 		while (is_valid_char((*map_line)[i]) || ft_isspace((*map_line)[i]))
@@ -221,7 +221,30 @@ void	get_map(int fd, t_data *data, char **map_line)
 	data->map[i] = NULL;
 }
 
-void	check_map(t_data *data)
+void	is_empty_line(char **line, int i)
+{
+	int		c;
+
+	c = 0;
+	if (line[i][c] == '\0')
+	{
+		while (line[i])
+		{
+			c = 0;
+			while (line[i][c] && ft_isspace(line[i][c]))
+				c++;
+			if (line[i][c] != '\0')
+			{
+				printf(BPINK"Error: empty line in map\n"RST);
+				exit(EXIT_FAILURE);
+			}
+			i++;
+		}
+	}
+
+}
+
+void	check_map_info(t_data *data)
 {
 	int		i;
 	int		j;
@@ -230,6 +253,7 @@ void	check_map(t_data *data)
 	while (data->map[i])
 	{
 		j = 0;
+		is_empty_line(data->map, i);
 		while (data->map[i][j])
 		{
 			if (!is_valid_char(data->map[i][j]))
@@ -265,6 +289,48 @@ int count_items(t_data *data)
 	}
 	return (count);
 }
+void	is_map_border(char **map, int lin, int i, int j)
+{
+	if (i == 0 || i == lin - 1 || j == 0 || j == (int)ft_strlen(map[i]))
+	{
+		printf(BPINK "Error: map is not surrounded by walls\n" RST);
+		exit(EXIT_FAILURE);
+	}
+}
+
+void	is_surrounded_by_walls(char **map, int lin)
+{
+	int		i;
+	int		j;
+	
+	i = 0;
+	while (map[i])
+	{
+		j = 0;
+		while (map[i][j])
+		{
+			if (map[i][j] == '0')
+			{
+				is_map_border(map, lin, i, j);
+				if (ft_isspace(map[i - 1][j]) || ft_isspace(map[i + 1][j]) \
+					|| ft_isspace(map[i][j - 1]) || ft_isspace(map[i][j + 1]))
+				{
+					printf(BPINK"Error: map is not surrounded by walls\n"RST);
+					exit(EXIT_FAILURE);
+				}
+			}
+			j++;
+		}
+		i ++;
+	}
+}
+
+void	validate_map(t_data *data)
+{
+	check_map_info(data);
+	is_surrounded_by_walls(data->map, data->lin);
+	// check_map_elements - checar sem tem pelo menos 1 elemento de player, mas 
+}
 
 void	process_map(int argc, char **argv, t_data *data)
 {
@@ -291,15 +357,7 @@ void	process_map(int argc, char **argv, t_data *data)
 	// 	i++;
 	// }
 	// check_map(data->map, data); //TO BE DONE
-	// PRINT DEBUG
-	int i = 0;
-	printf("Map size: %d x %d\n", data->lin, data->col);
-	while (data->map[i])
-	{
-		printf("%s\n", data->map[i]);
-		i++;
-	}
-	check_map(data);
+	validate_map(data);
 	close(fd);
 	free(map_line);
 }
