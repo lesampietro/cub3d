@@ -58,9 +58,9 @@ void	check_path_ext(char *path_ext)
 	int		len;
 
 	i = 0;
-	valid_ext = ".png";
+	valid_ext = ".png\0";
 	len = ft_strlen(path_ext);
-	len = len - 4;
+	len = len - 5;
 	while (path_ext[len] && valid_ext[i] && path_ext[len] == valid_ext[i])
 	{
 		i++;
@@ -72,61 +72,51 @@ void	check_path_ext(char *path_ext)
 	exit(EXIT_FAILURE);
 }
 
-void check_extra_text(char *line)
-{
-	int i;
-
-	i = 0;
-	if (ft_strncmp("./", line, 2) != 0)
-	{
-		printf(BPINK "Error: text before texture information\n" RST);
-		exit(EXIT_FAILURE);
-	}
-	while (line[i] && !ft_isspace(line[i]))
-		i++;
-	while (line[i] && ft_isspace(line[i]))
-		i++;
-	if (line[i])
-	{
-		printf(BPINK "Error: text after texture information\n" RST);
-		exit(EXIT_FAILURE);
-	}
-}
-
-void	check_texture_path(char *id, char *line)
-{
-	check_extra_text(line);
-	check_path_ext(line);
-}
+// void	check_texture_path(char *id, char *line)
+// {
+// 	check_extra_text(line);
+// 	// check_path_ext(line);
+// }
 
 int	save_texture_path(char *identifier, char *line, char **path)
 {
-	while (line && ft_isspace(*line))
-	line++;
-	if (!ft_strncmp(identifier, line, 2))
-		line += 2;
-	while (line && ft_isspace(*line))
-		line++;
-	if (line)
+	char	**split;
+
+	split = NULL;
+	split = ft_split(line, ' ');
+	if (split[2])
 	{
-		check_texture_path(identifier, line);
-		*path = strdup(line);
+		printf(BPINK "Error: extra text before or after texture path\n" RST);
+		ft_free_split(split);
+		exit(EXIT_FAILURE);
 	}
-	printf("Path for %s texture: %s", identifier, *path);
+	if (split[1])
+	{
+		check_path_ext(split[1]);
+		*path = strdup(split[1]);
+	}
+	ft_free_split(split);
 	return (1);
 }
 
 int	save_colour_path(char *identifier, char *line, char **path)
 {
-	while (line && ft_isspace(*line))
-	line++;
-	if (!ft_strncmp(identifier, line, 2))
-		line += 2;
-	while (line && ft_isspace(*line))
-		line++;
-	if (line) //adicionar checagem específica de cores
-		*path = strdup(line);
-	printf("Path for %s colour: %s", identifier, *path);
+	char	**split;
+
+	split = NULL;
+	split = ft_split(line, ' ');
+	if (split[2]) 
+	{
+		printf(BPINK "Error: extra text before or after texture path\n" RST);
+		ft_free_split(split);
+		exit(EXIT_FAILURE);
+	}
+	if (split[1]) //adicionar checagem específica de cores
+	{
+		// check_texture_path(identifier, line);
+		*path = strdup(split[1]);
+	}
+	ft_free_split(split);
 	return (1);
 }
 
@@ -173,6 +163,7 @@ void	check_map_metadata(char *map_file, t_data *data)
 	char	*line;
 	int		count;
 	
+	count = 0;
 	fd = safe_open(map_file);
 	line = NULL;
 	line = get_next_line(fd);
@@ -198,4 +189,11 @@ void	validate_map(int argc, char **argv, t_data *data)
 	check_args(argc, argv);
 	is_valid_ext(argv[1]);
 	check_map_metadata(argv[1], data);
+	//\/\/\/\/\/\/ DEBUG \/\/\/\/\/\/
+	printf("Path for NO= %s", data->no);
+	printf("Path for SO= %s", data->so);
+	printf("Path for EA= %s", data->ea);
+	printf("Path for WE= %s", data->we);
+	printf("Path for C= %s", data->c);
+	printf("Path for F= %s", data->f);
 }
