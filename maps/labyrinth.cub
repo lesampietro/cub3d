@@ -1,12 +1,13 @@
-NO ./assets/textures/walls/1-16/Asset3.png
+NO ./assets/textures/TormentTextures/TrueColour/str_metalgen4.png
 
-SO ./assets/textures/walls/17-32/Asset2.png
+SO ./assets/textures/walls/17-32/Asset6.png
 
 WE ./assets/textures/walls/1-16/Asset6.png
 
 EA ./assets/textures/walls/17-32/Asset2.png
 
-C 200,120,40
+
+C 54,0,60
 
 F 30,30,13
 
