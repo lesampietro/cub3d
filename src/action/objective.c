@@ -27,6 +27,8 @@ void	objective_check(void *param)
 	detect_item(game);
 	if (game->item_count < game->total_items)
 		return ;
-	printf(BGRN"You collected all items! You win!\n"RST);
+	printf(BGRN"-------------------------------------\n"RST);
+	printf(BGRN"| You collected all items! You win! |\n"RST);
+	printf(BGRN"-------------------------------------\n"RST);
 	free_and_exit(game);
 }

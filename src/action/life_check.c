@@ -43,6 +43,8 @@ void	check_player_life(void *param)
 	if (game->player_health > 0)
 		return ;
 	game->player_health = 0;
-	printf(BRED"Game Over! You are dead.\n"RST);
+	printf(BRED"---------------------------\n"RST);
+	printf(BRED"| GAME OVER! You are dead |\n"RST);
+	printf(BRED"---------------------------\n"RST);
 	free_and_exit(game);
 }
