@@ -27,8 +27,6 @@ void	objective_check(void *param)
 	detect_item(game);
 	if (game->item_count < game->total_items)
 		return ;
-	mlx_close_window(game->mlx);
-	mlx_terminate(game->mlx);
 	printf(BGRN"You collected all items! You win!\n"RST);
-	exit(0);
+	free_and_exit(game);
 }

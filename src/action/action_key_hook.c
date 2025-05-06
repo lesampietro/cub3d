@@ -42,11 +42,7 @@ void	key_hook(mlx_key_data_t keydata, void *param)
 
 	game = (t_game *)param;
 	if (keydata.key == MLX_KEY_ESCAPE)
-	{
-		mlx_close_window(game->mlx);
-		mlx_terminate(game->mlx);
-		exit(0);
-	}
+		free_and_exit(game);
 	if (mlx_is_mouse_down(game->mlx, MLX_MOUSE_BUTTON_LEFT))
 		game->keys.mouse_left = true;
 	else

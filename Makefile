@@ -14,6 +14,7 @@ BIN		:= bin
 
 SRCS	= $(addprefix  $(SRC_PATH)/, $(FILES))
 FILES	= main.c \
+			free.c \
 			init_cub3d.c \
 			graphics/background.c \
 			graphics/frame_loop.c \

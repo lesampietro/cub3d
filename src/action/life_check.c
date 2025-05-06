@@ -43,8 +43,6 @@ void	check_player_life(void *param)
 	if (game->player_health > 0)
 		return ;
 	game->player_health = 0;
-	mlx_close_window(game->mlx);
-	mlx_terminate(game->mlx);
 	printf(BRED"Game Over! You are dead.\n"RST);
-	exit(0);
+	free_and_exit(game);
 }
