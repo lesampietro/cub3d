@@ -31,7 +31,7 @@ FILES	= main.c \
 			action/shooting.c \
 			action/shooting_utils.c \
 			action/enemy_shots.c \
-			action/player_life.c \
+			action/life_check.c \
 			init/image.c \
 			validation/map_parsing.c \
 			validation/map_validation.c \

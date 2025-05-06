@@ -36,24 +36,10 @@ void	print_element(t_game *game, t_coord coord, int pixel, uint32_t color)
 
 void	found_element(t_game *game, t_coord coord, int pixel)
 {
-	int		i;
-
-	i = 0;
 	if (game->data->map[coord.y][coord.x] == '1')
 		print_element(game, coord, pixel, convert_rgb(255, 255, 255));
 	else if (game->data->map[coord.y][coord.x] == 'X')
-	{
-		while (i < game->element_count)
-		{
-			if (game->element[i].type == ENEMY && game->element[i].health > 0 && (int)game->element[i].x == coord.x &&
-				(int)game->element[i].y == coord.y)
-			{
-				print_element(game, coord, pixel, convert_rgb(255, 0, 0));
-				break ;
-			}
-			i++;
-		}
-	}
+		print_element(game, coord, pixel, convert_rgb(255, 0, 0));
 	else if (game->data->map[coord.y][coord.x] == 'I')
 		print_element(game, coord, pixel, convert_rgb(0, 0, 255));
 	else if (game->data->map[coord.y][coord.x] == 'H')

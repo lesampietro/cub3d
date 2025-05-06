@@ -240,6 +240,7 @@ void		mouse_hook(mouse_key_t button, action_t action,
 //ACTION
 void		shoot_hit(t_game *game);
 void		check_player_life(void *param);
+// void		check_element_life(t_game *game);
 void		detect_potion(t_game *game);
 
 //SHOOTING

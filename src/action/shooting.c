@@ -26,6 +26,10 @@ void	shoot_hit(t_game *game)
 	{
 		game->element[hit_index].health -= 25;
 		if (game->element[hit_index].health <= 0)
+		{
 			game->element[hit_index].alive = false;
+			game->data->map[(int)game->element[hit_index].y][(int)game->element[hit_index].x] = '0';
+		}
+
 	}
 }
