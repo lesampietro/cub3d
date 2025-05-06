@@ -109,13 +109,12 @@ void	count_map_size(int fd, t_data *data, char **map_line)
 	close(fd);
 }
 
-void	safe_malloc(void *data, int size)
+void	safe_malloc(void **data, int size)
 {
-	data = malloc(sizeof(char *) * (size));
-	if (!data)
+	*data = malloc(size);
+	if (!*data)
 	{
-		data = NULL;
-		printf(BPINK"Error: memmory allocation failed"RST);
+		printf("Error: memory allocation failed\n");
 		exit(EXIT_FAILURE);
 	}
 }
@@ -127,12 +126,12 @@ void	get_map(int fd, t_data *data, char **map_line)
 	i = 0;
 	*map_line = get_next_line(fd);
 	find_map_first_line(fd, map_line);
-	data->map = malloc(sizeof(char *) * (data->lin + 1));
-	//PROTECT MALLOC (SUBSTITUIR MALLOC POR SAFE_MALLOC - ECONOMIA DE LINHAS)
+	safe_malloc((void**)&data->map, \
+							sizeof(char *) * (data->lin + 1));
 	while (*map_line && i < data->lin)
 	{
-		data->map[i] = malloc(sizeof(char) * (data->col + 1));
-		// PROTECT MALLOC (SUBSTITUIR MALLOC POR SAFE_MALLOC - ECONOMIA DE LINHAS)
+		safe_malloc((void**)&data->map[i], \
+									sizeof(char) * (data->col + 1));
 		data->map[i] = ft_strtrim(*map_line, "\n");
 		free(*map_line);
 		*map_line = get_next_line(fd);
@@ -140,6 +139,29 @@ void	get_map(int fd, t_data *data, char **map_line)
 	}
 	data->map[i] = NULL;
 }
+
+void	check_map(t_data *data)
+{
+	int		i;
+	int		j;
+
+	i = 0;
+	while (data->map[i])
+	{
+		j = 0;
+		while (data->map[i][j])
+		{
+			if (!is_valid_char(data->map[i][j]))
+			{
+				printf(BPINK"Error: invalid character in map\n"RST);
+				exit(EXIT_FAILURE);
+			}
+			j++;
+		}
+		i++;
+	}
+}
+
 
 void	process_map(int argc, char **argv, t_data *data)
 {
@@ -163,7 +185,7 @@ void	process_map(int argc, char **argv, t_data *data)
 		printf("%s\n", data->map[i]);
 		i++;
 	}
-	// check_map(data->map, data); //TO BE DONE
+	check_map(data);
 	close(fd);
 	free(map_line);
 }
