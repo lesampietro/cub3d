@@ -2,6 +2,9 @@
 
 # include <sys/time.h>
 
+void	damage_animation(t_game *game);
+// nao funcionando ainda
+
 uint64_t	get_time_in_ms(void)
 {
 	struct timeval	tv;
@@ -10,12 +13,29 @@ uint64_t	get_time_in_ms(void)
 	return (tv.tv_sec * 1000 + tv.tv_usec / 1000);
 }
 
+void	update_enemy_animation(t_element *enemy)
+{
+	uint64_t now;
+
+	if (enemy->shooting)
+	{
+		now = get_time_in_ms();
+		if (now - enemy->last_shot_time >= 500)
+		{
+			enemy->current_texture = enemy->idle_texture;
+			enemy->shooting = false;
+		}
+	}
+}
+
 void	enemy_shoot_at_player(t_game *game, t_element *enemy)
 {
 	if (enemy->visible)
 	{
 		enemy->current_texture = enemy->shooting_texture;
 		game->player_health -= 5;
+		enemy->shooting = true;
+		damage_animation(game);
 	}
 }
 
@@ -51,10 +71,38 @@ void	enemy_shots(t_game *game)
 	{
 		if (game->element[i].alive && game->element[i].type == ENEMY)
 		{
-			if (!game->element[i].visible)
-				game->element[i].current_texture = game->element[i].idle_texture;
+			update_enemy_animation(&game->element[i]);
 			update_enemy_shooting(game, &game->element[i]);
 		}
 		i++;
 	}
+}
+
+
+void	damage_animation(t_game *game)
+{
+	const int thickness = 10;
+	const uint32_t color = 0x88FF0000; // vermelho com transparência suave (88 = ~50%)
+
+	int x, y;
+
+	// Topo
+	for (y = 0; y < thickness; y++)
+		for (x = 0; x < WINDOW_WIDTH; x++)
+			mlx_put_pixel(game->mlx_image, x, y, color);
+
+	// Base
+	for (y = WINDOW_HEIGHT - thickness; y < WINDOW_HEIGHT; y++)
+		for (x = 0; x < WINDOW_WIDTH; x++)
+			mlx_put_pixel(game->mlx_image, x, y, color);
+
+	// Esquerda
+	for (y = thickness; y < WINDOW_HEIGHT - thickness; y++)
+		for (x = 0; x < thickness; x++)
+			mlx_put_pixel(game->mlx_image, x, y, color);
+
+	// Direita
+	for (y = thickness; y < WINDOW_HEIGHT - thickness; y++)
+		for (x = WINDOW_WIDTH - thickness; x < WINDOW_WIDTH; x++)
+			mlx_put_pixel(game->mlx_image, x, y, color);
 }

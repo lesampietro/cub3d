@@ -131,6 +131,8 @@ void	process_element(t_data *data, int x, int y, char c)
 	e->dist_rank = 0;
 	e->distance = 0;
 	e->id = game->element_count;
+	e->got_hit = false;
+	e->shooting = false;
 	
 	if (c == 'X')
 	{
@@ -152,8 +154,8 @@ void	process_element(t_data *data, int x, int y, char c)
 	{
 		e->type = HEALTH;
 		e->health = 25;
-		e->idle_texture_path = "./assets/items/health.png";
-		e->shooting_texture_path = "./assets/items/health.png";
+		e->idle_texture_path = "./assets/items/health-s.png";
+		e->shooting_texture_path = "./assets/items/health-s.png";
 		e->texture_path = NULL;
 	}
 	game->element_count++;
@@ -161,7 +163,6 @@ void	process_element(t_data *data, int x, int y, char c)
 
 
 void	process_info(char *map_line, t_data *data, int map_index)
-
 {
 	int		x;
 	char	c;

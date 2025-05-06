@@ -37,8 +37,10 @@ static bool	is_within_beam(float tr_x, float tr_y)
 	return (true);
 }
 
-static bool	is_not_blocked_by_wall(t_game *g, float tr_y)
+static bool	is_not_blocked_by_wall(t_game *g, float tr_y, int i)
 {
+	if (g->element[i].type != ENEMY)
+		return (true);
 	if (tr_y - 0.5f < g->raycasting->z_buffer[WINDOW_WIDTH / 2])
 		return (true);
 	return (false);
@@ -63,7 +65,7 @@ bool	check_target(t_game *g, int i, int *hit_index, float *min_dist)
 		return (false);
 	if (!is_within_beam(tr_x, tr_y))
 		return (false);
-	if (!is_not_blocked_by_wall(g, tr_y))
+	if (!is_not_blocked_by_wall(g, tr_y, i))
 		return (false);
 	update_hit_if_closer(hit_index, min_dist, tr_y, i);
 	return (true);

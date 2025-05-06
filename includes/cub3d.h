@@ -66,6 +66,8 @@ typedef struct s_element
 	int				id;
 	bool			alive;
 	bool			visible;
+	bool			shooting;
+	bool			got_hit;
 	uint64_t		last_shot_time;
 	uint64_t		first_visible_time;
 }	t_element;

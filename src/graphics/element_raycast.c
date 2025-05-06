@@ -21,7 +21,8 @@ static void	draw_sprite_stripe(t_game *game, t_sprite_draw *draw_ctx)
 		uint32_t color = get_texture_pixel(draw_ctx->element->current_texture, draw_ctx->tex_x, tex_y);
 		if ((color & 0x00FFFFFF) != 0)
 		{
-			game->raycasting->z_buffer[draw_ctx->stripe] = draw_ctx->raycast->transform_y;
+			if (draw_ctx->element->type == ENEMY)
+				game->raycasting->z_buffer[draw_ctx->stripe] = draw_ctx->raycast->transform_y;
 			mlx_put_pixel(game->mlx_image, draw_ctx->stripe, y, color);
 		}
 		y++;
@@ -38,6 +39,7 @@ static void	render_sprite_stripes(t_game *game, t_element *e,
 
 	tex_width = e->current_texture->width;
 	stripe = d->draw_start_x;
+	e->visible = false;
 	while (stripe < d->draw_end_x)
 	{
 		tex_x = (int)(256 * (stripe + (d->width / 2) - d->screen_x)
@@ -49,8 +51,6 @@ static void	render_sprite_stripes(t_game *game, t_element *e,
 			draw_ctx = (t_sprite_draw){e, d, tex_x, stripe};
 			draw_sprite_stripe(game, &draw_ctx);
 		}
-		else
-			e->visible = false;
 		stripe++;
 	}
 }
