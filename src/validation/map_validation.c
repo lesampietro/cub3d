@@ -142,7 +142,7 @@ void	process_element(t_data *data, int x, int y, char c)
 		e->type = ENEMY;
 		e->health = 100;
 		e->idle_texture_path = "./assets/enemies/wizard idle.png";
-		e->shooting_texture_path = "./assets/enemies/wizard attack2.png";
+		e->shooting_texture_path = "./assets/enemies/wizard attack3.png";
 		e->hit_texture_path = "./assets/enemies/wizard_strucky.png";
 		e->texture_path = NULL;
 		// e->got_hit = false;

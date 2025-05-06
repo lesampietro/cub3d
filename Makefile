@@ -33,6 +33,7 @@ FILES	= main.c \
 			action/enemy_shots.c \
 			action/life_check.c \
 			action/objective.c \
+			action/damage_animation.c \
 			init/image.c \
 			validation/map_parsing.c \
 			validation/map_validation.c \

@@ -260,5 +260,6 @@ bool		is_close(t_game *game, int i);
 //SHOOTING
 bool		check_target(t_game *g, int i, int *hit_index, float *min_dist);
 void		enemy_shots(t_game *game);
+void		enemy_texture_reset(t_game *game);
 
 #endif
