@@ -86,7 +86,8 @@ void	check_map_metadata(int fd, t_data *data, char **map_line)
 		while (ft_isspace(**map_line))
 			(*map_line)++;
 		read_textures_n_colours(&count, *map_line, data);
-		if (count == 6 && (data->direction[NORTH] && data->direction[SOUTH] && data->direction[WEST] && data->direction[EAST] \
+		if (count == 6 && (data->direction[NORTH] && data->direction[SOUTH] \
+			&& data->direction[WEST] && data->direction[EAST] \
 			&& data->c && data->f ))
 				break ;
 		*map_line = get_next_line(fd);

@@ -90,7 +90,7 @@ void	count_map_size(int fd, t_data *data, char **map_line)
 	max_col = 0;
 	*map_line = get_next_line(fd);
 	find_map_first_line(fd, map_line);
-	while (*map_line && **map_line != '\0' && **map_line != '\n')
+	while (*map_line && **map_line != '\0')
 	{
 		i = 0;
 		while (is_valid_char((*map_line)[i]) || ft_isspace((*map_line)[i]))
@@ -149,8 +149,14 @@ void	check_map_info(char **map)
 	while (map[i])
 	{
 		j = 0;
+		if (map[i][0] == '\0')
+		{
+			printf(BPINK"Error: empty line in map\n"RST);
+			exit(EXIT_FAILURE);
+		}
 		while (map[i][j])
 		{
+			// printf("map line: %s\n", map[i]);
 			if (!is_valid_char(map[i][j]))
 			{
 				printf(BPINK"Error: invalid character in map\n"RST);
@@ -220,14 +226,14 @@ void	process_map(int argc, char **argv, t_data *data)
 	count_map_size(fd, data, &map_line);
 	fd = safe_open(argv[1]);
 	get_map(fd, data, &map_line);
-	// PRINT DEBUG
-	int i = 0;
-	printf("Map size: %d x %d\n", data->lin, data->col);
-	while (data->map[i])
-	{
-		printf("%s\n", data->map[i]);
-		i++;
-	}
+	// // PRINT DEBUG
+	// int i = 0;
+	// printf("Map size: %d x %d\n", data->lin, data->col);
+	// while (data->map[i])
+	// {
+	// 	printf("%s\n", data->map[i]);
+	// 	i++;
+	// }
 	validate_map(data);
 	close(fd);
 	free(map_line);
