@@ -115,9 +115,9 @@ void	process_element(t_data *data, int x, int y, char c)
 	t_game		*game = data->game;
 	t_element	*e;
 
-	if (game->element_count >= 20)
+	if (game->element_count >= 34)
 	{
-		printf(BPINK"Error: too many elements in the map. Max = 20\n"RST);
+		printf(BPINK"Error: too many elements in the map. Max = 35\n"RST);
 		exit(EXIT_FAILURE);
 	}
 
@@ -133,6 +133,9 @@ void	process_element(t_data *data, int x, int y, char c)
 	e->id = game->element_count;
 	e->got_hit = false;
 	e->shooting = false;
+	e->shooting_texture_path = NULL;
+	e->hit_texture_path = NULL;
+	e->texture_path = NULL;
 	
 	if (c == 'X')
 	{
@@ -140,22 +143,23 @@ void	process_element(t_data *data, int x, int y, char c)
 		e->health = 100;
 		e->idle_texture_path = "./assets/enemies/wizard idle.png";
 		e->shooting_texture_path = "./assets/enemies/wizard attack2.png";
+		e->hit_texture_path = "./assets/enemies/wizard_strucky.png";
 		e->texture_path = NULL;
+		// e->got_hit = false;
+		// e->shooting = false;
 	}
 	else if (c == 'I')
 	{
 		e->type = ITEM;
 		e->health = 100;
-		e->idle_texture_path = "./assets/items/star.png";
-		e->shooting_texture_path = "./assets/items/star.png";
+		e->idle_texture_path = "./assets/items/resource.png";
 		e->texture_path = NULL;
 	}
 	else if (c == 'H')
 	{
 		e->type = HEALTH;
-		e->health = 25;
+		e->health = POTION_HEALTH;
 		e->idle_texture_path = "./assets/items/red_potion.png";
-		e->shooting_texture_path = "./assets/items/red_potion.png";
 		e->texture_path = NULL;
 	}
 	game->element_count++;
@@ -176,6 +180,7 @@ void	process_info(char *map_line, t_data *data, int map_index)
 			data->pov = c;
 			data->game->player_pos.x = x + 0.5f; // centraliza na célula
 			data->game->player_pos.y = map_index + 0.5f;
+			map_line[x] = '0';
 		}
 		if (c == 'X' || c == 'I' || c == 'H')
 			process_element(data, x, map_index, c);
@@ -183,7 +188,6 @@ void	process_info(char *map_line, t_data *data, int map_index)
 	}
 
 }
-
 
 void	get_map(int fd, t_data *data, char **map_line)
 {
@@ -207,6 +211,28 @@ void	get_map(int fd, t_data *data, char **map_line)
 	data->map[i] = NULL;
 }
 
+int count_items(t_data *data)
+{
+	int i;
+	int j;
+	int count;
+
+	count = 0;
+	i = 0;
+	while (data->map[i])
+	{
+		j = 0;
+		while (data->map[i][j])
+		{
+			if (data->map[i][j] == 'I')
+				count++;
+			j++;
+		}
+		i++;
+	}
+	return (count);
+}
+
 void	process_map(int argc, char **argv, t_data *data)
 {
 	int		fd;
@@ -220,6 +246,8 @@ void	process_map(int argc, char **argv, t_data *data)
 	count_map_size(fd, data, &map_line);
 	fd = safe_open(argv[1]);
 	get_map(fd, data, &map_line);
+	data->game->total_items = count_items(data);
+	
 	// PRINT DEBUG
 	// int i = 0;
 	// printf("Map size: %d x %d\n", data->lin, data->col);

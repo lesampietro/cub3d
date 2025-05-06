@@ -1,10 +1,5 @@
 #include "../../includes/cub3d.h"
 
-# include <sys/time.h>
-
-// void	damage_animation(t_game *game);
-// nao funcionando ainda
-
 uint64_t	get_time_in_ms(void)
 {
 	struct timeval	tv;
@@ -33,7 +28,7 @@ void	enemy_shoot_at_player(t_game *game, t_element *enemy)
 	if (enemy->visible)
 	{
 		enemy->current_texture = enemy->shooting_texture;
-		game->player_health -= 5;
+		game->player_health -= ENEMY_DAMAGE;
 		enemy->shooting = true;
 		// damage_animation(game);
 	}

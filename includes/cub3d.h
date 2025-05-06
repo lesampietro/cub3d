@@ -9,6 +9,7 @@
 # include <math.h>
 # include <stdint.h>
 # include <stdbool.h>
+# include <sys/time.h>
 # include "../.lib/MLX42/include/MLX42/MLX42.h"
 # include "../libft/libft.h"
 
@@ -23,6 +24,10 @@
 # define MAP_SIZE 8
 # define MAP_IND 10
 
+# define ENEMY_DAMAGE 11
+# define PLAYER_DAMAGE 14
+# define POTION_HEALTH 25
+
 # define ENEMY_SHOOT_INTERVAL 1000
 # define MOVE_SPEED 0.04
 # define ROTATE_SPEED 2.8
@@ -36,6 +41,8 @@
 
 # define BPINK "\033[1;35m"
 # define BCYAN "\033[1;36m"
+# define BRED "\033[1;31m"
+# define BGRN "\033[1;32m"
 # define RST "\033[0m"
 
 typedef struct s_game t_game;
@@ -54,7 +61,9 @@ typedef struct s_element
 	mlx_texture_t	*current_texture;
 	mlx_texture_t	*shooting_texture;
 	mlx_texture_t	*idle_texture;
+	mlx_texture_t	*hit_texture;
 	char			*texture_path;
+	char			*hit_texture_path;
 	char			*shooting_texture_path;
 	char			*idle_texture_path;
 	float			x;
@@ -68,6 +77,7 @@ typedef struct s_element
 	bool			visible;
 	bool			shooting;
 	bool			got_hit;
+	uint64_t		last_hit_time;
 	uint64_t		last_shot_time;
 	uint64_t		first_visible_time;
 }	t_element;
@@ -166,7 +176,9 @@ typedef struct s_game
 	int				hit_side;
 	int				mouse_prev_x;
 	int				element_count;
-	t_element		element[20];
+	t_element		element[35];
+	int				total_items;
+	int				item_count;
 }	t_game;
 
 typedef struct s_weapon_render
@@ -238,11 +250,13 @@ void		mouse_hook(mouse_key_t button, action_t action,
 				modifier_key_t mods, void *param);
 
 //ACTION
+uint64_t	get_time_in_ms(void);
 void		shoot_hit(t_game *game);
 void		check_player_life(void *param);
+void		objective_check(void *param);
 // void		check_element_life(t_game *game);
 void		detect_potion(t_game *game);
-
+bool		is_close(t_game *game, int i);
 //SHOOTING
 bool		check_target(t_game *g, int i, int *hit_index, float *min_dist);
 void		enemy_shots(t_game *game);

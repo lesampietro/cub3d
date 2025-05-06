@@ -27,9 +27,9 @@ void load_texture(t_game *game)
 	while (i < game->element_count)
 	{
 		if (!game->element[i].idle_texture_path)
-    		printf("idle_texture_path is NULL for element %d\n", i);
-		if (!game->element[i].shooting_texture_path)
-    		printf("shooting_texture_path is NULL for element %d\n", i);
+    		printf("idle_texture_path is NULL for element %i\n", i);
+		// if (!game->element[i].shooting_texture_path)
+    	// 	printf("shooting_texture_path is NULL for element %i\n", i);
 			// TEST
 
 
@@ -37,61 +37,43 @@ void load_texture(t_game *game)
 		{
 			game->element[i].idle_texture = mlx_load_png(game->element[i].idle_texture_path);
 			game->element[i].shooting_texture = mlx_load_png(game->element[i].shooting_texture_path);
+			game->element[i].hit_texture = mlx_load_png(game->element[i].hit_texture_path);
 			game->element[i].current_texture = game->element[i].idle_texture;
-			if (!game->element[i].idle_texture || !game->element[i].shooting_texture)
+			if (!game->element[i].idle_texture || !game->element[i].shooting_texture || !game->element[i].hit_texture)
 			{
-				printf("Error loading element texture: %s\n", game->element[i].texture_path);
+				printf("Error loading texture for ENEMY element: %i\n", i);
 				exit(EXIT_FAILURE);
 			}
 		}
 		else if (game->element[i].type == ITEM)
 		{
 			game->element[i].idle_texture = mlx_load_png(game->element[i].idle_texture_path);
-			game->element[i].shooting_texture = mlx_load_png(game->element[i].shooting_texture_path);
 			game->element[i].current_texture = game->element[i].idle_texture;
-			if (!game->element[i].idle_texture || !game->element[i].shooting_texture)
+			if (!game->element[i].idle_texture)
 			{
-				printf("Error loading element texture: %s\n", game->element[i].texture_path);
+				printf("Error loading texture for ITEM element: %i\n", i);
 				exit(EXIT_FAILURE);
 			}
 		}
 		else if (game->element[i].type == HEALTH)
 		{
 			game->element[i].idle_texture = mlx_load_png(game->element[i].idle_texture_path);
-			game->element[i].shooting_texture = mlx_load_png(game->element[i].shooting_texture_path);
 			game->element[i].current_texture = game->element[i].idle_texture;
-			if (!game->element[i].idle_texture || !game->element[i].shooting_texture)
+			if (!game->element[i].idle_texture)
 			{
-				printf("Error loading element texture: %s\n", game->element[i].texture_path);
+				printf("Error loading texture for HEALTH element: %i\n", i);
 				exit(EXIT_FAILURE);
 			}
 		}
 
 		i++;
 	}
-
-	// game->element[0].texture = mlx_load_png(game->element[0].texture_path);
-	// if (!game->element[0].texture)
-	// {
-	// 	printf("Error loading element texture: %s\n", game->element[0].texture_path);
-	// 	exit(EXIT_FAILURE);
-	// }
 }
 
 void init_textures(t_game *game)
 {
-	// game->data->direction[NORTH] = "./assets/textures/50 Free Stylized Wall Textures/1-16/Asset-3.png";
-	// game->data->direction[EAST] = "./assets/textures/50 Free Stylized Wall Textures/17-32/Asset-2.png";
-	// game->data->direction[SOUTH] = "./assets/textures/50 Free Stylized Wall Textures/1-16/Asset-6.png";
-	// game->data->direction[WEST] = "./assets/textures/50 Free Stylized Wall Textures/17-32/Asset-2.png";
-
-
 	game->weapon_shooting_text_path = "./assets/wand_shooting.png";
 	game->weapon_text_path = "./assets/wand.png";
-	// game->data->direction[NORTH] = "./assets/textures/Torment Textures/True Colour/str_metalpan8.png";
-	// game->data->direction[EAST] = "./assets/textures/Torment Textures/True Colour/str_metalgen4.png";
-	// game->data->direction[SOUTH] = "./assets/textures/Torment Textures/True Colour/str_metalgrbl4.png";
-	// game->data->direction[WEST] = "./assets/textures/Torment Textures/True Colour/str_metalgen6.png";
 	load_texture(game);
 }
 
