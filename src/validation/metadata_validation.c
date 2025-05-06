@@ -94,4 +94,5 @@ void	check_map_metadata(int fd, t_data *data, char **map_line)
 	data->ceiling = convert_rgb(data->c[0], data->c[1], data->c[2]);
 	data->floor = convert_rgb(data->f[0], data->f[1], data->f[2]);
 	check_invalid_count(count);
+	close(fd);
 }

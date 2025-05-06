@@ -219,10 +219,10 @@ int			safe_open(char *filename);
 void		check_invalid_count(int count);
 void		check_color(char *line);
 char		*check_line_info(char *line);
+void		find_map_first_line(int fd, char **map_line);
 
-//GRAPHICS
-void		ui_init(t_game *game);
-void		frame_loop(void *param);
+	// GRAPHICS
+	void frame_loop(void *param);
 void		draw_background(t_game *game, t_data *data);
 void		draw_raycasting(t_game *game);
 uint32_t	convert_rgb(int r, int g, int b);
