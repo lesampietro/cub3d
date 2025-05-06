@@ -30,6 +30,7 @@ void load_texture(t_game *game)
     		printf("idle_texture_path is NULL for element %d\n", i);
 		if (!game->element[i].shooting_texture_path)
     		printf("shooting_texture_path is NULL for element %d\n", i);
+			// TEST
 
 
 		if (game->element[i].type == ENEMY)

@@ -2,7 +2,7 @@
 
 # include <sys/time.h>
 
-void	damage_animation(t_game *game);
+// void	damage_animation(t_game *game);
 // nao funcionando ainda
 
 uint64_t	get_time_in_ms(void)
@@ -35,7 +35,7 @@ void	enemy_shoot_at_player(t_game *game, t_element *enemy)
 		enemy->current_texture = enemy->shooting_texture;
 		game->player_health -= 5;
 		enemy->shooting = true;
-		damage_animation(game);
+		// damage_animation(game);
 	}
 }
 
@@ -79,30 +79,30 @@ void	enemy_shots(t_game *game)
 }
 
 
-void	damage_animation(t_game *game)
-{
-	const int thickness = 10;
-	const uint32_t color = 0x88FF0000; // vermelho com transparência suave (88 = ~50%)
+// void	damage_animation(t_game *game)
+// {
+// 	const int thickness = 10;
+// 	const uint32_t color = 0x88FF0000; // vermelho com transparência suave (88 = ~50%)
 
-	int x, y;
+// 	int x, y;
 
-	// Topo
-	for (y = 0; y < thickness; y++)
-		for (x = 0; x < WINDOW_WIDTH; x++)
-			mlx_put_pixel(game->mlx_image, x, y, color);
+// 	// Topo
+// 	for (y = 0; y < thickness; y++)
+// 		for (x = 0; x < WINDOW_WIDTH; x++)
+// 			mlx_put_pixel(game->mlx_image, x, y, color);
 
-	// Base
-	for (y = WINDOW_HEIGHT - thickness; y < WINDOW_HEIGHT; y++)
-		for (x = 0; x < WINDOW_WIDTH; x++)
-			mlx_put_pixel(game->mlx_image, x, y, color);
+// 	// Base
+// 	for (y = WINDOW_HEIGHT - thickness; y < WINDOW_HEIGHT; y++)
+// 		for (x = 0; x < WINDOW_WIDTH; x++)
+// 			mlx_put_pixel(game->mlx_image, x, y, color);
 
-	// Esquerda
-	for (y = thickness; y < WINDOW_HEIGHT - thickness; y++)
-		for (x = 0; x < thickness; x++)
-			mlx_put_pixel(game->mlx_image, x, y, color);
+// 	// Esquerda
+// 	for (y = thickness; y < WINDOW_HEIGHT - thickness; y++)
+// 		for (x = 0; x < thickness; x++)
+// 			mlx_put_pixel(game->mlx_image, x, y, color);
 
-	// Direita
-	for (y = thickness; y < WINDOW_HEIGHT - thickness; y++)
-		for (x = WINDOW_WIDTH - thickness; x < WINDOW_WIDTH; x++)
-			mlx_put_pixel(game->mlx_image, x, y, color);
-}
+// 	// Direita
+// 	for (y = thickness; y < WINDOW_HEIGHT - thickness; y++)
+// 		for (x = WINDOW_WIDTH - thickness; x < WINDOW_WIDTH; x++)
+// 			mlx_put_pixel(game->mlx_image, x, y, color);
+// }

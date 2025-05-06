@@ -154,8 +154,8 @@ void	process_element(t_data *data, int x, int y, char c)
 	{
 		e->type = HEALTH;
 		e->health = 25;
-		e->idle_texture_path = "./assets/items/health-s.png";
-		e->shooting_texture_path = "./assets/items/health-s.png";
+		e->idle_texture_path = "./assets/items/red_potion.png";
+		e->shooting_texture_path = "./assets/items/red_potion.png";
 		e->texture_path = NULL;
 	}
 	game->element_count++;
