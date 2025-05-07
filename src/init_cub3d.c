@@ -46,9 +46,9 @@ void init_window(t_game *game)
 
 	mlx_set_setting(MLX_STRETCH_IMAGE, 1);
 	game->mlx = mlx_init(WINDOW_WIDTH, WINDOW_HEIGHT, "Cub3D", true);
+	game->mlx_image = mlx_new_image(game->mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
 	// if (!game->mlx)
 	// 	ft_error(ERROR_MLX_LOAD, NULL);
-	game->mlx_image = mlx_new_image(game->mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
 	// if (!game->mlx_image)
 	// 	ft_error(ERROR_MLX_LOAD, NULL);
 	mlx_image_to_window(game->mlx, game->mlx_image, 0, 0);

@@ -107,6 +107,7 @@ void	count_map_size(int fd, t_data *data, char **map_line)
 		*map_line = get_next_line(fd);
 		data->lin++;
 	}
+	free(*map_line);
 	data->col = max_col;
 	close(fd);
 }
@@ -246,6 +247,8 @@ void	get_map(int fd, t_data *data, char **map_line)
 		*map_line = get_next_line(fd);
 		i++;
 	}
+	free(*map_line);
+	*map_line = NULL;
 	trim_empty_lines_at_end(data, i);
 	data->map[i] = NULL;
 }
@@ -288,7 +291,7 @@ void	check_map_info(t_data *data)
 			if (!is_valid_char(data->map[i][j]))
 			{
 				printf(BPINK"Error: invalid character in map\n"RST);
-				exit(EXIT_FAILURE);
+				free_and_exit(data->game);
 			}
 			j++;
 		}
@@ -374,6 +377,7 @@ void	process_map(int argc, char **argv, t_data *data)
 	map_line = NULL;
 	check_args(argc);
 	is_valid_ext(argv[1]);
+	// NÃO TEM QUE DAR CLOSE QUANDO ATRBUI DE NOVO?
 	fd = safe_open(argv[1]);
 	check_map_metadata(fd, data, &map_line);
 	fd = safe_open(argv[1]);
