@@ -154,6 +154,6 @@ int32_t main(int argc, char **argv)
 	// // data.ceiling = convert_rgb(218, 218, 218);
 
 
-	init_game(argv[1], &game);
+	// init_game(argv[1], &game);
 	return (EXIT_SUCCESS);
 }
