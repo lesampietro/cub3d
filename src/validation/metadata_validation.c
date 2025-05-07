@@ -54,6 +54,7 @@ void	save_colour_path(char *line, int **color_ptr, int *count)
 	(*color_ptr)[0] = ft_atoi(split[0]);
 	(*color_ptr)[1] = ft_atoi(split[1]);
 	(*color_ptr)[2] = ft_atoi(split[2]);
+	ft_free_split(split);
 	free(line);
 	(*count)++;
 }

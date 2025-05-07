@@ -4,10 +4,12 @@ char	*check_line_info(char *line)
 {
 	char	**split;
 	char	*path;
+	char	*tmp;
 
 	split = NULL;
-	line = ft_strtrim(line, " \n");
-	split = ft_split(line, ' ');
+	tmp = ft_strtrim(line, " \n");
+	split = ft_split(tmp, ' ');
+	free(tmp);
 	path = NULL;
 	if (split[2])
 	{
