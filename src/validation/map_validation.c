@@ -65,22 +65,23 @@ void	find_map_first_line(int fd, char **map_line)
 	while (*map_line)
 	{
 		i = 0;
-		if (ft_strchr(*map_line, '1'))
+		if (ft_strchr(*map_line, '1') || ft_strchr(*map_line, '0'))
 		{
 			while ((*map_line)[i])
 			{
-				if ((*map_line)[i] != '1' && !ft_isspace((*map_line)[i]) && (*map_line)[i] != '\n')
-				break;
+				if ((*map_line)[i] != '1' && !ft_isspace((*map_line)[i]) \
+				&& (*map_line)[i] != '\n' && (*map_line)[i] != '0')
+					break;
 				i++;
 			}
 			if ((*map_line)[i] == '\0' || (*map_line)[i] == '\n')
-			return;
+				return;
 		}
 		free(*map_line);
 		*map_line = get_next_line(fd);
 	}
-	printf(BPINK "Error: map not found\n" RST);
-	exit(EXIT_FAILURE);
+	// printf(BPINK "Error: map not found\n" RST);
+	// exit(EXIT_FAILURE);
 }
 
 void	count_map_size(int fd, t_data *data, char **map_line)
@@ -118,6 +119,33 @@ void	safe_malloc(void **data, int size)
 		printf("Error: memory allocation failed\n");
 		exit(EXIT_FAILURE);
 	}
+}
+
+int	is_line_empty_or_spaces(char *line)
+{
+	while (*line)
+	{
+		if (!ft_isspace((unsigned char)*line))
+			return (0); // encontrou algo que não é espaço
+		line++;
+	}
+	return (1); // só tinha espaços
+}
+
+void	trim_empty_lines_at_end(t_data *data, int i)
+{
+	while (i > 0)
+	{
+		if (!data->map[i - 1] || is_line_empty_or_spaces(data->map[i - 1]))
+		{
+			free(data->map[i - 1]);
+			data->map[i - 1] = NULL;
+			i--;
+		}
+		else
+			break;
+	}
+	data->lin = i;
 }
 
 void	process_element(t_data *data, int x, int y, char c)
@@ -218,6 +246,7 @@ void	get_map(int fd, t_data *data, char **map_line)
 		*map_line = get_next_line(fd);
 		i++;
 	}
+	trim_empty_lines_at_end(data, i);
 	data->map[i] = NULL;
 }
 
@@ -291,10 +320,15 @@ int count_items(t_data *data)
 }
 void	is_map_border(char **map, int lin, int i, int j)
 {
-	if (i == 0 || i == lin - 1 || j == 0 || j == (int)ft_strlen(map[i]))
+	if (i == 0 || i == lin - 1 || j == 0 || j == (int)ft_strlen(map[i]) - 1)
 	{
 		printf(BPINK "Error: map is not surrounded by walls\n" RST);
 		exit(EXIT_FAILURE);
+	}
+	if (!map[i - 1][j] || !map[i + 1][j])
+	{
+			printf(BPINK "Error: map is not surrounded by walls\n" RST);
+			exit(EXIT_FAILURE);
 	}
 }
 
