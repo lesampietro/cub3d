@@ -46,5 +46,6 @@ void	check_player_life(void *param)
 	printf(BRED"---------------------------\n"RST);
 	printf(BRED"| GAME OVER! You are dead |\n"RST);
 	printf(BRED"---------------------------\n"RST);
-	free_and_exit(game);
+	// free_and_exit(&game, 0);
+	return ;
 }

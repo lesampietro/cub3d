@@ -19,7 +19,7 @@ int32_t main(int argc, char **argv)
 	game.raycasting = &raycasting;
 	process_map(argc, argv, &data);
 	init_textures(&game);
-
 	init_game(argv[1], &game);
+	// free_and_exit(&game, 0);
 	return (EXIT_SUCCESS);
 }

@@ -264,6 +264,6 @@ void		enemy_shots(t_game *game);
 void		enemy_texture_reset(t_game *game);
 
 //FREE
-void		free_and_exit(t_game *game);
+void		free_and_exit(t_game *game, int code);
 
 #endif

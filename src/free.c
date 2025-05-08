@@ -38,27 +38,27 @@ void	free_texture_paths(t_game *game)
 			mlx_delete_texture(game->element[i].shooting_texture);
 		if (game->element[i].hit_texture_path)
 			mlx_delete_texture(game->element[i].hit_texture);
-		if (game->data->direction[0])
-			free(game->data->direction[0]);
-		if (game->data->direction[1])
-			free(game->data->direction[1]);
-		if (game->data->direction[2])
-			free(game->data->direction[2]);
-		if (game->data->direction[3])
-			free(game->data->direction[3]);
 		i++;
 	}
+	if (game->data->direction[0])
+		free(game->data->direction[0]);
+	if (game->data->direction[1])
+		free(game->data->direction[1]);
+	if (game->data->direction[2])
+		free(game->data->direction[2]);
+	if (game->data->direction[3])
+		free(game->data->direction[3]);
 }
 
-void	free_and_exit(t_game *game)
+void	free_and_exit(t_game *game, int code)
 {
-	int	i;
-
-	i = 0;
 	free_map(game->data->map);
 	free_color_array(game->data);
 	free_texture_paths(game);
 	mlx_close_window(game->mlx);
 	mlx_terminate(game->mlx);
-	exit(EXIT_SUCCESS);
+	if (code == 1)
+		exit(EXIT_FAILURE);
+	if (code == 0)
+		exit(EXIT_SUCCESS);
 }

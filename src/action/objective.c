@@ -30,5 +30,6 @@ void	objective_check(void *param)
 	printf(BGRN"-------------------------------------\n"RST);
 	printf(BGRN"| You collected all items! You win! |\n"RST);
 	printf(BGRN"-------------------------------------\n"RST);
-	free_and_exit(game);
+	free_and_exit(game, 0);
+	// return ;
 }

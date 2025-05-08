@@ -238,8 +238,6 @@ void	get_map(int fd, t_data *data, char **map_line)
 							sizeof(char *) * (data->lin + 1));
 	while (*map_line && i < data->lin)
 	{
-		safe_malloc((void**)&data->map[i], \
-									sizeof(char) * (data->col + 1));
 		data->map[i] = ft_strtrim(*map_line, "\n");
 		free(*map_line);
 		process_info(data->map[i], data, i);
@@ -248,6 +246,7 @@ void	get_map(int fd, t_data *data, char **map_line)
 	}
 	trim_empty_lines_at_end(data, i);
 	data->map[i] = NULL;
+	
 }
 
 void	is_empty_line(char **line, int i)
