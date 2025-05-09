@@ -321,12 +321,12 @@ void	is_map_border(char **map, int lin, int i, int j)
 {
 	if (i == 0 || i == lin - 1 || j == 0 || j == (int)ft_strlen(map[i]) - 1)
 	{
-		printf(BPINK "Error: map is not surrounded by walls\n" RST);
+		printf(BPINK "Error: map is not surrounded by walls at x:%i, y:%i\n" RST, i, j);
 		exit(EXIT_FAILURE);
 	}
 	if (!map[i - 1][j] || !map[i + 1][j])
 	{
-			printf(BPINK "Error: map is not surrounded by walls\n" RST);
+			printf(BPINK "Error: map is not surrounded by walls at x:%i, y:%i\n" RST, i, j);
 			exit(EXIT_FAILURE);
 	}
 }
@@ -348,7 +348,7 @@ void	is_surrounded_by_walls(char **map, int lin)
 				if (ft_isspace(map[i - 1][j]) || ft_isspace(map[i + 1][j]) \
 					|| ft_isspace(map[i][j - 1]) || ft_isspace(map[i][j + 1]))
 				{
-					printf(BPINK"Error: map is not surrounded by walls\n"RST);
+					printf(BPINK"Error: map is not surrounded by walls at x:%i, y:%i\n" RST, i, j);
 					exit(EXIT_FAILURE);
 				}
 			}

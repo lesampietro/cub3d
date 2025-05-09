@@ -23,7 +23,7 @@ static void	draw_progress_bar(t_game *game)
 			if (x < inner_start_x || x >= inner_end_x || y < inner_start_y || y >= inner_end_y)
 				mlx_put_pixel(game->mlx_image, x, y, 0xFFFFFFFF); // contorno branco
 			else if (x < inner_start_x + filled_width)
-				mlx_put_pixel(game->mlx_image, x, y, convert_rgb(40,40,250)); // azul (progresso)
+				mlx_put_pixel(game->mlx_image, x, y, convert_rgb(250,206,15)); // azul (progresso)
 			// else
 			// 	mlx_put_pixel(game->mlx_image, x, y, 0x00000000); // transparente ou vazio
 			x++;
