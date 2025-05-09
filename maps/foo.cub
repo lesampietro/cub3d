@@ -1,4 +1,4 @@
-NO ./textures/pattern4.png
+NO ./textures/pattern4.png aaaa
 SO ./textures/pattern3.png
 
 WE ./textures/pattern2.png
@@ -20,7 +20,7 @@ C 225,30,0
 1000000000001
 1000000000001
 1100001000011
-1111111111111w
+1111111111111
 
 
 

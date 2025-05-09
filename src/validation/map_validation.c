@@ -84,14 +84,14 @@ void	find_map_first_line(int fd, char **map_line)
 	// exit(EXIT_FAILURE);
 }
 
-void	count_map_size(int fd, t_data *data, char **map_line)
+void	count_map_size(t_data *data, char **map_line)
 {
 	int			max_col;
 	size_t		i;
 
 	max_col = 0;
-	*map_line = get_next_line(fd);
-	find_map_first_line(fd, map_line);
+	*map_line = get_next_line(data->fd);
+	find_map_first_line(data->fd, map_line);
 	while (*map_line && **map_line != '\0')
 	{
 		i = 0;
@@ -104,11 +104,11 @@ void	count_map_size(int fd, t_data *data, char **map_line)
 				max_col = data->col;
 		}
 		free(*map_line);
-		*map_line = get_next_line(fd);
+		*map_line = get_next_line(data->fd);
 		data->lin++;
 	}
 	data->col = max_col;
-	close(fd);
+	close(data->fd);
 }
 
 void	safe_malloc(void **data, int size)
@@ -227,13 +227,13 @@ void	process_info(char *map_line, t_data *data, int map_index)
 
 }
 
-void	get_map(int fd, t_data *data, char **map_line)
+void	get_map(t_data *data, char **map_line)
 {
 	int		i;
 
 	i = 0;
-	*map_line = get_next_line(fd);
-	find_map_first_line(fd, map_line);
+	*map_line = get_next_line(data->fd);
+	find_map_first_line(data->fd, map_line);
 	safe_malloc((void**)&data->map, \
 							sizeof(char *) * (data->lin + 1));
 	while (*map_line && i < data->lin)
@@ -241,7 +241,7 @@ void	get_map(int fd, t_data *data, char **map_line)
 		data->map[i] = ft_strtrim(*map_line, "\n");
 		free(*map_line);
 		process_info(data->map[i], data, i);
-		*map_line = get_next_line(fd);
+		*map_line = get_next_line(data->fd);
 		i++;
 	}
 	trim_empty_lines_at_end(data, i);
@@ -367,30 +367,19 @@ void	validate_map(t_data *data)
 
 void	process_map(int argc, char **argv, t_data *data)
 {
-	int		fd;
 	char	*map_line;
 	
 	map_line = NULL;
 	check_args(argc);
 	is_valid_ext(argv[1]);
-	fd = safe_open(argv[1]);
-	check_map_metadata(fd, data, &map_line);
-	fd = safe_open(argv[1]);
-	count_map_size(fd, data, &map_line);
-	fd = safe_open(argv[1]);
-	get_map(fd, data, &map_line);
+	data->fd = safe_open(argv[1]);
+	check_map_metadata(data, &map_line);
+	data->fd = safe_open(argv[1]);
+	count_map_size(data, &map_line);
+	data->fd = safe_open(argv[1]);
+	get_map(data, &map_line);
 	data->game->total_items = count_items(data);
-	
-	// PRINT DEBUG
-	// int i = 0;
-	// printf("Map size: %d x %d\n", data->lin, data->col);
-	// while (data->map[i])
-	// {
-	// 	printf("%s\n", data->map[i]);
-	// 	i++;
-	// }
-	// check_map(data->map, data); //TO BE DONE
 	validate_map(data);
-	close(fd);
+	close(data->fd);
 	free(map_line);
 }

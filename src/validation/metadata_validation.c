@@ -77,13 +77,13 @@ void	read_textures_n_colours(int *count, char *line, t_data *data)
 		save_colour_path(line, &data->f, count);
 }
 
-void	check_map_metadata(int fd, t_data *data, char **map_line)
+void	check_map_metadata(t_data *data, char **map_line)
 {
 	int		count;
 	char	*tmp;
 
 	count = 0;
-	*map_line = get_next_line(fd);
+	*map_line = get_next_line(data->fd);
 	is_empty(*map_line);
 	tmp = *map_line;
 	while (tmp && *map_line)
@@ -96,12 +96,12 @@ void	check_map_metadata(int fd, t_data *data, char **map_line)
 			&& data->c && data->f ))
 				break ;
 		free(*map_line);
-		*map_line = get_next_line(fd);
+		*map_line = get_next_line(data->fd);
 		tmp = *map_line;
 	}
 	data->ceiling = convert_rgb(data->c[0], data->c[1], data->c[2]);
 	data->floor = convert_rgb(data->f[0], data->f[1], data->f[2]);
 	check_invalid_count(count);
 	free(tmp);
-	close(fd);
+	close(data->fd);
 }

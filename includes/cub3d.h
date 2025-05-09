@@ -149,6 +149,7 @@ typedef struct s_data
 {
 	t_game		*game;
 	char		**map;
+	int			fd;
 	int			col;
 	int			lin;
 	char		*direction[4];
@@ -218,7 +219,7 @@ void		init_elements(t_game *game);
 
 //MAP VALIDATION
 void		process_map(int argc, char **argv, t_data *data);
-void		check_map_metadata(int fd, t_data *data, char **map_line);
+void		check_map_metadata(t_data *data, char **map_line);
 int			safe_open(char *filename);
 void		check_invalid_count(int count);
 void		check_color(char *line);
