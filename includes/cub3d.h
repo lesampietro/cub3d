@@ -21,6 +21,9 @@
 # define WINDOW_HEIGHT 1200
 # define WEAPON_SCALE 2.5
 
+#define AIM_RADIUS 10
+#define AIM_THICK 2
+
 # define MAP_SIZE 8
 # define MAP_IND 10
 
