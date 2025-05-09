@@ -7,7 +7,8 @@ void	frame_loop(void *param)
 	game = (t_game *)param;
 	check_player_life(game);
 	enemy_texture_reset(game);
-	objective_check(game);
+	if (game->total_items > 0)
+		objective_check(game);
 	move_player(game);
 	enemy_shots(game);
 	draw_background(game, game->data);

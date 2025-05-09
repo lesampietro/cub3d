@@ -57,7 +57,8 @@ static void	draw_health_bar(t_game *game)
 
 void	ui_init(t_game *game)
 {
-	draw_health_bar(game);
-	draw_progress_bar(game);
 	draw_aim_circle(game);
+	draw_health_bar(game);
+	if (game->total_items > 0)
+		draw_progress_bar(game);
 }
