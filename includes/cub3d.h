@@ -21,8 +21,8 @@
 # define WINDOW_HEIGHT 1200
 # define WEAPON_SCALE 2.5
 
-#define AIM_RADIUS 10
-#define AIM_THICK 2
+# define AIM_RADIUS 10
+# define AIM_THICK 2
 
 # define MAP_SIZE 8
 # define MAP_IND 10
@@ -48,8 +48,8 @@
 # define BGRN "\033[1;32m"
 # define RST "\033[0m"
 
-typedef struct s_game t_game;
-typedef struct s_data t_data;
+typedef struct s_game	t_game;
+typedef struct s_data	t_data;
 
 typedef enum e_element_id
 {
@@ -235,10 +235,12 @@ t_vector	multiply_vector(t_vector vector, double factor);
 t_vector	add_vector(t_vector vector1, t_vector vector2);
 t_vector	rotate_vector(t_vector v, float angle);
 t_vector	create_vector(float x, float y);
+uint32_t	get_sprite_color(t_sprite_draw *draw_ctx, int tex_y);
 void		draw_wall(t_game *game, t_raycasting *ray, int pixel);
 void		init_textures(t_game *game);
 uint32_t	get_texture_pixel(mlx_texture_t *texture, int x, int y);
 void		draw_minimap(void *param);
+void		draw_progress_bar(t_game *game);
 
 void		draw_weapon(t_game *game);
 

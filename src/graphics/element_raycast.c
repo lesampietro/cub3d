@@ -18,12 +18,15 @@ static void	draw_sprite_stripe(t_game *game, t_sprite_draw *draw_ctx)
 	{
 		d = y * 256 - WINDOW_HEIGHT * 128 + draw_ctx->raycast->height * 128;
 		tex_y = ((d * tex_height) / draw_ctx->raycast->height) / 256;
-		uint32_t color = get_texture_pixel(draw_ctx->element->current_texture, draw_ctx->tex_x, tex_y);
-		if ((color & 0x00FFFFFF) != 0)
+		if ((get_sprite_color(draw_ctx, tex_y) & 0x00FFFFFF) != 0)
 		{
 			if (draw_ctx->element->type == ENEMY)
-				game->raycasting->z_buffer[draw_ctx->stripe] = draw_ctx->raycast->transform_y;
-			mlx_put_pixel(game->mlx_image, draw_ctx->stripe, y, color);
+			{
+				game->raycasting->z_buffer[draw_ctx->stripe] = \
+					draw_ctx->raycast->transform_y;
+			}
+			mlx_put_pixel(game->mlx_image, draw_ctx->stripe, y, \
+				get_sprite_color(draw_ctx, tex_y));
 		}
 		y++;
 	}

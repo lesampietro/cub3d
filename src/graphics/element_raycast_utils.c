@@ -1,53 +1,12 @@
 #include "../../includes/cub3d.h"
 
-static void	rank_elem_dist(t_game *game, int i)
+uint32_t	get_sprite_color(t_sprite_draw *draw_ctx, int tex_y)
 {
-	t_element	*e;
-	float		dx;
-	float		dy;
+	uint32_t	color;
 
-	e = &game->element[i];
-	dx = e->x - game->player_pos.x;
-	dy = e->y - game->player_pos.y;
-	e->distance = dx * dx + dy * dy;
-}
-
-void	sort_elements(t_game *game)
-{
-	int	i;
-	int	j;
-	int	indices[20];
-	int	tmp;
-
-	i = 0;
-	while (i < game->element_count)
-	{
-		rank_elem_dist(game, i);
-		indices[i] = i;
-		i++;
-	}
-	i = 0;
-	while (i < game->element_count - 1)
-	{
-		j = i + 1;
-		while (j < game->element_count)
-		{
-			if (game->element[indices[i]].distance < game->element[indices[j]].distance)
-			{
-				tmp = indices[i];
-				indices[i] = indices[j];
-				indices[j] = tmp;
-			}
-			j++;
-		}
-		i++;
-	}
-	i = 0;
-	while (i < game->element_count)
-	{
-		game->element[indices[i]].dist_rank = i;
-		i++;
-	}
+	color = get_texture_pixel(draw_ctx->element->current_texture,
+			draw_ctx->tex_x, tex_y);
+	return (color);
 }
 
 static void	get_sprite_transform(t_game *game, t_element *e,

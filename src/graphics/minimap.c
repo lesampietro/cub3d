@@ -38,8 +38,6 @@ void	found_element(t_game *game, t_coord coord, int pixel)
 {
 	if (game->data->map[coord.y][coord.x] == '1')
 		print_tile(game, coord, pixel, convert_rgb(255, 255, 255));
-	// else if (game->data->map[coord.y][coord.x] == 'X')
-	// 	print_tile(game, coord, pixel, convert_rgb(255, 0, 0));
 	else if (game->data->map[coord.y][coord.x] == 'I')
 		print_tile(game, coord, pixel, convert_rgb(0, 0, 255));
 	else if (game->data->map[coord.y][coord.x] == 'H')
@@ -47,12 +45,13 @@ void	found_element(t_game *game, t_coord coord, int pixel)
 	else
 		print_tile(game, coord, pixel, convert_rgb(0, 0, 0));
 }
+
 void	draw_minimap(void *param)
 {
 	t_game	*game;
 	t_coord	coord;
 	int		pixel;
-	
+
 	coord = (t_coord){0, 0};
 	game = (t_game *)param;
 	while (game->data->map[coord.y])
@@ -61,8 +60,10 @@ void	draw_minimap(void *param)
 		while (game->data->map[coord.y][coord.x])
 		{
 			pixel = 0;
-			if (game->data->map[coord.y][coord.x] == '1' || game->data->map[coord.y][coord.x] == 'X'
-				|| game->data->map[coord.y][coord.x] == 'I' || game->data->map[coord.y][coord.x] == 'H')
+			if (game->data->map[coord.y][coord.x] == '1' || \
+				game->data->map[coord.y][coord.x] == 'X' || \
+				game->data->map[coord.y][coord.x] == 'I' || \
+				game->data->map[coord.y][coord.x] == 'H')
 				found_element(game, coord, pixel);
 			else if (game->data->map[coord.y][coord.x] == '0')
 				print_tile(game, coord, pixel, convert_rgb(0, 0, 0));

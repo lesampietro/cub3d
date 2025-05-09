@@ -24,8 +24,10 @@ FILES	= main.c \
 			graphics/minimap.c \
 			graphics/element_raycast.c \
 			graphics/element_raycast_utils.c \
+			graphics/elements_sorting.c \
 			graphics/first_person.c \
 			graphics/ui.c \
+			graphics/progress_bar.c \
 			action/action_key_hook.c \
 			action/move_logic.c \
 			action/mouse_hook.c \
