@@ -10,7 +10,7 @@ uint64_t	get_time_in_ms(void)
 
 void	update_enemy_animation(t_element *enemy)
 {
-	uint64_t now;
+	uint64_t	now;
 
 	if (enemy->shooting)
 	{
@@ -30,13 +30,12 @@ void	enemy_shoot_at_player(t_game *game, t_element *enemy)
 		enemy->current_texture = enemy->shooting_texture;
 		game->player_health -= ENEMY_DAMAGE;
 		enemy->shooting = true;
-		// damage_animation(game);
 	}
 }
 
 void	update_enemy_shooting(t_game *game, t_element *enemy)
 {
-	uint64_t now;
+	uint64_t	now;
 
 	now = get_time_in_ms();
 	if (!enemy->alive)
@@ -72,32 +71,3 @@ void	enemy_shots(t_game *game)
 		i++;
 	}
 }
-
-
-// void	damage_animation(t_game *game)
-// {
-// 	const int thickness = 10;
-// 	const uint32_t color = 0x88FF0000; // vermelho com transparência suave (88 = ~50%)
-
-// 	int x, y;
-
-// 	// Topo
-// 	for (y = 0; y < thickness; y++)
-// 		for (x = 0; x < WINDOW_WIDTH; x++)
-// 			mlx_put_pixel(game->mlx_image, x, y, color);
-
-// 	// Base
-// 	for (y = WINDOW_HEIGHT - thickness; y < WINDOW_HEIGHT; y++)
-// 		for (x = 0; x < WINDOW_WIDTH; x++)
-// 			mlx_put_pixel(game->mlx_image, x, y, color);
-
-// 	// Esquerda
-// 	for (y = thickness; y < WINDOW_HEIGHT - thickness; y++)
-// 		for (x = 0; x < thickness; x++)
-// 			mlx_put_pixel(game->mlx_image, x, y, color);
-
-// 	// Direita
-// 	for (y = thickness; y < WINDOW_HEIGHT - thickness; y++)
-// 		for (x = WINDOW_WIDTH - thickness; x < WINDOW_WIDTH; x++)
-// 			mlx_put_pixel(game->mlx_image, x, y, color);
-// }

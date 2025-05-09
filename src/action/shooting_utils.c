@@ -70,4 +70,3 @@ bool	check_target(t_game *g, int i, int *hit_index, float *min_dist)
 	update_hit_if_closer(hit_index, min_dist, tr_y, i);
 	return (true);
 }
-
