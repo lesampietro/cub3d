@@ -1,0 +1,18 @@
+NO ./assets/textures/TormentTextures/TrueColour/str_metalgen4.png
+
+SO ./assets/textures/walls/17-32/Asset6.png
+
+WE ./assets/textures/walls/1-16/Asset6.png
+
+EA ./assets/textures/walls/17-32/Asset2.png
+
+
+C 35,10,80
+
+F 20,20,20
+
+111111111
+1000I0001
+100000001
+1000N0001
+111111111
