@@ -272,7 +272,7 @@ void	is_empty_line(char **line, int i)
 
 }
 
-void	check_map_info(t_data *data)
+void	check_map_info(t_data *data, int fd)
 {
 	int		i;
 	int		j;
@@ -287,7 +287,10 @@ void	check_map_info(t_data *data)
 			if (!is_valid_char(data->map[i][j]))
 			{
 				printf(BPINK"Error: invalid character in map\n"RST);
-				exit(EXIT_FAILURE);
+				// free_texture_paths(data->game);
+				// exit(EXIT_FAILURE);
+				close(fd);
+				free_and_exit(data->game, 1);
 			}
 			j++;
 		}
@@ -317,6 +320,7 @@ int count_items(t_data *data)
 	}
 	return (count);
 }
+
 void	is_map_border(char **map, int lin, int i, int j)
 {
 	if (i == 0 || i == lin - 1 || j == 0 || j == (int)ft_strlen(map[i]) - 1)
@@ -358,9 +362,9 @@ void	is_surrounded_by_walls(char **map, int lin)
 	}
 }
 
-void	validate_map(t_data *data)
+void	validate_map(t_data *data, int fd)
 {
-	check_map_info(data);
+	check_map_info(data, fd);
 	is_surrounded_by_walls(data->map, data->lin);
 	// check_map_elements - checar sem tem pelo menos 1 elemento de player, mas 
 }
@@ -379,8 +383,6 @@ void	process_map(int argc, char **argv, t_data *data)
 	count_map_size(fd, data, &map_line);
 	fd = safe_open(argv[1]);
 	get_map(fd, data, &map_line);
-	data->game->total_items = count_items(data);
-	
 	// PRINT DEBUG
 	// int i = 0;
 	// printf("Map size: %d x %d\n", data->lin, data->col);
@@ -389,8 +391,8 @@ void	process_map(int argc, char **argv, t_data *data)
 	// 	printf("%s\n", data->map[i]);
 	// 	i++;
 	// }
-	// check_map(data->map, data); //TO BE DONE
-	validate_map(data);
+	validate_map(data, fd);
+	data->game->total_items = count_items(data);	
 	close(fd);
 	free(map_line);
 }

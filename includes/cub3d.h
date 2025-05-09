@@ -217,7 +217,7 @@ void		process_map(int argc, char **argv, t_data *data);
 void		check_map_metadata(int fd, t_data *data, char **map_line);
 int			safe_open(char *filename);
 void		check_invalid_count(int count);
-void		check_color(char *line);
+void		check_color(t_data *data, char *line);
 char		*check_line_info(char *line);
 void		find_map_first_line(int fd, char **map_line);
 
@@ -265,5 +265,6 @@ void		enemy_texture_reset(t_game *game);
 
 //FREE
 void		free_and_exit(t_game *game, int code);
+void		free_texture_paths(t_game *game);
 
 #endif

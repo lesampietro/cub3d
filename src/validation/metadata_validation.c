@@ -13,20 +13,20 @@ void	is_empty(char *line)
 	}
 }
 
-void	save_texture_path(char *line, char **path, int *count)
+void	save_texture_path(char *line, char **path, int *count, t_data *data)
 {
 	line = check_line_info(line);
 	if (!line)
 	{
 		printf(BPINK "Error: invalid texture/colour info\n" RST);
 		free(line);
-		exit(EXIT_FAILURE);
+		free_and_exit(data->game, 1);
 	}
 	if (ft_strncmp("./", line, 2) != 0)
 	{
 		printf(BPINK "Error: invalid texture path\n" RST);
 		free(line);
-		exit(EXIT_FAILURE);
+		free_and_exit(data->game, 1);
 	}
 	else
 		*path = strdup(line);
@@ -34,7 +34,7 @@ void	save_texture_path(char *line, char **path, int *count)
 	(*count)++;
 }
 
-void	save_colour_path(char *line, int **color_ptr, int *count)
+void	save_colour_path(char *line, int **color_ptr, int *count, t_data *data)
 {
 	char	**split;
 	line = check_line_info(line);
@@ -42,16 +42,16 @@ void	save_colour_path(char *line, int **color_ptr, int *count)
 	{
 		printf(BPINK "Error: invalid texture/colour info\n" RST);
 		free(line);
-		exit(EXIT_FAILURE);
+		free_and_exit(data->game, 1);
 	}
-	check_color(line);
+	check_color(data, line);
 	split = ft_split(line, ',');
 	*color_ptr = malloc(sizeof(int) * 3);
 	if (!*color_ptr)
 	{
 		printf(BPINK "Error: memory allocation failed\n" RST);
 		free(line);
-		exit(EXIT_FAILURE);
+		free_and_exit(data->game, 1);
 	}
 	(*color_ptr)[0] = ft_atoi(split[0]);
 	(*color_ptr)[1] = ft_atoi(split[1]);
@@ -64,17 +64,17 @@ void	save_colour_path(char *line, int **color_ptr, int *count)
 void	read_textures_n_colours(int *count, char *line, t_data *data)
 {
 	if (!ft_strncmp("NO", line, 2))
-		save_texture_path(line, &(data->direction[NORTH]), count);
+		save_texture_path(line, &(data->direction[NORTH]), count, data);
 	else if (!ft_strncmp("SO", line, 2))
-		save_texture_path(line, &(data->direction[SOUTH]), count);
+		save_texture_path(line, &(data->direction[SOUTH]), count, data);
 	else if (!ft_strncmp("EA", line, 2))
-		save_texture_path(line, &(data->direction[EAST]), count);
+		save_texture_path(line, &(data->direction[EAST]), count, data);
 	else if (!ft_strncmp("WE", line, 2))
-		save_texture_path(line, &(data->direction[WEST]), count);
+		save_texture_path(line, &(data->direction[WEST]), count, data);
 	else if (!ft_strncmp("C", line, 1))
-		save_colour_path(line, &data->c, count);
+		save_colour_path(line, &data->c, count, data);
 	else if (!ft_strncmp("F", line, 1))
-		save_colour_path(line, &data->f, count);
+		save_colour_path(line, &data->f, count, data);
 }
 
 void	check_map_metadata(int fd, t_data *data, char **map_line)

@@ -55,8 +55,11 @@ void	free_and_exit(t_game *game, int code)
 	free_map(game->data->map);
 	free_color_array(game->data);
 	free_texture_paths(game);
-	mlx_close_window(game->mlx);
-	mlx_terminate(game->mlx);
+	if (game->mlx)
+	{
+		mlx_close_window(game->mlx);
+		mlx_terminate(game->mlx);
+	}
 	if (code == 1)
 		exit(EXIT_FAILURE);
 	if (code == 0)

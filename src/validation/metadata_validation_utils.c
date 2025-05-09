@@ -31,7 +31,7 @@ char	*check_line_info(char *line)
 	}
 }
 
-void	check_color(char *line)
+void	check_color(t_data *data, char *line)
 {
 	int		i;
 	int		j;
@@ -49,7 +49,7 @@ void	check_color(char *line)
 	{
 		printf(BPINK "Error: invalid colour info\n" RST);
 		ft_free_split(split);
-		exit(EXIT_FAILURE);
+		free_and_exit(data->game, 1);
 	}
 	ft_free_split(split);
 }
