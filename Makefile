@@ -37,7 +37,8 @@ FILES	= main.c \
 			action/life_check.c \
 			action/objective.c \
 			action/damage_animation.c \
-			init/image.c \
+			init/texture.c \
+			init/utils.c \
 			validation/map_parsing.c \
 			validation/map_validation.c \
 			validation/metadata_validation.c \
