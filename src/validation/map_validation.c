@@ -37,7 +37,7 @@ void	check_args(int argc)
 		return ;
 }
 
-int	safe_open(char *filename)
+int	safe_open(char *filename, t_data *data)
 {
 	int fd;
 
@@ -45,8 +45,7 @@ int	safe_open(char *filename)
 	if (fd == -1)
 	{
 		printf(BPINK"Error: failed to open file\n"RST);
-		//funçao para lidar com erro - dar free e sair
-		exit(EXIT_FAILURE);
+		free_and_exit(data->game, 1);
 	}
 	return (fd);
 }
@@ -80,44 +79,43 @@ void	find_map_first_line(int fd, char **map_line)
 		free(*map_line);
 		*map_line = get_next_line(fd);
 	}
-	// printf(BPINK "Error: map not found\n" RST);
-	// exit(EXIT_FAILURE);
 }
 
-void	count_map_size(int fd, t_data *data, char **map_line)
+void	count_map_size(t_data *data)
 {
 	int			max_col;
 	size_t		i;
 
+	i = 0;
 	max_col = 0;
-	*map_line = get_next_line(fd);
-	find_map_first_line(fd, map_line);
-	while (*map_line && **map_line != '\0')
+	data->map_line = get_next_line(data->fd);
+	find_map_first_line(data->fd, &data->map_line);
+	while (data->map_line && data->map_line[i] != '\0')
 	{
 		i = 0;
-		while (is_valid_char((*map_line)[i]) || ft_isspace((*map_line)[i]))
+		while (is_valid_char(data->map_line[i]) || ft_isspace(data->map_line[i]))
 			i++;
-		if (i == ft_strlen(*map_line) && (*map_line)[i - 1] == '\n')
+		if (i == ft_strlen(data->map_line) && data->map_line[i - 1] == '\n')
 		{
 			data->col = i;
 			if (data->col > max_col)
 				max_col = data->col;
 		}
-		free(*map_line);
-		*map_line = get_next_line(fd);
+		free(data->map_line);
+		data->map_line = get_next_line(data->fd);
 		data->lin++;
 	}
 	data->col = max_col;
-	close(fd);
+	close(data->fd);
 }
 
-void	safe_malloc(void **data, int size)
+void	safe_malloc(void **to_malloc, int size, t_data *data)
 {
-	*data = malloc(size);
-	if (!*data)
+	*to_malloc = malloc(size);
+	if (!*to_malloc)
 	{
 		printf("Error: memory allocation failed\n");
-		exit(EXIT_FAILURE);
+		free_and_exit(data->game, 1);
 	}
 }
 
@@ -156,7 +154,7 @@ void	process_element(t_data *data, int x, int y, char c)
 	if (game->element_count >= 34)
 	{
 		printf(BPINK"Error: too many elements in the map. Max = 35\n"RST);
-		exit(EXIT_FAILURE);
+		free_and_exit(data->game, 1);
 	}
 
 	e = &game->element[game->element_count];
@@ -227,21 +225,20 @@ void	process_info(char *map_line, t_data *data, int map_index)
 
 }
 
-void	get_map(int fd, t_data *data, char **map_line)
+void	get_map(t_data *data)
 {
 	int		i;
 
 	i = 0;
-	*map_line = get_next_line(fd);
-	find_map_first_line(fd, map_line);
-	safe_malloc((void**)&data->map, \
-							sizeof(char *) * (data->lin + 1));
-	while (*map_line && i < data->lin)
+	data->map_line = get_next_line(data->fd);
+	find_map_first_line(data->fd, &data->map_line);
+	safe_malloc((void**)&data->map, sizeof(char *) * (data->lin + 1), data);
+	while (data->map_line && i < data->lin)
 	{
-		data->map[i] = ft_strtrim(*map_line, "\n");
-		free(*map_line);
+		data->map[i] = ft_strtrim(data->map_line, "\n");
+		free(data->map_line);
 		process_info(data->map[i], data, i);
-		*map_line = get_next_line(fd);
+		data->map_line = get_next_line(data->fd);
 		i++;
 	}
 	trim_empty_lines_at_end(data, i);
@@ -272,7 +269,7 @@ void	is_empty_line(char **line, int i)
 
 }
 
-void	check_map_info(t_data *data, int fd)
+void	check_map_info(t_data *data)
 {
 	int		i;
 	int		j;
@@ -287,9 +284,6 @@ void	check_map_info(t_data *data, int fd)
 			if (!is_valid_char(data->map[i][j]))
 			{
 				printf(BPINK"Error: invalid character in map\n"RST);
-				// free_texture_paths(data->game);
-				// exit(EXIT_FAILURE);
-				close(fd);
 				free_and_exit(data->game, 1);
 			}
 			j++;
@@ -335,7 +329,7 @@ void	is_map_border(char **map, int lin, int i, int j)
 	}
 }
 
-void	is_surrounded_by_walls(char **map, int lin)
+void	is_surrounded_by_walls(char **map, int lin, t_data *data)
 {
 	int		i;
 	int		j;
@@ -353,7 +347,7 @@ void	is_surrounded_by_walls(char **map, int lin)
 					|| ft_isspace(map[i][j - 1]) || ft_isspace(map[i][j + 1]))
 				{
 					printf(BPINK"Error: map is not surrounded by walls\n"RST);
-					exit(EXIT_FAILURE);
+					free_and_exit(data->game, 1);
 				}
 			}
 			j++;
@@ -362,37 +356,34 @@ void	is_surrounded_by_walls(char **map, int lin)
 	}
 }
 
-void	validate_map(t_data *data, int fd)
+void	validate_map(t_data *data)
 {
-	check_map_info(data, fd);
-	is_surrounded_by_walls(data->map, data->lin);
+	check_map_info(data);
+	is_surrounded_by_walls(data->map, data->lin, data);
 	// check_map_elements - checar sem tem pelo menos 1 elemento de player, mas 
 }
 
 void	process_map(int argc, char **argv, t_data *data)
 {
-	int		fd;
-	char	*map_line;
-	
-	map_line = NULL;
 	check_args(argc);
 	is_valid_ext(argv[1]);
-	fd = safe_open(argv[1]);
-	check_map_metadata(fd, data, &map_line);
-	fd = safe_open(argv[1]);
-	count_map_size(fd, data, &map_line);
-	fd = safe_open(argv[1]);
-	get_map(fd, data, &map_line);
-	// PRINT DEBUG
-	// int i = 0;
-	// printf("Map size: %d x %d\n", data->lin, data->col);
-	// while (data->map[i])
-	// {
-	// 	printf("%s\n", data->map[i]);
-	// 	i++;
-	// }
-	validate_map(data, fd);
-	data->game->total_items = count_items(data);	
-	close(fd);
-	free(map_line);
+	data->fd = safe_open(argv[1], data);
+	check_map_metadata(data);
+	data->fd = safe_open(argv[1], data);
+	count_map_size(data);
+	data->fd = safe_open(argv[1], data);
+	get_map(data);
+	validate_map(data);
+	data->game->total_items = count_items(data);
+	close(data->fd);
+	free(data->map_line);
 }
+
+// PRINT DEBUG
+// int i = 0;
+// printf("Map size: %d x %d\n", data->lin, data->col);
+// while (data->map[i])
+// {
+// 	printf("%s\n", data->map[i]);
+// 	i++;
+// }

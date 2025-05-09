@@ -60,6 +60,8 @@ void	free_and_exit(t_game *game, int code)
 		mlx_close_window(game->mlx);
 		mlx_terminate(game->mlx);
 	}
+	if (game->data->fd)
+		close(game->data->fd);
 	if (code == 1)
 		exit(EXIT_FAILURE);
 	if (code == 0)

@@ -4,13 +4,14 @@ char	*check_line_info(char *line)
 {
 	char	**split;
 	char	*path;
-	char	*tmp;
+	// char	*tmp;
 
 	split = NULL;
-	tmp = ft_strtrim(line, " \n");
-	split = ft_split(tmp, ' ');
-	free(tmp);
+	// tmp = ft_strtrim(line, " \n");
+	// split = ft_split(tmp, ' ');
+	// free(tmp);
 	path = NULL;
+	split = ft_split(line, ' ');
 	if (split[2])
 	{
 		printf(BPINK "Error: too much texture info\n" RST);
@@ -54,11 +55,11 @@ void	check_color(t_data *data, char *line)
 	ft_free_split(split);
 }
 
-void	check_invalid_count(int count)
+void	check_invalid_count(int count, t_data *data)
 {
 	if (count != 6)
 	{
 		printf(BPINK"Error: missing or duplicated texture/colour info"RST);
-		exit(EXIT_FAILURE);
+		free_and_exit(data->game, 1);
 	}
 }
