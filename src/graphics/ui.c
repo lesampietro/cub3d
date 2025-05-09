@@ -1,5 +1,8 @@
 #include "../../includes/cub3d.h"
 
+#define AIM_RADIUS 10
+#define AIM_THICK 2
+
 static void	draw_progress_bar(t_game *game)
 {
 	int	x, y;
@@ -47,6 +50,31 @@ static void	draw_progress_bar(t_game *game)
 	}
 }
 
+// static void	draw_aim_circle(t_game *game)
+// {
+// 	int		x;
+// 	int 	y;
+// 	float	distance;
+
+// 	y = WINDOW_HEIGHT / 2 - AIM_RADIUS - AIM_THICK;
+//     while (y <= WINDOW_HEIGHT / 2 + AIM_RADIUS + AIM_THICK)
+//     {
+// 		x = WINDOW_WIDTH / 2 - AIM_RADIUS - AIM_THICK;
+//         while (x <= WINDOW_WIDTH / 2 + AIM_RADIUS + AIM_THICK)
+//         {
+//             distance = sqrtf((x - WINDOW_WIDTH / 2) * (x - WINDOW_WIDTH / 2) + 
+//                                   (y - WINDOW_HEIGHT / 2) * (y - WINDOW_HEIGHT / 2));
+//             if (distance >= AIM_RADIUS - AIM_THICK/2 && distance <= AIM_RADIUS + AIM_THICK/2)
+//             {
+//                 if (x >= 0 && x < WINDOW_WIDTH && y >= 0 && y < WINDOW_HEIGHT)
+//                     mlx_put_pixel(game->mlx_image, x, y, convert_rgb(255,255,0));
+//             }
+// 			x++;
+//         }
+// 		y++;
+//     }
+// 	mlx_put_pixel(game->mlx_image, WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2, convert_rgb(255, 255, 0));
+// }
 
 static void	draw_health_bar(t_game *game)
 {
@@ -73,4 +101,5 @@ void	ui_init(t_game *game)
 {
 	draw_health_bar(game);
 	draw_progress_bar(game);
+	// draw_aim_circle(game);
 }

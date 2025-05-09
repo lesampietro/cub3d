@@ -27,7 +27,7 @@ static int	desloc(t_game *game, int y)
 	return (desloc);
 }
 
-void	print_element(t_game *game, t_coord coord, int pixel, uint32_t color)
+void	print_tile(t_game *game, t_coord coord, int pixel, uint32_t color)
 {
 	while (pixel++ < MAP_SIZE)
 		fill_tile(game->mlx_image, (coord.x * MAP_SIZE) + MAP_IND,
@@ -37,13 +37,15 @@ void	print_element(t_game *game, t_coord coord, int pixel, uint32_t color)
 void	found_element(t_game *game, t_coord coord, int pixel)
 {
 	if (game->data->map[coord.y][coord.x] == '1')
-		print_element(game, coord, pixel, convert_rgb(255, 255, 255));
-	else if (game->data->map[coord.y][coord.x] == 'X')
-		print_element(game, coord, pixel, convert_rgb(255, 0, 0));
+		print_tile(game, coord, pixel, convert_rgb(255, 255, 255));
+	// else if (game->data->map[coord.y][coord.x] == 'X')
+	// 	print_tile(game, coord, pixel, convert_rgb(255, 0, 0));
 	else if (game->data->map[coord.y][coord.x] == 'I')
-		print_element(game, coord, pixel, convert_rgb(0, 0, 255));
+		print_tile(game, coord, pixel, convert_rgb(0, 0, 255));
 	else if (game->data->map[coord.y][coord.x] == 'H')
-		print_element(game, coord, pixel, convert_rgb(0, 255, 0));
+		print_tile(game, coord, pixel, convert_rgb(0, 255, 0));
+	else
+		print_tile(game, coord, pixel, convert_rgb(0, 0, 0));
 }
 void	draw_minimap(void *param)
 {
@@ -63,7 +65,7 @@ void	draw_minimap(void *param)
 				|| game->data->map[coord.y][coord.x] == 'I' || game->data->map[coord.y][coord.x] == 'H')
 				found_element(game, coord, pixel);
 			else if (game->data->map[coord.y][coord.x] == '0')
-				print_element(game, coord, pixel, convert_rgb(0, 0, 0));
+				print_tile(game, coord, pixel, convert_rgb(0, 0, 0));
 			coord.x++;
 		}
 		coord.y++;

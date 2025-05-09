@@ -74,6 +74,7 @@ void init_textures(t_game *game)
 {
 	game->weapon_shooting_text_path = "./assets/wand_shooting.png";
 	game->weapon_text_path = "./assets/wand.png";
+	// init_elements(game);
 	load_texture(game);
 }
 

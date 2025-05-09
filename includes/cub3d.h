@@ -211,6 +211,7 @@ typedef enum e_dir
 
 int32_t		init_game(char *argv, t_game *game);
 void		init_window(t_game *game);
+void		init_elements(t_game *game);
 
 //MAP VALIDATION
 void		process_map(int argc, char **argv, t_data *data);
