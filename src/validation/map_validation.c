@@ -190,7 +190,7 @@ void	process_element(t_data *data, int x, int y, char c)
 	{
 		e->type = ITEM;
 		e->health = 100;
-		e->idle_texture_path = "./assets/items/resource.png";
+		e->idle_texture_path = "./assets/items/key.png";
 		e->texture_path = NULL;
 	}
 	else if (c == 'H')
