@@ -26,12 +26,14 @@ void	shoot_hit(t_game *game)
 	{
 		game->element[hit_index].health -= PLAYER_DAMAGE;
 		game->element[hit_index].got_hit = true;
-		game->element[hit_index].current_texture = game->element[hit_index].hit_texture;
+		game->element[hit_index].current_texture
+			= game->element[hit_index].hit_texture;
 		game->element[hit_index].last_hit_time = get_time_in_ms();
 		if (game->element[hit_index].health <= 0)
 		{
 			game->element[hit_index].alive = false;
-			game->data->map[(int)game->element[hit_index].y][(int)game->element[hit_index].x] = '0';
+			game->data->map[(int)game->element[hit_index].y]
+			[(int)game->element[hit_index].x] = '0';
 		}
 	}
 }

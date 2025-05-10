@@ -20,7 +20,8 @@ void	detect_potion(t_game *game)
 	i = 0;
 	while (i < game->element_count)
 	{
-		if (game->element[i].type == HEALTH && game->element[i].health > 0 && is_close(game, i) )
+		if (game->element[i].type == HEALTH && game->element[i].health > 0
+			&& is_close(game, i))
 		{	
 			game->player_health += game->element[i].health;
 			game->element[i].health = 0;
