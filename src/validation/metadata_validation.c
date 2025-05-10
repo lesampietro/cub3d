@@ -20,25 +20,19 @@ bool	save_texture_path(char *line, char **path, int *count)
 	if (!tmp)
 	{
 		printf(BPINK "Error: invalid texture/colour info\n" RST);
-		// free(line);
-		// exit(EXIT_FAILURE);
+		return (false);
 	}
 	if (ft_strncmp("./", tmp, 2) != 0)
 	{
 		printf(BPINK "Error: invalid texture path\n" RST);
 		free(tmp);
-		// free(line);
-		// exit(EXIT_FAILURE);
+		return (false);
 	}
-	else
-	{
-		printf(BRED "path:%s\n" RST, tmp);
-		*path = strdup(tmp);
-		(*count)++;
-		free(tmp);
-		return (true);
-	}
-	return (false);
+	printf(BRED "path:%s\n" RST, tmp);
+	*path = strdup(tmp);
+	(*count)++;
+	free(tmp);
+	return (true);
 }
 
 bool	save_colour_path(char *line, int **color_ptr, int *count)
