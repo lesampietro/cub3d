@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsampiet <lsampiet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fcaldas- <fcaldas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 15:21:47 by fcaldas-          #+#    #+#             */
-/*   Updated: 2025/05/10 16:03:15 by lsampiet         ###   ########.fr       */
+/*   Updated: 2025/05/10 19:56:25 by fcaldas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,7 @@ char	*get_next_line(int fd)
 	static char	*cache[1024];
 	char		*line;
 
-	if (fd == -2)
-	{
-		free_gnl_cache(cache);
-		return (NULL);
-	}
+	free_gnl_cache(fd, cache);
 	if (!BUFFER_SIZE || fd < 0)
 		return (NULL);
 	line = (char *)ft_calloc((1), sizeof(char));
@@ -47,6 +43,13 @@ char	*get_next_line(int fd)
 	if (ft_strchr(line, '\n'))
 		cache[fd] = ft_strdup(ft_strchr(line, '\n') + 1);
 	return (treat_line(cache[fd], line));
+}
+
+static char	*clean_buffer(char *buffer)
+{
+	free(buffer);
+	buffer = NULL;
+	return (NULL);
 }
 
 static char	*read_line(int fd, char *line)
@@ -102,13 +105,6 @@ static char	*treat_line(char *cache, char *line)
 		line = NULL;
 		return (NULL);
 	}
-}
-
-static char	*clean_buffer(char *buffer)
-{
-	free(buffer);
-	buffer = NULL;
-	return (NULL);
 }
 
 static char	*ft_gnl_strjoin(const char *s1, const char *s2)

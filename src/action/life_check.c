@@ -25,7 +25,8 @@ void	detect_potion(t_game *game)
 			game->player_health += game->element[i].health;
 			game->element[i].health = 0;
 			game->element[i].alive = false;
-			game->data->map[(int)game->element[i].y][(int)game->element[i].x] = '0';
+			game->data->map[(int)game->element[i].y]
+			[(int)game->element[i].x] = '0';
 			break ;
 		}
 		i++;

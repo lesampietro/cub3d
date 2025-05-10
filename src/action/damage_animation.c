@@ -12,8 +12,10 @@ void	enemy_texture_reset(t_game *game)
 		if (now - game->element[i].last_hit_time > 250)
 		{
 			game->element[i].got_hit = false;
-			if (game->element[i].current_texture == game->element[i].hit_texture)
-				game->element[i].current_texture = game->element[i].idle_texture;
+			if (game->element[i].current_texture
+				== game->element[i].hit_texture)
+				game->element[i].current_texture
+					= game->element[i].idle_texture;
 		}
 		i++;
 	}

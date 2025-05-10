@@ -7,12 +7,14 @@ void	detect_item(t_game *game)
 	i = 0;
 	while (i < game->element_count)
 	{
-		if (game->element[i].type == ITEM && game->element[i].health > 0 && is_close(game, i) )
+		if (game->element[i].type == ITEM && game->element[i].health
+			> 0 && is_close(game, i))
 		{	
 			game->element[i].health = 0;
 			game->element[i].alive = false;
 			game->item_count++;
-			game->data->map[(int)game->element[i].y][(int)game->element[i].x] = '0';
+			game->data->map[(int)game->element[i].y]
+			[(int)game->element[i].x] = '0';
 			break ;
 		}
 		i++;

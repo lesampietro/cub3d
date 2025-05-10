@@ -3,27 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   gnl_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsampiet <lsampiet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fcaldas- <fcaldas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 16:04:59 by lsampiet          #+#    #+#             */
-/*   Updated: 2025/05/10 16:05:00 by lsampiet         ###   ########.fr       */
+/*   Updated: 2025/05/10 19:59:33 by fcaldas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft.h"
 
-void free_gnl_cache(char **cache)
+void	free_gnl_cache(int fd, char **cache)
 {
-	int i;
+	int	i;
 
 	i = 0;
-	while (i < 1024)
+	if (fd == -2)
 	{
-		if (cache[i])
+		while (i < 1024)
 		{
-			free(cache[i]);
-			cache[i] = NULL;
+			if (cache[i])
+			{
+				free(cache[i]);
+				cache[i] = NULL;
+			}
+			i++;
 		}
-		i++;
 	}
 }
