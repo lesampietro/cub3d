@@ -1,9 +1,11 @@
-NO ./textures/pattern4.png aaaa
+NO ./textures/pattern4.png
+
 SO ./textures/pattern3.png
 
 WE ./textures/pattern2.png
 
 EA ./textures/pattern1.png
+
 
 F 220,100,0 
 

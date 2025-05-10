@@ -13,68 +13,80 @@ void	is_empty(char *line)
 	}
 }
 
-void	save_texture_path(char *line, char **path, int *count)
+bool	save_texture_path(char *line, char **path, int *count)
 {
-	line = check_line_info(line);
-	if (!line)
+	char	*tmp;
+	tmp = check_line_info(line);
+	if (!tmp)
 	{
 		printf(BPINK "Error: invalid texture/colour info\n" RST);
-		free(line);
-		exit(EXIT_FAILURE);
+		// free(line);
+		// exit(EXIT_FAILURE);
 	}
-	if (ft_strncmp("./", line, 2) != 0)
+	if (ft_strncmp("./", tmp, 2) != 0)
 	{
 		printf(BPINK "Error: invalid texture path\n" RST);
-		free(line);
-		exit(EXIT_FAILURE);
+		free(tmp);
+		// free(line);
+		// exit(EXIT_FAILURE);
 	}
 	else
-		*path = strdup(line);
-	free(line);
-	(*count)++;
+	{
+		printf(BRED "path:%s\n" RST, tmp);
+		*path = strdup(tmp);
+		(*count)++;
+		free(tmp);
+		return (true);
+	}
+	return (false);
 }
 
-void	save_colour_path(char *line, int **color_ptr, int *count)
+bool	save_colour_path(char *line, int **color_ptr, int *count)
 {
 	char	**split;
-	line = check_line_info(line);
-	if (!line)
-	{
-		printf(BPINK "Error: invalid texture/colour info\n" RST);
-		free(line);
-		exit(EXIT_FAILURE);
-	}
-	check_color(line);
-	split = ft_split(line, ',');
+	char	*colour;
+	colour = check_line_info(line);
+	if (!colour)
+		return (false);
+	if (!check_color(colour))
+		return (false);
+	split = ft_split(colour, ',');
 	*color_ptr = malloc(sizeof(int) * 3);
 	if (!*color_ptr)
 	{
 		printf(BPINK "Error: memory allocation failed\n" RST);
-		free(line);
-		exit(EXIT_FAILURE);
+		return (false);
 	}
 	(*color_ptr)[0] = ft_atoi(split[0]);
 	(*color_ptr)[1] = ft_atoi(split[1]);
 	(*color_ptr)[2] = ft_atoi(split[2]);
 	ft_free_split(split);
-	free(line);
+	free(colour);
+	// free(line);
 	(*count)++;
+	return (true);
 }
 
-void	read_textures_n_colours(int *count, char *line, t_data *data)
+bool	read_textures_n_colours(int *count, char *line, t_data *data)
 {
+	while (ft_isspace(*line))
+		line++;
+	// printf("line:%s\n", line);
+	if (*line == '\n' || *line == '\0')
+		return (true);
 	if (!ft_strncmp("NO", line, 2))
-		save_texture_path(line, &(data->direction[NORTH]), count);
+		return (save_texture_path(line, &(data->direction[NORTH]), count));
 	else if (!ft_strncmp("SO", line, 2))
-		save_texture_path(line, &(data->direction[SOUTH]), count);
+		return (save_texture_path(line, &(data->direction[SOUTH]), count));
 	else if (!ft_strncmp("EA", line, 2))
-		save_texture_path(line, &(data->direction[EAST]), count);
+		return (save_texture_path(line, &(data->direction[EAST]), count));
 	else if (!ft_strncmp("WE", line, 2))
-		save_texture_path(line, &(data->direction[WEST]), count);
+		return (save_texture_path(line, &(data->direction[WEST]), count));
 	else if (!ft_strncmp("C", line, 1))
-		save_colour_path(line, &data->c, count);
+		return (save_colour_path(line, &data->c, count));
 	else if (!ft_strncmp("F", line, 1))
-		save_colour_path(line, &data->f, count);
+		return (save_colour_path(line, &data->f, count));
+	return (false);
 }
 
 void	check_map_metadata(t_data *data, char **map_line)
@@ -88,9 +100,13 @@ void	check_map_metadata(t_data *data, char **map_line)
 	tmp = *map_line;
 	while (tmp && *map_line)
 	{
-		while (ft_isspace(*tmp))
-			tmp++;
-		read_textures_n_colours(&count, tmp, data);
+		if (!read_textures_n_colours(&count, tmp, data))
+		{
+			printf(BRED"count:%i\n"RST, count);
+			free(tmp);
+			// free(*map_line);
+			free_and_exit(data->game, EXIT_FAILURE);
+		}
 		if (count == 6 && (data->direction[NORTH] && data->direction[SOUTH] \
 			&& data->direction[WEST] && data->direction[EAST] \
 			&& data->c && data->f ))

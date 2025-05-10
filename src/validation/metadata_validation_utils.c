@@ -31,7 +31,7 @@ char	*check_line_info(char *line)
 	}
 }
 
-void	check_color(char *line)
+bool	check_color(char *line)
 {
 	int		i;
 	int		j;
@@ -49,9 +49,10 @@ void	check_color(char *line)
 	{
 		printf(BPINK "Error: invalid colour info\n" RST);
 		ft_free_split(split);
-		exit(EXIT_FAILURE);
+		return (false);
 	}
 	ft_free_split(split);
+	return (true);
 }
 
 void	check_invalid_count(int count)
