@@ -29,7 +29,6 @@ bool	save_texture_path(char *line, char **path, int *count)
 		free(tmp);
 		return (false);
 	}
-	printf(BRED "path:%s\n" RST, tmp);
 	*path = strdup(tmp);
 	(*count)++;
 	free(tmp);
@@ -84,6 +83,7 @@ bool	read_textures_n_colours(int *count, char *line, t_data *data)
 		return (save_colour_path(line, &data->c, count));
 	else if (!ft_strncmp("F", line, 1))
 		return (save_colour_path(line, &data->f, count));
+	printf(BPINK "Error: invalid texture/colour info\n" RST);
 	return (false);
 }
 

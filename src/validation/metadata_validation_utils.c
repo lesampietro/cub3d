@@ -66,6 +66,7 @@ bool	check_color(char *line)
 
 void	check_invalid_count(int count)
 {
+	printf(BRED "count:%i\n" RST, count);
 	if (count != 6)
 	{
 		printf(BPINK"Error: missing or duplicated texture/colour info"RST);
