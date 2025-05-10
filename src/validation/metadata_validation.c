@@ -29,7 +29,14 @@ bool	save_texture_path(char *line, char **path, int *count)
 		free(tmp);
 		return (false);
 	}
-	*path = strdup(tmp);
+	if (!*path)
+		*path = strdup(tmp);
+	else
+	{
+		printf(BPINK "Error: more than 4 textures\n" RST);
+		free(tmp);
+		return (false);
+	}
 	(*count)++;
 	free(tmp);
 	return (true);
@@ -39,11 +46,19 @@ bool	save_colour_path(char *line, int **color_ptr, int *count)
 {
 	char	**split;
 	char	*colour;
+	static int	count_colours;
+
 	colour = check_line_info(line);
 	if (!colour)
 		return (false);
 	if (!check_color(colour))
 	{
+		free(colour);
+		return (false);
+	}
+	if (count_colours > 1)
+	{
+		printf(BPINK "Error: more than 2 colours\n" RST);
 		free(colour);
 		return (false);
 	}
@@ -59,7 +74,7 @@ bool	save_colour_path(char *line, int **color_ptr, int *count)
 	(*color_ptr)[2] = ft_atoi(split[2]);
 	ft_free_split(split);
 	free(colour);
-	// free(line);
+	count_colours++;
 	(*count)++;
 	return (true);
 }
@@ -68,7 +83,6 @@ bool	read_textures_n_colours(int *count, char *line, t_data *data)
 {
 	while (ft_isspace(*line))
 		line++;
-	// printf("line:%s\n", line);
 	if (*line == '\n' || *line == '\0')
 		return (true);
 	if (!ft_strncmp("NO", line, 2))
@@ -87,6 +101,29 @@ bool	read_textures_n_colours(int *count, char *line, t_data *data)
 	return (false);
 }
 
+bool	is_map_line(char *line)
+{
+	int	i;
+	bool	map;
+
+	i = 0;
+	map = false;
+	while (line[i] == ' ' || line[i] == '\t')
+		i++;
+	while (line[i] != '\n')
+	{
+		if (line[i] == '1' || line[i] == '0')
+			map = true;
+		else
+		{
+			map = false;
+			break ;
+		}
+		i++;
+	}
+	return (map);
+}
+
 void	check_map_metadata(t_data *data, char **map_line)
 {
 	int		count;
@@ -96,22 +133,23 @@ void	check_map_metadata(t_data *data, char **map_line)
 	is_empty(*map_line);
 	while (*map_line)
 	{
+		if (is_map_line(*map_line))
+		{
+			break ;
+		}
 		if (!read_textures_n_colours(&count, *map_line, data))
 		{
 			free(*map_line);
 			*map_line = NULL;
 			free_and_exit(data->game, EXIT_FAILURE);
 		}
-		if (count == 6 && (data->direction[NORTH] && data->direction[SOUTH] \
-			&& data->direction[WEST] && data->direction[EAST] \
-			&& data->c && data->f ))
-				break ;
 		free(*map_line);
 		*map_line = get_next_line(data->fd);
+
 	}
+	check_invalid_count(data, count, *map_line);
 	data->ceiling = convert_rgb(data->c[0], data->c[1], data->c[2]);
 	data->floor = convert_rgb(data->f[0], data->f[1], data->f[2]);
-	check_invalid_count(count);
 	if (*map_line)
 	{
 		free(*map_line);

@@ -64,12 +64,17 @@ bool	check_color(char *line)
 	return (true);
 }
 
-void	check_invalid_count(int count)
+void	check_invalid_count(t_data *data, int count, char *line)
 {
-	printf(BRED "count:%i\n" RST, count);
-	if (count != 6)
+	if (count == 6)
 	{
-		printf(BPINK"Error: missing or duplicated texture/colour info"RST);
-		exit(EXIT_FAILURE);
+		if (data->direction[NORTH] && data->direction[SOUTH] \
+			&& data->direction[EAST] && data->direction[WEST] \
+			&& data->f && data->c)
+			return ;
 	}
+	printf(BPINK"Error: missing or duplicated texture/colour info"RST);
+	free(line);
+	line = NULL;
+	free_and_exit(data->game, 1);
 }
