@@ -1,18 +1,5 @@
 #include "../../includes/cub3d.h"
 
-void	is_empty(char *line)
-{
-	while (line && ft_isspace(*line))
-		line++;
-	if (!line)
-	{
-		printf(BPINK"Error: file is empty\n"RST);
-		free(line);
-		line = NULL;
-		exit(EXIT_FAILURE);
-	}
-}
-
 bool	save_texture_path(char *line, char **path, int *count)
 {
 	char	*tmp;
@@ -133,7 +120,7 @@ void	check_map_metadata(t_data *data, char **map_line)
 
 	count = 0;
 	*map_line = get_next_line(data->fd);
-	is_empty(*map_line);
+	is_empty_file(*map_line);
 	while (*map_line)
 	{
 		if (is_map_line(*map_line))
