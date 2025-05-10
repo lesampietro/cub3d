@@ -191,6 +191,7 @@ void	process_element(t_data *data, int x, int y, char c)
 		e->type = ITEM;
 		e->health = 100;
 		e->idle_texture_path = "./assets/items/key.png";
+		// e->idle_texture_path = "./textures/rat.png";
 		e->texture_path = NULL;
 	}
 	else if (c == 'H')
@@ -249,7 +250,7 @@ void	get_map(t_data *data, char **map_line)
 	
 }
 
-void	is_empty_line(char **line, int i)
+bool	is_empty_line(char **line, int i)
 {
 	int		c;
 
@@ -262,14 +263,11 @@ void	is_empty_line(char **line, int i)
 			while (line[i][c] && ft_isspace(line[i][c]))
 				c++;
 			if (line[i][c] != '\0')
-			{
-				printf(BPINK"Error: empty line in map\n"RST);
-				exit(EXIT_FAILURE);
-			}
+				return (true);
 			i++;
 		}
 	}
-
+	return (false);
 }
 
 void	check_map_info(t_data *data)
@@ -281,13 +279,17 @@ void	check_map_info(t_data *data)
 	while (data->map[i])
 	{
 		j = 0;
-		is_empty_line(data->map, i);
+		if (is_empty_line(data->map, i))
+		{
+			printf(BPINK"Error: empty line in map\n"RST);
+			free_and_exit(data->game, EXIT_FAILURE);
+		}
 		while (data->map[i][j])
 		{
 			if (!is_valid_char(data->map[i][j]))
 			{
 				printf(BPINK"Error: invalid character in map\n"RST);
-				exit(EXIT_FAILURE);
+				free_and_exit(data->game, EXIT_FAILURE);
 			}
 			j++;
 		}
