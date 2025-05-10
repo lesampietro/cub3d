@@ -1,10 +1,10 @@
        C 2,2,255
 
-	NO ./textures/air.png
+	NO ./textures/pattern2.png
        F 255,255,255
-	SO ./textures/fire.png
-       WE  ./textures/water.png
-       EA ./textures/earth.png
+	SO ./textures/wall.png
+       WE  ./textures/pattern1.png
+       EA ./textures/wall.png
 
 
        1111111111111111111111111

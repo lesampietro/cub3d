@@ -108,18 +108,21 @@ bool	is_map_line(char *line)
 
 	i = 0;
 	map = false;
-	while (line[i] == ' ' || line[i] == '\t')
-		i++;
-	while (line[i] != '\n')
+	if (ft_strchr(line, '1'))
 	{
-		if (line[i] == '1' || line[i] == '0')
-			map = true;
-		else
+		while (ft_isspace(line[i]))
+			i++;
+		while (line[i] && line[i] != '\n')
 		{
-			map = false;
-			break ;
+			if (line[i] == '1' || line[i] == '0' || ft_isspace(line[i]))
+				map = true;
+			else
+			{
+				map = false;
+				break ;
+			}
+			i++;
 		}
-		i++;
 	}
 	return (map);
 }
