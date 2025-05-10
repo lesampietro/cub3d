@@ -228,9 +228,24 @@ void	process_info(char *map_line, t_data *data, int map_index)
 
 }
 
+void	fill_with_spaces(char *map_line, char *tmp, int col)
+{
+	int		i;
+
+	ft_strlcpy(map_line, tmp, col + 1);
+	i = ft_strlen(tmp);
+	while (i < col)
+	{
+		map_line[i] = ' ';
+		i++;
+	}
+	map_line[i] = '\0';
+}
+
 void	get_map(t_data *data, char **map_line)
 {
 	int		i;
+	char	*tmp;
 
 	i = 0;
 	*map_line = get_next_line(data->fd);
@@ -239,7 +254,10 @@ void	get_map(t_data *data, char **map_line)
 							sizeof(char *) * (data->lin + 1));
 	while (*map_line && i < data->lin)
 	{
-		data->map[i] = ft_strtrim(*map_line, "\n");
+		tmp = ft_strtrim(*map_line, "\n");
+		safe_malloc((void**)&data->map[i], sizeof(char) * (data->col + 1));
+		fill_with_spaces(data->map[i], tmp, data->col);
+		free(tmp);
 		free(*map_line);
 		process_info(data->map[i], data, i);
 		*map_line = get_next_line(data->fd);
