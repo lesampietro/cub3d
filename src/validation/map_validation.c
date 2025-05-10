@@ -219,7 +219,6 @@ void	process_info(char *map_line, t_data *data, int map_index)
 			data->pov = c;
 			data->game->player_pos.x = x + 0.5f; // centraliza na célula
 			data->game->player_pos.y = map_index + 0.5f;
-			map_line[x] = '0';
 		}
 		if (c == 'X' || c == 'I' || c == 'H')
 			process_element(data, x, map_index, c);
@@ -259,6 +258,7 @@ void	get_map(t_data *data, char **map_line)
 		fill_with_spaces(data->map[i], tmp, data->col);
 		free(tmp);
 		free(*map_line);
+		printf("%s\n", data->map[i]);
 		process_info(data->map[i], data, i);
 		*map_line = get_next_line(data->fd);
 		i++;
@@ -376,7 +376,38 @@ void	is_surrounded_by_walls(t_data *data, char **map, int lin)
 			}
 			j++;
 		}
-		i ++;
+		i++;
+	}
+}
+
+void	check_map_elements(t_data *data, char **map)
+{
+	int		i;
+	int		j;
+	int		count;
+
+	count = 0;
+	i = 0;
+	while (map[i])
+	{
+		j = 0;
+		while (map[i][j])
+		{
+			if (map[i][j] == 'S' || map[i][j] == 'N' \
+				|| map[i][j] == 'E' || map[i][j] == 'W')
+			{
+				map[i][j] = '0';
+				count++;
+			}
+			j++;
+		}
+		i++;
+	}
+	printf("count = %i\n", count);
+	if (count != 1)
+	{
+		printf(BPINK"Error: invalid number of player positions\n"RST);
+		free_and_exit(data->game, EXIT_FAILURE);
 	}
 }
 
@@ -384,7 +415,7 @@ void	validate_map(t_data *data)
 {
 	check_map_info(data);
 	is_surrounded_by_walls(data, data->map, data->lin);
-	// check_map_elements - checar sem tem pelo menos 1 elemento de player, mas 
+	check_map_elements(data, data->map);
 }
 
 void	process_map(int argc, char **argv, t_data *data)
@@ -400,8 +431,8 @@ void	process_map(int argc, char **argv, t_data *data)
 	count_map_size(data, &map_line);
 	data->fd = safe_open(argv[1]);
 	get_map(data, &map_line);
-	data->game->total_items = count_items(data);
 	validate_map(data);
+	data->game->total_items = count_items(data);
 	close(data->fd);
 	free(map_line);
 }
