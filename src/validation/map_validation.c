@@ -297,7 +297,6 @@ void	check_map_info(t_data *data)
 	}
 }
 
-
 int count_items(t_data *data)
 {
 	int i;
@@ -319,21 +318,23 @@ int count_items(t_data *data)
 	}
 	return (count);
 }
-void	is_map_border(char **map, int lin, int i, int j)
+
+bool	is_map_border(char **map, int lin, int i, int j)
 {
 	if (i == 0 || i == lin - 1 || j == 0 || j == (int)ft_strlen(map[i]) - 1)
 	{
 		printf(BPINK "Error: map is not surrounded by walls at x:%i, y:%i\n" RST, i, j);
-		exit(EXIT_FAILURE);
+		return (true);
 	}
 	if (!map[i - 1][j] || !map[i + 1][j])
 	{
 			printf(BPINK "Error: map is not surrounded by walls at x:%i, y:%i\n" RST, i, j);
-			exit(EXIT_FAILURE);
+			return (true);
 	}
+	return (false);
 }
 
-void	is_surrounded_by_walls(char **map, int lin)
+void	is_surrounded_by_walls(t_data *data, char **map, int lin)
 {
 	int		i;
 	int		j;
@@ -346,12 +347,13 @@ void	is_surrounded_by_walls(char **map, int lin)
 		{
 			if (map[i][j] == '0')
 			{
-				is_map_border(map, lin, i, j);
+				if (is_map_border(map, lin, i, j))
+					free_and_exit(data->game, EXIT_FAILURE);
 				if (ft_isspace(map[i - 1][j]) || ft_isspace(map[i + 1][j]) \
 					|| ft_isspace(map[i][j - 1]) || ft_isspace(map[i][j + 1]))
 				{
 					printf(BPINK"Error: map is not surrounded by walls at x:%i, y:%i\n" RST, i, j);
-					exit(EXIT_FAILURE);
+					free_and_exit(data->game, EXIT_FAILURE);
 				}
 			}
 			j++;
@@ -363,7 +365,7 @@ void	is_surrounded_by_walls(char **map, int lin)
 void	validate_map(t_data *data)
 {
 	check_map_info(data);
-	is_surrounded_by_walls(data->map, data->lin);
+	is_surrounded_by_walls(data, data->map, data->lin);
 	// check_map_elements - checar sem tem pelo menos 1 elemento de player, mas 
 }
 
