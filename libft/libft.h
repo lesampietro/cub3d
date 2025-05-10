@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: edcastro <edcastro@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: lsampiet <lsampiet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 12:29:12 by fcaldas-          #+#    #+#             */
-/*   Updated: 2024/10/09 17:35:10 by edcastro         ###   ########.fr       */
+/*   Updated: 2025/05/10 16:04:21 by lsampiet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ int		ft_putnbr_base(long int nbr, char format);
 int		ft_printptr(unsigned long num);
 
 char	*get_next_line(int fd);
+void	free_gnl_cache(char **cache);
 
 int		ft_atoi(const char *s);
 char	*ft_itoa(int n);

@@ -57,6 +57,7 @@ SRCS = \
 	str/ft_striteri.c \
 	\
 	get_next_line/get_next_line.c \
+	get_next_line/gnl_utils.c \
 	\
 	ft_printf/ft_printf.c \
 	\

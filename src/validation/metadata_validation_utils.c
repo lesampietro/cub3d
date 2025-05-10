@@ -37,13 +37,22 @@ bool	check_color(char *line)
 	int		j;
 	char	**split;
 
-	i = -1;
-	j = 0;
+	i = 0;
 	split = ft_split(line, ',');
-	while (split[++i])
+	while (split[i])
 	{
-		if (!ft_isdigit(split[i][j]))
-		break ;
+		j = 0;
+		while (split[i][j])
+		{
+			if (!ft_isdigit(split[i][j]))
+			{
+				printf(BPINK "Error: invalid colour info\n" RST);
+				ft_free_split(split);
+				return (false);
+			}
+			j++;
+		}
+		i++;
 	}
 	if (i != 3 || split[3])
 	{

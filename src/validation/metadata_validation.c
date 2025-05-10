@@ -20,6 +20,7 @@ bool	save_texture_path(char *line, char **path, int *count)
 	if (!tmp)
 	{
 		printf(BPINK "Error: invalid texture/colour info\n" RST);
+		free(tmp);
 		return (false);
 	}
 	if (ft_strncmp("./", tmp, 2) != 0)
@@ -43,7 +44,10 @@ bool	save_colour_path(char *line, int **color_ptr, int *count)
 	if (!colour)
 		return (false);
 	if (!check_color(colour))
+	{
+		free(colour);
 		return (false);
+	}
 	split = ft_split(colour, ',');
 	*color_ptr = malloc(sizeof(int) * 3);
 	if (!*color_ptr)
@@ -86,19 +90,16 @@ bool	read_textures_n_colours(int *count, char *line, t_data *data)
 void	check_map_metadata(t_data *data, char **map_line)
 {
 	int		count;
-	char	*tmp;
 
 	count = 0;
 	*map_line = get_next_line(data->fd);
 	is_empty(*map_line);
-	tmp = *map_line;
-	while (tmp && *map_line)
+	while (*map_line)
 	{
-		if (!read_textures_n_colours(&count, tmp, data))
+		if (!read_textures_n_colours(&count, *map_line, data))
 		{
-			printf(BRED"count:%i\n"RST, count);
-			free(tmp);
-			// free(*map_line);
+			free(*map_line);
+			*map_line = NULL;
 			free_and_exit(data->game, EXIT_FAILURE);
 		}
 		if (count == 6 && (data->direction[NORTH] && data->direction[SOUTH] \
@@ -107,11 +108,14 @@ void	check_map_metadata(t_data *data, char **map_line)
 				break ;
 		free(*map_line);
 		*map_line = get_next_line(data->fd);
-		tmp = *map_line;
 	}
 	data->ceiling = convert_rgb(data->c[0], data->c[1], data->c[2]);
 	data->floor = convert_rgb(data->f[0], data->f[1], data->f[2]);
 	check_invalid_count(count);
-	free(tmp);
+	if (*map_line)
+	{
+		free(*map_line);
+		*map_line = NULL;
+	}
 	close(data->fd);
 }

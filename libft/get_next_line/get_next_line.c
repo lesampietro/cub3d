@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
+/*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fcaldas- <fcaldas-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lsampiet <lsampiet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 15:21:47 by fcaldas-          #+#    #+#             */
-/*   Updated: 2023/09/11 16:49:52 by fcaldas-         ###   ########.fr       */
+/*   Updated: 2025/05/10 16:03:15 by lsampiet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,11 @@ char	*get_next_line(int fd)
 	static char	*cache[1024];
 	char		*line;
 
+	if (fd == -2)
+	{
+		free_gnl_cache(cache);
+		return (NULL);
+	}
 	if (!BUFFER_SIZE || fd < 0)
 		return (NULL);
 	line = (char *)ft_calloc((1), sizeof(char));

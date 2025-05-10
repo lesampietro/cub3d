@@ -52,6 +52,7 @@ void	free_texture_paths(t_game *game)
 
 void	free_and_exit(t_game *game, int code)
 {
+	get_next_line(-2);
 	free_map(game->data->map);
 	free_color_array(game->data);
 	free_texture_paths(game);
