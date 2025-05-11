@@ -6,7 +6,7 @@
 /*   By: nasser <nasser@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 23:52:23 by fcaldas-          #+#    #+#             */
-/*   Updated: 2025/05/11 16:46:44 by nasser           ###   ########.fr       */
+/*   Updated: 2025/05/11 17:13:18 by nasser           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,13 @@
 # include "../.lib/MLX42/include/MLX42/MLX42.h"
 # include "../libft/libft.h"
 
-# define WINDOW_WIDTH 800
-# define WINDOW_HEIGHT 600
-# define WEAPON_SCALE 1.5
+// # define WINDOW_WIDTH 800
+// # define WINDOW_HEIGHT 600
+// # define WEAPON_SCALE 1.5
 
-// # define WINDOW_WIDTH 1900
-// # define WINDOW_HEIGHT 1200
-// # define WEAPON_SCALE 2.5
+# define WINDOW_WIDTH 1900
+# define WINDOW_HEIGHT 1200
+# define WEAPON_SCALE 2.5
 
 # define MOVE_SPEED 0.04
 # define ROTATE_SPEED 2.8
@@ -44,16 +44,16 @@
 # define BGRN "\033[1;32m"
 # define RST "\033[0m"
 
-typedef struct s_game	t_game;
-typedef struct s_data	t_data;
-typedef struct s_raycasting	t_raycasting;
-typedef struct s_keys	t_keys;
-typedef struct s_vector	t_vector;
-typedef struct s_coord	t_coord;
-typedef struct s_wall	t_wall;
-typedef struct s_element	t_element;
-typedef struct s_weapon_render	t_weapon_render;
-typedef struct s_sprite_draw	t_sprite_draw;
+typedef struct s_game				t_game;
+typedef struct s_data				t_data;
+typedef struct s_raycasting			t_raycasting;
+typedef struct s_keys				t_keys;
+typedef struct s_vector				t_vector;
+typedef struct s_coord				t_coord;
+typedef struct s_wall				t_wall;
+typedef struct s_element			t_element;
+typedef struct s_weapon_render		t_weapon_render;
+typedef struct s_sprite_draw		t_sprite_draw;
 typedef struct s_element_raycast	t_element_raycast;
 
 typedef struct s_keys

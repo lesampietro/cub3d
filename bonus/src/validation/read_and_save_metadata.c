@@ -6,7 +6,7 @@
 /*   By: nasser <nasser@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 23:58:31 by lsampiet          #+#    #+#             */
-/*   Updated: 2025/05/11 17:00:14 by nasser           ###   ########.fr       */
+/*   Updated: 2025/05/11 17:07:01 by nasser           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ static bool	save_texture_path(char *line, char **path, int *count)
 {
 	char	*tmp;
 
-	printf(BPINK "Saving texture path: %s\n" RST, line);
 	tmp = check_line_info(line);
 	if (!check_texture(tmp))
 	{
@@ -79,13 +78,15 @@ static bool	read_aux(int *count, char *line, t_data *data)
 	if (!ft_strncmp("EH", line, 2))
 		return (save_texture_path(line, &(data->game->hit_text_path), count));
 	else if (!ft_strncmp("ES", line, 2))
-		return (save_texture_path(line, &(data->game->shooting_text_path), count));
+		return (save_texture_path(line, &(data->game->shooting_text_path),
+				count));
 	else if (!ft_strncmp("EI", line, 2))
 		return (save_texture_path(line, &(data->game->idle_text_path), count));
 	else if (!ft_strncmp("IT", line, 2))
 		return (save_texture_path(line, &(data->game->item_text_path), count));
 	else if (!ft_strncmp("HE", line, 2))
-		return (save_texture_path(line, &(data->game->health_text_path), count));
+		return (save_texture_path(line, &(data->game->health_text_path),
+				count));
 	return (false);
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   life_check.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fcaldas- <fcaldas-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nasser <nasser@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 23:53:14 by fcaldas-          #+#    #+#             */
-/*   Updated: 2025/05/10 23:53:15 by fcaldas-         ###   ########.fr       */
+/*   Updated: 2025/05/11 17:09:07 by nasser           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	detect_potion(t_game *game)
 	{
 		if (game->element[i].type == HEALTH && game->element[i].health > 0
 			&& is_close(game, i))
-		{	
+		{
 			game->player_health += game->element[i].health;
 			game->element[i].health = 0;
 			game->element[i].alive = false;

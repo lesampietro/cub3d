@@ -6,7 +6,7 @@
 /*   By: nasser <nasser@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 23:57:46 by lsampiet          #+#    #+#             */
-/*   Updated: 2025/05/11 16:57:46 by nasser           ###   ########.fr       */
+/*   Updated: 2025/05/11 17:06:10 by nasser           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ void	allocate_colour(int **color_ptr, char **split)
 	(*color_ptr)[1] = ft_atoi(split[1]);
 	(*color_ptr)[2] = ft_atoi(split[2]);
 }
+
 bool	save_colour_rgb(char *line, int **colour_ptr, int *count)
 {
 	char		**split;

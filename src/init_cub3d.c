@@ -6,7 +6,7 @@
 /*   By: nasser <nasser@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 23:55:21 by fcaldas-          #+#    #+#             */
-/*   Updated: 2025/05/11 15:42:39 by nasser           ###   ########.fr       */
+/*   Updated: 2025/05/11 17:07:30 by nasser           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,11 +49,7 @@ int32_t	init_game(char *argv, t_game *game)
 {
 	(void)argv;
 	init_window(game);
-	// mlx_set_cursor_mode(game->mlx, MLX_MOUSE_DISABLED);
-	// mlx_set_mouse_pos(game->mlx, WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2);
-	// game->mouse_prev_x = WINDOW_WIDTH / 2;
 	mlx_key_hook(game->mlx, key_hook, game);
-	// mlx_mouse_hook(game->mlx, mouse_hook, game);
 	mlx_loop_hook(game->mlx, frame_loop, game);
 	mlx_loop(game->mlx);
 	mlx_close_window(game->mlx);

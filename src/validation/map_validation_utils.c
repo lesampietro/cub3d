@@ -6,7 +6,7 @@
 /*   By: nasser <nasser@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 23:58:14 by lsampiet          #+#    #+#             */
-/*   Updated: 2025/05/11 15:43:02 by nasser           ###   ########.fr       */
+/*   Updated: 2025/05/11 17:07:44 by nasser           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,4 +60,3 @@ bool	is_empty_line_in_map(char **line, int i)
 	}
 	return (false);
 }
-

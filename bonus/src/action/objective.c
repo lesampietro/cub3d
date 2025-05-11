@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   objective.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fcaldas- <fcaldas-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nasser <nasser@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 23:53:32 by fcaldas-          #+#    #+#             */
-/*   Updated: 2025/05/10 23:53:33 by fcaldas-         ###   ########.fr       */
+/*   Updated: 2025/05/11 17:08:56 by nasser           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	detect_item(t_game *game)
 	{
 		if (game->element[i].type == ITEM && game->element[i].health
 			> 0 && is_close(game, i))
-		{	
+		{
 			game->element[i].health = 0;
 			game->element[i].alive = false;
 			game->item_count++;

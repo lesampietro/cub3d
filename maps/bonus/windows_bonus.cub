@@ -6,6 +6,12 @@ WE ./assets/windows_maze/wall.png
 
 EA ./assets/windows_maze/wall.png
 
+EH ./assets/enemies/wizard_strucky.png
+ES ./assets/enemies/wizard_attack3.png
+EI ./assets/enemies/wizard_idle.png
+
+IT ./assets/windows_maze/rat.png
+HE ./assets/items/red_potion.png
 
 C 200,200,200
 
