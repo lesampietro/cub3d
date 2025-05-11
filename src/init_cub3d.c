@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_cub3d.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fcaldas- <fcaldas-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nasser <nasser@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 23:55:21 by fcaldas-          #+#    #+#             */
-/*   Updated: 2025/05/10 23:55:22 by fcaldas-         ###   ########.fr       */
+/*   Updated: 2025/05/11 15:42:39 by nasser           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,14 +36,8 @@ static void	define_initial_plane(t_game *game)
 	}
 }
 
-void	init_default_values(t_game *game)
-{
-	game->player_health = 100;
-}
-
 void	init_window(t_game *game)
 {
-	init_default_values(game);
 	define_initial_plane(game);
 	mlx_set_setting(MLX_STRETCH_IMAGE, 1);
 	game->mlx = mlx_init(WINDOW_WIDTH, WINDOW_HEIGHT, "Cub3D", true);
@@ -55,11 +49,11 @@ int32_t	init_game(char *argv, t_game *game)
 {
 	(void)argv;
 	init_window(game);
-	mlx_set_cursor_mode(game->mlx, MLX_MOUSE_DISABLED);
-	mlx_set_mouse_pos(game->mlx, WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2);
-	game->mouse_prev_x = WINDOW_WIDTH / 2;
+	// mlx_set_cursor_mode(game->mlx, MLX_MOUSE_DISABLED);
+	// mlx_set_mouse_pos(game->mlx, WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2);
+	// game->mouse_prev_x = WINDOW_WIDTH / 2;
 	mlx_key_hook(game->mlx, key_hook, game);
-	mlx_mouse_hook(game->mlx, mouse_hook, game);
+	// mlx_mouse_hook(game->mlx, mouse_hook, game);
 	mlx_loop_hook(game->mlx, frame_loop, game);
 	mlx_loop(game->mlx);
 	mlx_close_window(game->mlx);

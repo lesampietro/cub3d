@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   action_key_hook.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fcaldas- <fcaldas-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nasser <nasser@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 23:53:02 by fcaldas-          #+#    #+#             */
-/*   Updated: 2025/05/10 23:53:03 by fcaldas-         ###   ########.fr       */
+/*   Updated: 2025/05/11 15:28:12 by nasser           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,10 +55,6 @@ void	key_hook(mlx_key_data_t keydata, void *param)
 	game = (t_game *)param;
 	if (keydata.key == MLX_KEY_ESCAPE)
 		free_and_exit(game, 0);
-	if (mlx_is_mouse_down(game->mlx, MLX_MOUSE_BUTTON_LEFT))
-		game->keys.mouse_left = true;
-	else
-		game->keys.mouse_left = false;
 	if (keydata.action == MLX_PRESS || keydata.action == MLX_REPEAT)
 		pressed(keydata, game);
 	else if (keydata.action == MLX_RELEASE)

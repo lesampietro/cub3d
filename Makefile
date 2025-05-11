@@ -25,22 +25,8 @@ FILES	= main.c \
 			graphics/raycasting.c \
 			graphics/vector_operations.c \
 			graphics/walls.c \
-			graphics/minimap.c \
-			graphics/element_raycast.c \
-			graphics/element_raycast_utils.c \
-			graphics/elements_sorting.c \
-			graphics/first_person.c \
-			graphics/ui.c \
-			graphics/progress_bar.c \
 			action/action_key_hook.c \
 			action/move_logic.c \
-			action/mouse_hook.c \
-			action/shooting.c \
-			action/shooting_utils.c \
-			action/enemy_shots.c \
-			action/life_check.c \
-			action/objective.c \
-			action/damage_animation.c \
 			init/texture.c \
 			init/utils.c \
 			validation/colour_validation_utils.c \

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_validation_aux.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsampiet <lsampiet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nasser <nasser@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 23:58:10 by lsampiet          #+#    #+#             */
-/*   Updated: 2025/05/10 23:58:11 by lsampiet         ###   ########.fr       */
+/*   Updated: 2025/05/11 15:30:54 by nasser           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,9 +85,6 @@ void	is_surrounded_by_walls(t_data *data, char **map)
 		while (map[i][j])
 		{
 			check_element_on_edge(data, '0', i, j);
-			check_element_on_edge(data, 'X', i, j);
-			check_element_on_edge(data, 'I', i, j);
-			check_element_on_edge(data, 'H', i, j);
 			check_element_on_edge(data, 'S', i, j);
 			check_element_on_edge(data, 'N', i, j);
 			check_element_on_edge(data, 'E', i, j);

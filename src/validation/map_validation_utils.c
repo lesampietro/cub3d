@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_validation_utils.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsampiet <lsampiet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nasser <nasser@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 23:58:14 by lsampiet          #+#    #+#             */
-/*   Updated: 2025/05/10 23:58:15 by lsampiet         ###   ########.fr       */
+/*   Updated: 2025/05/11 15:43:02 by nasser           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,7 @@ int	safe_open(t_data *data, char *filename)
 int	is_valid_char(char c)
 {
 	return (c == '1' || c == '0' || c == ' ' \
-		|| c == 'S' || c == 'N' || c == 'E' || c == 'W'
-		|| c == 'X' || c == 'I' || c == 'H' );
+		|| c == 'S' || c == 'N' || c == 'E' || c == 'W');
 }
 
 bool	is_empty_line_in_map(char **line, int i)
@@ -62,24 +61,3 @@ bool	is_empty_line_in_map(char **line, int i)
 	return (false);
 }
 
-int	count_items(t_data *data)
-{
-	int	i;
-	int	j;
-	int	count;
-
-	count = 0;
-	i = 0;
-	while (data->map[i])
-	{
-		j = 0;
-		while (data->map[i][j])
-		{
-			if (data->map[i][j] == 'I')
-				count++;
-			j++;
-		}
-		i++;
-	}
-	return (count);
-}

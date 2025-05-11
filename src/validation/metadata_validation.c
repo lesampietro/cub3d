@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   metadata_validation.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsampiet <lsampiet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nasser <nasser@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 23:58:24 by lsampiet          #+#    #+#             */
-/*   Updated: 2025/05/10 23:58:25 by lsampiet         ###   ########.fr       */
+/*   Updated: 2025/05/11 15:31:35 by nasser           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,8 +78,7 @@ bool	is_map_line(char *line)
 		{
 			if (line[i] == '1' || line[i] == '0' || ft_isspace(line[i])
 				|| line[i] == 'S' || line[i] == 'N' || line[i] == 'E'
-				|| line[i] == 'W' || line[i] == 'X' || line[i] == 'I'
-				|| line[i] == 'H')
+				|| line[i] == 'W')
 				map = true;
 			else
 			{

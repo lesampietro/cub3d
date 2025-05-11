@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_validation.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsampiet <lsampiet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nasser <nasser@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 23:58:20 by lsampiet          #+#    #+#             */
-/*   Updated: 2025/05/10 23:58:21 by lsampiet         ###   ########.fr       */
+/*   Updated: 2025/05/11 15:43:11 by nasser           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,6 @@ void	validate_map(t_data *data)
 {
 	check_map_info(data);
 	is_surrounded_by_walls(data, data->map);
-	check_map_elements(data, data->map);
 }
 
 void	process_map(int argc, char **argv, t_data *data)
@@ -99,6 +98,5 @@ void	process_map(int argc, char **argv, t_data *data)
 	free(map_line);
 	validate_map(data);
 	process_info(data);
-	data->game->total_items = count_items(data);
 	close(data->fd);
 }
