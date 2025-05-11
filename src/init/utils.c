@@ -12,3 +12,8 @@ uint32_t	get_texture_pixel(mlx_texture_t *texture, int x, int y)
 	pixel = &texture->pixels[texture_pos];
 	return (pixel[0] << 24 | pixel[1] << 16 | pixel[2] << 8 | pixel[3]);
 }
+
+uint32_t	convert_rgb(int r, int g, int b)
+{
+	return (r << 24 | g << 16 | b << 8 | 255);
+}
