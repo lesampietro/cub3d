@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   metadata_validation.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsampiet <lsampiet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nasser <nasser@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 23:58:24 by lsampiet          #+#    #+#             */
-/*   Updated: 2025/05/10 23:58:25 by lsampiet         ###   ########.fr       */
+/*   Updated: 2025/05/11 16:50:17 by nasser           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,11 +50,13 @@ static void	is_empty_file(char *line)
 
 static void	check_invalid_count(t_data *data, int count, char *line)
 {
-	if (count == 6)
+	if (count == 11)
 	{
 		if (data->direction[NORTH] && data->direction[SOUTH] \
 			&& data->direction[EAST] && data->direction[WEST] \
-			&& data->floor && data->ceiling)
+			&& data->game->hit_text_path && data->game->shooting_text_path \
+			&& data->game->idle_text_path && data->game->item_text_path \
+			&& data->game->health_text_path)
 			return ;
 	}
 	printf(BPINK"Error: missing or duplicated texture/colour info"RST);

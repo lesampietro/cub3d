@@ -6,28 +6,27 @@
 /*   By: nasser <nasser@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 23:58:27 by lsampiet          #+#    #+#             */
-/*   Updated: 2025/05/11 16:28:04 by nasser           ###   ########.fr       */
+/*   Updated: 2025/05/11 16:49:42 by nasser           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-static void	fill_element_info(t_element *e)
+static void	fill_element_info(t_element *e, t_game *game)
 {
 	if (e->type == ENEMY)
 	{
-		e->idle_texture_path = "./assets/enemies/wizard idle.png";
-		e->shooting_texture_path = "./assets/enemies/wizard attack3.png";
-		e->hit_texture_path = "./assets/enemies/wizard_strucky.png";
+		e->idle_texture_path = game->idle_text_path;
+		e->shooting_texture_path = game->shooting_text_path;
+		e->hit_texture_path = game->hit_text_path;
 	}
 	else if (e->type == HEALTH)
 	{
 		e->health = POTION_HEALTH;
-		e->idle_texture_path = "./assets/items/red_potion.png";
+		e->idle_texture_path = game->health_text_path;
 	}
 	else if (e->type == ITEM)
-		e->idle_texture_path = "./assets/windows/rat.png"; 
-	// e->idle_texture_path = "./assets/items/key.png";
+		e->idle_texture_path = game->item_text_path;
 }
 
 static void	process_element(t_data *data, int x, int y, char c)
@@ -47,7 +46,7 @@ static void	process_element(t_data *data, int x, int y, char c)
 		e->type = ITEM;
 	else if (c == 'H')
 		e->type = HEALTH;
-	fill_element_info(e);
+	fill_element_info(e, data->game);
 	data->game->element_count++;
 }
 

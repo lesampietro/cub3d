@@ -3,6 +3,13 @@ NO ./assets/textures/walls/33-50/Asset14.png
 WE ./assets/textures/TormentTextures/TrueColour/str_stoneflr6.png
 EA ./assets/textures/TormentTextures/TrueColour/str_metalpan3.png
 
+EH ./assets/enemies/wizard_strucky.png
+ES ./assets/enemies/wizard_attack3.png
+EI ./assets/enemies/wizard_idle.png
+
+IT ./assets/items/key.png
+HE ./assets/items/red_potion.png
+
 C 130,0,130
 F 190,128,60
 

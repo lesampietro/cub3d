@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_and_save_metadata.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsampiet <lsampiet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nasser <nasser@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 23:58:31 by lsampiet          #+#    #+#             */
-/*   Updated: 2025/05/10 23:58:32 by lsampiet         ###   ########.fr       */
+/*   Updated: 2025/05/11 17:00:14 by nasser           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ static bool	save_texture_path(char *line, char **path, int *count)
 {
 	char	*tmp;
 
+	printf(BPINK "Saving texture path: %s\n" RST, line);
 	tmp = check_line_info(line);
 	if (!check_texture(tmp))
 	{
@@ -47,30 +48,6 @@ static bool	save_texture_path(char *line, char **path, int *count)
 	}
 	(*count)++;
 	free(tmp);
-	return (true);
-}
-
-static bool	save_colour_rgb(char *line, int **colour_ptr, int *count)
-{
-	char		**split;
-	char		*colour;
-	static int	count_colours;
-
-	colour = NULL;
-	if (!validate_colour_info(line, &colour))
-		return (false);
-	if (count_colours > 1)
-	{
-		printf(BPINK "Error: duplicated colour info\n" RST);
-		free(colour);
-		return (false);
-	}
-	split = ft_split(colour, ',');
-	allocate_colour(colour_ptr, split);
-	ft_free_split(split);
-	free(colour);
-	count_colours++;
-	(*count)++;
 	return (true);
 }
 
@@ -97,6 +74,21 @@ static bool	save_converted_colour(char id, char *line, t_data *data, int *count)
 	return (false);
 }
 
+static bool	read_aux(int *count, char *line, t_data *data)
+{
+	if (!ft_strncmp("EH", line, 2))
+		return (save_texture_path(line, &(data->game->hit_text_path), count));
+	else if (!ft_strncmp("ES", line, 2))
+		return (save_texture_path(line, &(data->game->shooting_text_path), count));
+	else if (!ft_strncmp("EI", line, 2))
+		return (save_texture_path(line, &(data->game->idle_text_path), count));
+	else if (!ft_strncmp("IT", line, 2))
+		return (save_texture_path(line, &(data->game->item_text_path), count));
+	else if (!ft_strncmp("HE", line, 2))
+		return (save_texture_path(line, &(data->game->health_text_path), count));
+	return (false);
+}
+
 bool	read_textures_n_colours(int *count, char *line, t_data *data)
 {
 	while (ft_isspace(*line))
@@ -115,6 +107,7 @@ bool	read_textures_n_colours(int *count, char *line, t_data *data)
 		return (save_converted_colour('C', line, data, count));
 	else if (!ft_strncmp("F", line, 1))
 		return (save_converted_colour('F', line, data, count));
+	return (read_aux(count, line, data));
 	printf(BPINK "Error: invalid texture/colour info\n" RST);
 	return (false);
 }

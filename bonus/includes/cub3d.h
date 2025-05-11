@@ -6,7 +6,7 @@
 /*   By: nasser <nasser@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 23:52:23 by fcaldas-          #+#    #+#             */
-/*   Updated: 2025/05/11 16:13:05 by nasser           ###   ########.fr       */
+/*   Updated: 2025/05/11 16:46:44 by nasser           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,6 +151,11 @@ typedef struct s_game
 	char			*weapon_text_path;
 	mlx_texture_t	*weapon_shooting_texture;
 	char			*weapon_shooting_text_path;
+	char			*item_text_path;
+	char			*idle_text_path;
+	char			*shooting_text_path;
+	char			*hit_text_path;
+	char			*health_text_path;
 	t_data			*data;
 	t_raycasting	*raycasting;
 	t_keys			keys;

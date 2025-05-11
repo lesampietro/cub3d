@@ -24,5 +24,6 @@ void		process_info(t_data *data);
 bool		read_textures_n_colours(int *count, char *line, t_data *data);
 bool		validate_colour_info(char *line, char **colour);
 void		allocate_colour(int **color_ptr, char **split);
+bool		save_colour_rgb(char *line, int **colour_ptr, int *count);
 
 #endif
