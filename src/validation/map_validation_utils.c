@@ -25,7 +25,7 @@ void	safe_malloc(t_data *data, void **to_malloc, int size)
 
 int	safe_open(t_data *data, char *filename)
 {
-	int fd;
+	int	fd;
 
 	fd = open(filename, O_RDONLY);
 	if (fd == -1)

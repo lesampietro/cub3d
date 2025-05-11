@@ -74,7 +74,7 @@ void	validate_map(t_data *data)
 void	process_map(int argc, char **argv, t_data *data)
 {
 	char	*map_line;
-	
+
 	map_line = NULL;
 	check_args(argc);
 	is_valid_ext(argv[1]);
@@ -84,8 +84,9 @@ void	process_map(int argc, char **argv, t_data *data)
 	count_map_size(data, &map_line);
 	data->fd = safe_open(data, argv[1]);
 	get_map(data, &map_line);
+	free(map_line);
+	process_info(data);
 	validate_map(data);
 	data->game->total_items = count_items(data);
 	close(data->fd);
-	free(map_line);
 }

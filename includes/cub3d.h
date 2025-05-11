@@ -219,6 +219,7 @@ void		init_elements(t_game *game);
 
 //MAP VALIDATION
 void		process_map(int argc, char **argv, t_data *data);
+int			count_elements(t_data *data);
 void		is_empty_file(char *line);
 int			safe_open(t_data *data, char *filename);
 void		safe_malloc(t_data *data, void **to_malloc, int size);
@@ -235,7 +236,7 @@ void		check_map_elements(t_data *data, char **map);
 void		count_map_size(t_data *data, char **map_line);
 int			count_items(t_data *data);
 void		get_map(t_data *data, char **map_line);
-void		process_info(char *map_line, t_data *data, int map_index);
+void		process_info(t_data *data);
 
 	// GRAPHICS
 void		ui_init(t_game *game);

@@ -31,8 +31,8 @@ bool	save_texture_path(char *line, char **path, int *count)
 
 bool	save_colour_path(char *line, int **color_ptr, int *count)
 {
-	char	**split;
-	char	*colour;
+	char		**split;
+	char		*colour;
 	static int	count_colours;
 
 	colour = check_line_info(line);
@@ -65,6 +65,7 @@ bool	save_colour_path(char *line, int **color_ptr, int *count)
 	(*count)++;
 	return (true);
 }
+
 
 bool	read_textures_n_colours(int *count, char *line, t_data *data)
 {

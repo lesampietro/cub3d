@@ -82,7 +82,7 @@ void	get_map(t_data *data, char **map_line)
 		fill_with_spaces(data->map[i], tmp, data->col);
 		free(tmp);
 		free(*map_line);
-		process_info(data->map[i], data, i);
+		// process_info(data->map[i], data, i);
 		*map_line = get_next_line(data->fd);
 		i++;
 	}
