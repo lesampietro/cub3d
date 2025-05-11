@@ -102,7 +102,10 @@ bool	is_map_line(char *line)
 			i++;
 		while (line[i] && line[i] != '\n')
 		{
-			if (line[i] == '1' || line[i] == '0' || ft_isspace(line[i]))
+			if (line[i] == '1' || line[i] == '0' || ft_isspace(line[i])
+				|| line[i] == 'S' || line[i] == 'N' || line[i] == 'E'
+				|| line[i] == 'W' || line[i] == 'X' || line[i] == 'I'
+				|| line[i] == 'H')
 				map = true;
 			else
 			{
@@ -125,9 +128,7 @@ void	check_map_metadata(t_data *data, char **map_line)
 	while (*map_line)
 	{
 		if (is_map_line(*map_line))
-		{
 			break ;
-		}
 		if (!read_textures_n_colours(&count, *map_line, data))
 		{
 			free(*map_line);
