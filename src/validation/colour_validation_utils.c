@@ -1,6 +1,6 @@
 #include "../../includes/cub3d.h"
 
-bool	is_invalid_char_within_colour(char **split, int *i)
+static bool	is_invalid_char_within_colour(char **split, int *i)
 {
 	int	j;
 
@@ -40,17 +40,28 @@ bool	check_color(char *line)
 	return (true);
 }
 
-void	check_invalid_count(t_data *data, int count, char *line)
+bool	validate_colour_info(char *line, char **colour)
 {
-	if (count == 6)
+	*colour = check_line_info(line);
+	if (!*colour)
+		return (false);
+	if (!check_color(*colour))
 	{
-		if (data->direction[NORTH] && data->direction[SOUTH] \
-			&& data->direction[EAST] && data->direction[WEST] \
-			&& data->floor && data->ceiling)
-			return ;
+		free(colour);
+		return (false);
 	}
-	printf(BPINK"Error: missing or duplicated texture/colour info"RST);
-	free(line);
-	line = NULL;
-	free_and_exit(data->game, 1);
+	return (true);
+}
+
+void	allocate_colour(int **color_ptr, char **split)
+{
+	*color_ptr = malloc(sizeof(int) * 3);
+	if (!*color_ptr)
+	{
+		printf(BPINK "Error: memory allocation failed\n" RST);
+		exit(EXIT_FAILURE);
+	}
+	(*color_ptr)[0] = ft_atoi(split[0]);
+	(*color_ptr)[1] = ft_atoi(split[1]);
+	(*color_ptr)[2] = ft_atoi(split[2]);
 }

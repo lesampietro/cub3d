@@ -220,14 +220,14 @@ void		init_elements(t_game *game);
 //MAP VALIDATION
 void		process_map(int argc, char **argv, t_data *data);
 int			count_elements(t_data *data);
-void		is_empty_file(char *line);
 int			safe_open(t_data *data, char *filename);
 void		safe_malloc(t_data *data, void **to_malloc, int size);
 void		check_map_metadata(t_data *data, char **map_line);
 bool		read_textures_n_colours(int *count, char *line, t_data *data);
 char		*check_line_info(char *line);
 bool		check_color(char *line);
-void		check_invalid_count(t_data *data, int count, char *line);
+bool		validate_colour_info(char *line, char **colour);
+void		allocate_colour(int **color_ptr, char **split);
 void		find_map_first_line(int fd, char **map_line);
 void		check_map_info(t_data *data);
 int			is_valid_char(char c);

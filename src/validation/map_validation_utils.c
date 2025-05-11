@@ -1,18 +1,5 @@
 #include "../../includes/cub3d.h"
 
-void	is_empty_file(char *line)
-{
-	while (line && ft_isspace(*line))
-		line++;
-	if (!line)
-	{
-		printf(BPINK"Error: file is empty\n"RST);
-		free(line);
-		line = NULL;
-		exit(EXIT_FAILURE);
-	}
-}
-
 void	safe_malloc(t_data *data, void **to_malloc, int size)
 {
 	*to_malloc = malloc(size);
@@ -61,4 +48,26 @@ bool	is_empty_line_in_map(char **line, int i)
 		}
 	}
 	return (false);
+}
+
+int	count_items(t_data *data)
+{
+	int	i;
+	int	j;
+	int	count;
+
+	count = 0;
+	i = 0;
+	while (data->map[i])
+	{
+		j = 0;
+		while (data->map[i][j])
+		{
+			if (data->map[i][j] == 'I')
+				count++;
+			j++;
+		}
+		i++;
+	}
+	return (count);
 }

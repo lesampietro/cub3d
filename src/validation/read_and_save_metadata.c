@@ -1,18 +1,27 @@
 #include "../../includes/cub3d.h"
 
-bool	save_texture_path(char *line, char **path, int *count)
+static bool	check_texture(char *tmp)
 {
-	char	*tmp;
-	tmp = check_line_info(line);
 	if (!tmp)
 	{
 		printf(BPINK "Error: invalid texture/colour info\n" RST);
-		free(tmp);
 		return (false);
 	}
 	if (ft_strncmp("./", tmp, 2) != 0)
 	{
 		printf(BPINK "Error: invalid texture path\n" RST);
+		return (false);
+	}
+	return (true);
+}
+
+static bool	save_texture_path(char *line, char **path, int *count)
+{
+	char	*tmp;
+
+	tmp = check_line_info(line);
+	if (!check_texture(tmp))
+	{
 		free(tmp);
 		return (false);
 	}
@@ -20,7 +29,7 @@ bool	save_texture_path(char *line, char **path, int *count)
 		*path = strdup(tmp);
 	else
 	{
-		printf(BPINK "Error: more than 4 textures\n" RST);
+		printf(BPINK "Error: Duplicated texture\n" RST);
 		free(tmp);
 		return (false);
 	}
@@ -29,33 +38,7 @@ bool	save_texture_path(char *line, char **path, int *count)
 	return (true);
 }
 
-bool	validate_colour_info(char *line, char **colour)
-{
-	*colour = check_line_info(line);
-	if (!*colour)
-		return (false);
-	if (!check_color(*colour))
-	{
-		free(colour);
-		return (false);
-	}
-	return (true);
-}
-
-void	allocate_colour(int **color_ptr, char **split)
-{
-	*color_ptr = malloc(sizeof(int) * 3);
-	if (!*color_ptr)
-	{
-		printf(BPINK "Error: memory allocation failed\n" RST);
-		exit(EXIT_FAILURE);
-	}
-	(*color_ptr)[0] = ft_atoi(split[0]);
-	(*color_ptr)[1] = ft_atoi(split[1]);
-	(*color_ptr)[2] = ft_atoi(split[2]);
-}
-
-bool	save_colour_rgb(char *line, int **colour_ptr, int *count)
+static bool	save_colour_rgb(char *line, int **colour_ptr, int *count)
 {
 	char		**split;
 	char		*colour;
@@ -79,7 +62,7 @@ bool	save_colour_rgb(char *line, int **colour_ptr, int *count)
 	return (true);
 }
 
-bool	save_converted_colour(char id, char *line, t_data *data, int *count)
+static bool	save_converted_colour(char id, char *line, t_data *data, int *count)
 {
 	if (id == 'C')
 	{

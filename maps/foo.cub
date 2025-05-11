@@ -5,7 +5,7 @@ WE ./textures/pattern2.png
 SO ./textures/pattern4.png
 
 EA ./textures/pattern1.png
-
+EA ./textures/pattern1.png
 
 F 220,100,0
 
