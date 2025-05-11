@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cub3d.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fcaldas- <fcaldas-@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/05/10 23:52:23 by fcaldas-          #+#    #+#             */
+/*   Updated: 2025/05/10 23:52:53 by fcaldas-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef CUB3D_H
 # define CUB3D_H
 
@@ -255,14 +267,11 @@ void		init_textures(t_game *game);
 uint32_t	get_texture_pixel(mlx_texture_t *texture, int x, int y);
 void		draw_minimap(void *param);
 void		draw_progress_bar(t_game *game);
-
 void		draw_weapon(t_game *game);
-
 void		render_elements(t_game *game);
 void		compute_sprite_data(t_game *game, t_element *e,
 				t_element_raycast *d);
 void		sort_elements(t_game *game);
-
 
 //MOVEMENT
 void		key_hook(mlx_key_data_t keydata, void *param);

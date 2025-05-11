@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   texture.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fcaldas- <fcaldas-@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/05/10 23:54:31 by fcaldas-          #+#    #+#             */
+/*   Updated: 2025/05/10 23:56:56 by fcaldas-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/cub3d.h"
 
 static void	load_weapon_textures(t_game *game)
@@ -7,7 +19,7 @@ static void	load_weapon_textures(t_game *game)
 		mlx_load_png(game->weapon_shooting_text_path);
 	if (!game->weapon_texture || !game->weapon_shooting_texture)
 	{
-		printf("Error loading weapon textures\n");
+		printf(BPINK"Error loading weapon textures\n"RST);
 		free_and_exit(game, 1);
 	}
 }
@@ -22,7 +34,8 @@ static void	load_wall_textures(t_game *game)
 		game->texture[i] = mlx_load_png(game->data->direction[i]);
 		if (!game->texture[i])
 		{
-			printf("Error loading texture: %s\n", game->data->direction[i]);
+			printf(BPINK"Error loading texture: %s\n"RST,
+				game->data->direction[i]);
 			free_and_exit(game, 1);
 		}
 		i++;
@@ -38,7 +51,7 @@ static void	load_enemy_textures(t_game *game, t_element *element)
 	if (!element->idle_texture || !element->shooting_texture || \
 		!element->hit_texture)
 	{
-		printf("Error loading texture for ENEMY element\n");
+		printf(BPINK"Error loading texture for ENEMY element\n"RST);
 		free_and_exit(game, 1);
 	}
 }
@@ -50,9 +63,9 @@ static void	load_pickup_textures(t_game *game, t_element *element, int type)
 	if (!element->idle_texture)
 	{
 		if (type == ITEM)
-			printf("Error loading texture for ITEM element\n");
+			printf(BPINK"Error loading texture for ITEM element\n"RST);
 		else
-			printf("Error loading texture for HEALTH element\n");
+			printf(BPINK"Error loading texture for HEALTH element\n"RST);
 		free_and_exit(game, 1);
 	}
 }
