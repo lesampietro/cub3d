@@ -1,19 +1,15 @@
 #include "../../includes/cub3d.h"
 
-bool	check_color(char *line)
+bool	is_invalid_char_within_colour(char **split, int *i)
 {
-	int		i;
-	int		j;
-	char	**split;
+	int	j;
 
-	i = 0;
-	split = ft_split(line, ',');
-	while (split[i])
+	while (split[*i])
 	{
 		j = 0;
-		while (split[i][j])
+		while (split[*i][j])
 		{
-			if (!ft_isdigit(split[i][j]))
+			if (!ft_isdigit(split[*i][j]))
 			{
 				printf(BPINK "Error: invalid colour info\n" RST);
 				ft_free_split(split);
@@ -21,8 +17,19 @@ bool	check_color(char *line)
 			}
 			j++;
 		}
-		i++;
+		(*i)++;
 	}
+	return (true);
+}
+
+bool	check_color(char *line)
+{
+	int		i;
+	char	**split;
+
+	i = 0;
+	split = ft_split(line, ',');
+	is_invalid_char_within_colour(split, &i);
 	if (i != 3 || split[3])
 	{
 		printf(BPINK "Error: invalid colour info\n" RST);
