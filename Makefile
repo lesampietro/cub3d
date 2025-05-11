@@ -42,6 +42,7 @@ FILES	= main.c \
 			validation/map_validation.c \
 			validation/map_validation_utils.c \
 			validation/map_validation_aux.c \
+			validation/read_and_save_metadata.c \
 			validation/metadata_validation.c \
 			validation/metadata_validation_utils.c \
 			validation/get_map.c \
