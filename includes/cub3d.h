@@ -224,6 +224,7 @@ void		is_empty_file(char *line);
 int			safe_open(t_data *data, char *filename);
 void		safe_malloc(t_data *data, void **to_malloc, int size);
 void		check_map_metadata(t_data *data, char **map_line);
+bool		read_textures_n_colours(int *count, char *line, t_data *data);
 char		*check_line_info(char *line);
 bool		check_color(char *line);
 void		check_invalid_count(t_data *data, int count, char *line);
