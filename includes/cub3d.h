@@ -6,7 +6,7 @@
 /*   By: nasser <nasser@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 23:52:23 by fcaldas-          #+#    #+#             */
-/*   Updated: 2025/05/11 17:11:26 by nasser           ###   ########.fr       */
+/*   Updated: 2025/05/11 17:18:11 by nasser           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,34 +46,7 @@
 # define BGRN "\033[1;32m"
 # define RST "\033[0m"
 
-typedef struct s_game		t_game;
-typedef struct s_data		t_data;
-typedef struct s_raycasting	t_raycasting;
-typedef struct s_keys		t_keys;
-typedef struct s_vector		t_vector;
-typedef struct s_coord		t_coord;
-typedef struct s_wall		t_wall;
-
-typedef enum e_dir
-{
-	NORTH,
-	EAST,
-	SOUTH,
-	WEST
-}	t_dir;
-
-typedef struct s_vector
-{
-	float	x;
-	float	y;
-}	t_vector;
-
-typedef struct s_coord
-{
-	int		x;
-	int		y;
-}	t_coord;
-
+# include "types.h"
 # include "validation.h"
 # include "engine.h"
 
