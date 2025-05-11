@@ -2,8 +2,8 @@
 
 void	find_map_first_line(int fd, char **map_line)
 {
-	size_t i;
-	
+	size_t	i;
+
 	while (*map_line)
 	{
 		i = 0;
@@ -13,11 +13,11 @@ void	find_map_first_line(int fd, char **map_line)
 			{
 				if ((*map_line)[i] != '1' && !ft_isspace((*map_line)[i]) \
 				&& (*map_line)[i] != '\n' && (*map_line)[i] != '0')
-					break;
+					break ;
 				i++;
 			}
 			if ((*map_line)[i] == '\0' || (*map_line)[i] == '\n')
-				return;
+				return ;
 		}
 		free(*map_line);
 		*map_line = get_next_line(fd);
@@ -46,7 +46,7 @@ void	trim_empty_lines_at_end(t_data *data, int i)
 			i--;
 		}
 		else
-			break;
+			break ;
 	}
 	data->lin = i;
 }
@@ -73,12 +73,13 @@ void	get_map(t_data *data, char **map_line)
 	i = 0;
 	*map_line = get_next_line(data->fd);
 	find_map_first_line(data->fd, map_line);
-	safe_malloc(data, (void**)&data->map, \
+	safe_malloc(data, (void **)&data->map, \
 							sizeof(char *) * (data->lin + 1));
 	while (*map_line && i < data->lin)
 	{
 		tmp = ft_strtrim(*map_line, "\n");
-		safe_malloc(data, (void**)&data->map[i], sizeof(char) * (data->col + 1));
+		safe_malloc(data, (void **)&data->map[i], \
+							sizeof(char) * (data->col + 1));
 		fill_with_spaces(data->map[i], tmp, data->col);
 		free(tmp);
 		free(*map_line);

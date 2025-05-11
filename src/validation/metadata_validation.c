@@ -23,9 +23,37 @@ char	*check_line_info(char *line)
 	return (NULL);
 }
 
+static void	is_empty_file(char *line)
+{
+	while (line && ft_isspace(*line))
+		line++;
+	if (!line)
+	{
+		printf(BPINK"Error: file is empty\n"RST);
+		free(line);
+		line = NULL;
+		exit(EXIT_FAILURE);
+	}
+}
+
+static void	check_invalid_count(t_data *data, int count, char *line)
+{
+	if (count == 6)
+	{
+		if (data->direction[NORTH] && data->direction[SOUTH] \
+			&& data->direction[EAST] && data->direction[WEST] \
+			&& data->floor && data->ceiling)
+			return ;
+	}
+	printf(BPINK"Error: missing or duplicated texture/colour info"RST);
+	free(line);
+	line = NULL;
+	free_and_exit(data->game, 1);
+}
+
 bool	is_map_line(char *line)
 {
-	int	i;
+	int		i;
 	bool	map;
 
 	i = 0;

@@ -39,13 +39,13 @@ FILES	= main.c \
 			action/damage_animation.c \
 			init/texture.c \
 			init/utils.c \
-			validation/map_validation.c \
-			validation/map_validation_utils.c \
-			validation/map_validation_aux.c \
-			validation/read_and_save_metadata.c \
-			validation/metadata_validation.c \
-			validation/metadata_validation_utils.c \
+			validation/colour_validation_utils.c \
 			validation/get_map.c \
+			validation/map_validation_aux.c \
+			validation/map_validation_utils.c \
+			validation/map_validation.c \
+			validation/metadata_validation.c \
+			validation/read_and_save_metadata.c \
 			validation/process_map_info.c \
 
 HEADERS	= -I ./include -I $(MLX_PATH)/include -I ./libft
