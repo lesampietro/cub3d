@@ -1,10 +1,10 @@
-NO ./textures/wall.png
+NO ./assets/windows_maze/wall.png
 
-SO ./textures/wall.png
+SO ./assets/windows_maze/wall.png
 
-WE ./textures/wall.png
+WE ./assets/windows_maze/wall.png
 
-EA ./textures/wall.png
+EA ./assets/windows_maze/wall.png
 
 
 C 200,200,200
@@ -12,8 +12,8 @@ C 200,200,200
 F 130,100,0
 
 111111111
-1S10I01I1
+1S1000101
 101010101
 101010101
-1I0010I01
+100010001
 111111111

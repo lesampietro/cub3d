@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   process_map_info.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsampiet <lsampiet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nasser <nasser@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 23:58:27 by lsampiet          #+#    #+#             */
-/*   Updated: 2025/05/10 23:58:28 by lsampiet         ###   ########.fr       */
+/*   Updated: 2025/05/11 16:28:04 by nasser           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ static void	fill_element_info(t_element *e)
 		e->idle_texture_path = "./assets/items/red_potion.png";
 	}
 	else if (e->type == ITEM)
-		e->idle_texture_path = "./assets/items/key.png";
+		e->idle_texture_path = "./assets/windows/rat.png"; 
+	// e->idle_texture_path = "./assets/items/key.png";
 }
 
 static void	process_element(t_data *data, int x, int y, char c)

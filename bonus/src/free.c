@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fcaldas- <fcaldas-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nasser <nasser@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 23:55:48 by fcaldas-          #+#    #+#             */
-/*   Updated: 2025/05/11 00:14:42 by fcaldas-         ###   ########.fr       */
+/*   Updated: 2025/05/11 16:32:45 by nasser           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,11 @@ void	free_texture_paths(t_game *game)
 	i = 0;
 	while (i < game->element_count)
 	{
-		if (game->element[i].idle_texture_path)
+		if (game->element[i].idle_texture)
 			mlx_delete_texture(game->element[i].idle_texture);
-		if (game->element[i].shooting_texture_path)
+		if (game->element[i].shooting_texture)
 			mlx_delete_texture(game->element[i].shooting_texture);
-		if (game->element[i].hit_texture_path)
+		if (game->element[i].hit_texture)
 			mlx_delete_texture(game->element[i].hit_texture);
 		i++;
 	}
