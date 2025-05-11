@@ -6,7 +6,7 @@
 /*   By: fcaldas- <fcaldas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 23:55:48 by fcaldas-          #+#    #+#             */
-/*   Updated: 2025/05/10 23:55:49 by fcaldas-         ###   ########.fr       */
+/*   Updated: 2025/05/11 00:14:42 by fcaldas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,8 @@ void	free_and_exit(t_game *game, int code)
 	free_map(game->data->map);
 	free_color_array(game->data);
 	free_texture_paths(game);
+	if (game->data->fd)
+		close(game->data->fd);
 	if (game->mlx)
 	{
 		mlx_close_window(game->mlx);

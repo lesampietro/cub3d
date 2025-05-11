@@ -70,3 +70,30 @@
    fun:_dl_init
    ...
 }
+{
+   <dl_zero_byte_leak_exact>
+   Memcheck:Leak
+   match-leak-kinds: definite
+   fun:malloc
+   fun:*malloc*
+   fun:_dl_find_object_update
+   fun:dl_open_worker_begin
+   fun:_dl_catch_exception
+   fun:dl_open_worker
+   fun:_dl_catch_exception
+   fun:_dl_open
+   fun:dlopen_doit
+   fun:_dl_catch_exception
+   fun:_dl_catch_error
+   fun:_dlerror_run
+   fun:*dlopen*
+}
+{
+   <dl_load_path_resolution>
+   Memcheck:Addr8
+   fun:strncmp
+   fun:is_dst
+   ...
+   fun:_dl_map_object_deps
+   ...
+}
