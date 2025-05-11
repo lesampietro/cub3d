@@ -13,13 +13,13 @@
 # include "../.lib/MLX42/include/MLX42/MLX42.h"
 # include "../libft/libft.h"
 
-// # define WINDOW_WIDTH 800
-// # define WINDOW_HEIGHT 600
-// # define WEAPON_SCALE 1.5
+# define WINDOW_WIDTH 800
+# define WINDOW_HEIGHT 600
+# define WEAPON_SCALE 1.5
 
-# define WINDOW_WIDTH 1900
-# define WINDOW_HEIGHT 1200
-# define WEAPON_SCALE 2.5
+// # define WINDOW_WIDTH 1900
+// # define WINDOW_HEIGHT 1200
+// # define WEAPON_SCALE 2.5
 
 # define AIM_RADIUS 10
 # define AIM_THICK 2
@@ -223,11 +223,8 @@ int			count_elements(t_data *data);
 int			safe_open(t_data *data, char *filename);
 void		safe_malloc(t_data *data, void **to_malloc, int size);
 void		check_map_metadata(t_data *data, char **map_line);
-bool		read_textures_n_colours(int *count, char *line, t_data *data);
 char		*check_line_info(char *line);
 bool		check_color(char *line);
-bool		validate_colour_info(char *line, char **colour);
-void		allocate_colour(int **color_ptr, char **split);
 void		find_map_first_line(int fd, char **map_line);
 void		check_map_info(t_data *data);
 int			is_valid_char(char c);
@@ -238,6 +235,9 @@ void		count_map_size(t_data *data, char **map_line);
 int			count_items(t_data *data);
 void		get_map(t_data *data, char **map_line);
 void		process_info(t_data *data);
+bool		read_textures_n_colours(int *count, char *line, t_data *data);
+bool		validate_colour_info(char *line, char **colour);
+void		allocate_colour(int **color_ptr, char **split);
 
 	// GRAPHICS
 void		ui_init(t_game *game);
@@ -262,6 +262,7 @@ void		render_elements(t_game *game);
 void		compute_sprite_data(t_game *game, t_element *e,
 				t_element_raycast *d);
 void		sort_elements(t_game *game);
+
 
 //MOVEMENT
 void		key_hook(mlx_key_data_t keydata, void *param);
