@@ -1,10 +1,10 @@
-SO ./assets/textures/walls/33-50/Asset18.png
+SO ./assets/textures/walls/33-50/Asset4.png
 NO ./assets/textures/walls/33-50/Asset14.png
-WE ./assets/textures/TormentTextures/TrueColour/str_stoneflr6.png
-EA ./assets/textures/TormentTextures/TrueColour/str_metalpan3.png
+WE ./assets/textures/walls/1-16/Asset15.png
+EA ./assets/textures/walls/17-32/Asset4.png
 
-C 130,0,130
-F 190,128,60
+C 130,0,50
+F 40,10,40
 
 
                 11111111
@@ -18,7 +18,7 @@ F 190,128,60
   11111111111111111111X0I010010111
                       1111111001
                          1110001
-                           10001
+                    w       10001
                            1001
                           10001
                            1001
