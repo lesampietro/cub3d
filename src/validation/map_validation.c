@@ -67,7 +67,7 @@ void	count_map_size(t_data *data, char **map_line)
 void	validate_map(t_data *data)
 {
 	check_map_info(data);
-	is_surrounded_by_walls(data, data->map, data->lin);
+	is_surrounded_by_walls(data, data->map);
 	check_map_elements(data, data->map);
 }
 
@@ -85,8 +85,8 @@ void	process_map(int argc, char **argv, t_data *data)
 	data->fd = safe_open(data, argv[1]);
 	get_map(data, &map_line);
 	free(map_line);
-	process_info(data);
 	validate_map(data);
+	process_info(data);
 	data->game->total_items = count_items(data);
 	close(data->fd);
 }

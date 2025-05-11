@@ -56,6 +56,7 @@ void	process_info(t_data *data)
 				data->pov = c;
 				data->game->player_pos.x = x + 0.5f;
 				data->game->player_pos.y = y + 0.5f;
+				data->map[y][x] = '0';
 			}
 			if (c == 'X' || c == 'I' || c == 'H')
 				process_element(data, x, y, c);

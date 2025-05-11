@@ -56,7 +56,7 @@ bool	is_map_border(char **map, int lin, int i, int j)
 		printf(BPINK "Error: map is not surrounded by walls at x:%i, y:%i\n" RST, i, j);
 		return (true);
 	}
-	if (!map[i - 1][j] || !map[i + 1][j])
+	if (map[i - 1][j] == ' ' || map[i + 1][j] == ' ')
 	{
 			printf(BPINK "Error: map is not surrounded by walls at x:%i, y:%i\n" RST, i, j);
 			return (true);
@@ -64,7 +64,22 @@ bool	is_map_border(char **map, int lin, int i, int j)
 	return (false);
 }
 
-void	is_surrounded_by_walls(t_data *data, char **map, int lin)
+void	check_element_on_edge(t_data *data, char c, int i, int j)
+{
+	if (data->map[i][j] == c)
+	{
+		if (is_map_border(data->map, data->lin, i, j))
+			free_and_exit(data->game, EXIT_FAILURE);
+		if (ft_isspace(data->map[i - 1][j]) || ft_isspace(data->map[i + 1][j])
+			|| ft_isspace(data->map[i][j - 1]) || ft_isspace(data->map[i][j+1]))
+		{
+			printf(BPINK "Error: map is not surrounded by walls at y:%i, x:%i\n" RST, i, j);
+			free_and_exit(data->game, EXIT_FAILURE);
+		}
+	}
+}
+
+void	is_surrounded_by_walls(t_data *data, char **map)
 {
 	int		i;
 	int		j;
@@ -75,17 +90,14 @@ void	is_surrounded_by_walls(t_data *data, char **map, int lin)
 		j = 0;
 		while (map[i][j])
 		{
-			if (map[i][j] == '0')
-			{
-				if (is_map_border(map, lin, i, j))
-					free_and_exit(data->game, EXIT_FAILURE);
-				if (ft_isspace(map[i - 1][j]) || ft_isspace(map[i + 1][j]) \
-					|| ft_isspace(map[i][j - 1]) || ft_isspace(map[i][j + 1]))
-				{
-					printf(BPINK"Error: map is not surrounded by walls at x:%i, y:%i\n" RST, i, j);
-					free_and_exit(data->game, EXIT_FAILURE);
-				}
-			}
+			check_element_on_edge(data, '0', i, j);
+			check_element_on_edge(data, 'X', i, j);
+			check_element_on_edge(data, 'I', i, j);
+			check_element_on_edge(data, 'H', i, j);
+			check_element_on_edge(data, 'S', i, j);
+			check_element_on_edge(data, 'N', i, j);
+			check_element_on_edge(data, 'E', i, j);
+			check_element_on_edge(data, 'W', i, j);
 			j++;
 		}
 		i++;
@@ -107,10 +119,7 @@ void	check_map_elements(t_data *data, char **map)
 		{
 			if (map[i][j] == 'S' || map[i][j] == 'N' \
 				|| map[i][j] == 'E' || map[i][j] == 'W')
-			{
-				map[i][j] = '0';
 				count++;
-			}
 			j++;
 		}
 		i++;
