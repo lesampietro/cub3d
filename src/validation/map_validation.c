@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_validation.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nasser <nasser@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fcaldas- <fcaldas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 23:58:20 by lsampiet          #+#    #+#             */
-/*   Updated: 2025/05/11 15:43:11 by nasser           ###   ########.fr       */
+/*   Updated: 2025/05/12 18:10:14 by fcaldas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ void	validate_map(t_data *data)
 {
 	check_map_info(data);
 	is_surrounded_by_walls(data, data->map);
+	check_map_elements(data, data->map);
 }
 
 void	process_map(int argc, char **argv, t_data *data)

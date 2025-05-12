@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   validation.h                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fcaldas- <fcaldas-@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/05/12 18:12:07 by fcaldas-          #+#    #+#             */
+/*   Updated: 2025/05/12 18:12:08 by fcaldas-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef VALIDATION_H
 # define VALIDATION_H
 
@@ -12,6 +24,7 @@ char		*check_line_info(char *line);
 bool		check_color(char *line);
 void		find_map_first_line(int fd, char **map_line);
 void		check_map_info(t_data *data);
+void		check_map_elements(t_data *data, char **map);
 int			is_valid_char(char c);
 bool		is_empty_line_in_map(char **line, int i);
 void		is_surrounded_by_walls(t_data *data, char **map);
