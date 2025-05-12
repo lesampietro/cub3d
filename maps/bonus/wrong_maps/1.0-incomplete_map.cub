@@ -1,0 +1,17 @@
+NO ./textures/north.png
+SO ./textures/south.png
+WE ./textures/west.png
+EA ./textures/east.png
+
+EH ./assets/enemies/wizard_strucky.png
+ES ./assets/enemies/wizard_attack3.png
+EI ./assets/enemies/wizard_idle.png
+
+IT ./assets/items/key.png
+HE ./assets/items/red_potion.png
+
+F 220,100,0
+C 225,30,0
+
+111111111
+10000S001

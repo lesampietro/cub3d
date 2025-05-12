@@ -1,15 +1,15 @@
 NO ./assets/windows_maze/wall.png
 
-SO ./assets/windows_maze/wall.png a
+SO ./assets/windows_maze/wall.png
 
 WE ./assets/windows_maze/wall.png
 
 EA ./assets/windows_maze/wall.png
 
 
-C 200,200,200
+C 180,180,180
 
-F 130,100,0
+F 180,130,0
 
 111111111
 1S1000101

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   metadata_validation.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nasser <nasser@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fcaldas- <fcaldas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 23:58:24 by lsampiet          #+#    #+#             */
-/*   Updated: 2025/05/11 16:50:17 by nasser           ###   ########.fr       */
+/*   Updated: 2025/05/12 18:17:15 by fcaldas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ static void	check_invalid_count(t_data *data, int count, char *line)
 			&& data->game->health_text_path)
 			return ;
 	}
-	printf(BPINK"Error: missing or duplicated texture/colour info"RST);
+	printf(BPINK"Error: missing or duplicated texture/colour info\n"RST);
 	free(line);
 	line = NULL;
 	free_and_exit(data->game, 1);
