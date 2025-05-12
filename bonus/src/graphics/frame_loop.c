@@ -6,7 +6,7 @@
 /*   By: fcaldas- <fcaldas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 23:54:04 by fcaldas-          #+#    #+#             */
-/*   Updated: 2025/05/10 23:54:05 by fcaldas-         ###   ########.fr       */
+/*   Updated: 2025/05/12 20:07:41 by fcaldas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,7 @@ void	frame_loop(void *param)
 	game = (t_game *)param;
 	check_player_life(game);
 	enemy_texture_reset(game);
-	if (game->total_items > 0)
-		objective_check(game);
+	objective_check(game);
 	move_player(game);
 	enemy_shots(game);
 	draw_background(game, game->data);

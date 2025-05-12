@@ -1,0 +1,32 @@
+SO ./assets/textures/walls/33-50/Asset4.png
+NO ./assets/textures/walls/33-50/Asset14.png
+WE ./assets/textures/walls/1-16/Asset15.png
+EA ./assets/textures/walls/17-32/Asset4.png
+
+EH ./assets/enemies/wizard_strucky.png
+ES ./assets/enemies/wizard_attack3.png
+EI ./assets/enemies/wizard_idle.png
+
+IT ./assets/items/key.png
+HE ./assets/items/red_potion.png
+
+C 130,0,50
+F 40,10,40
+
+1111111111111
+1100001000011
+100000S000001
+1000000000001
+1000000000001
+1100001000011
+1000000000001
+1000000000001
+1000000000001
+1100000000011
+1111111111111
+
+
+
+
+
+

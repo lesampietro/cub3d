@@ -1,6 +1,7 @@
 .lib
 bin
 cub3D
+cub3D_bonus
 libft.a
 .nfs*
 
