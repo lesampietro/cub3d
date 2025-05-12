@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   colour_validation_utils.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsampiet <lsampiet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fcaldas- <fcaldas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 23:57:46 by lsampiet          #+#    #+#             */
-/*   Updated: 2025/05/10 23:57:51 by lsampiet         ###   ########.fr       */
+/*   Updated: 2025/05/12 17:19:30 by fcaldas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,13 +67,16 @@ bool	validate_colour_info(char *line, char **colour)
 
 void	allocate_colour(int **color_ptr, char **split)
 {
-	*color_ptr = malloc(sizeof(int) * 3);
 	if (!*color_ptr)
 	{
-		printf(BPINK "Error: memory allocation failed\n" RST);
-		exit(EXIT_FAILURE);
+		*color_ptr = malloc(sizeof(int) * 3);
+		if (!*color_ptr)
+		{
+			printf(BPINK "Error: memory allocation failed\n" RST);
+			exit(EXIT_FAILURE);
+		}
+		(*color_ptr)[0] = ft_atoi(split[0]);
+		(*color_ptr)[1] = ft_atoi(split[1]);
+		(*color_ptr)[2] = ft_atoi(split[2]);
 	}
-	(*color_ptr)[0] = ft_atoi(split[0]);
-	(*color_ptr)[1] = ft_atoi(split[1]);
-	(*color_ptr)[2] = ft_atoi(split[2]);
 }

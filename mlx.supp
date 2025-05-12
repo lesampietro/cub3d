@@ -71,6 +71,136 @@
    ...
 }
 {
+   <IRIS_DRI_LEAKS>
+   Memcheck:Leak
+   match-leak-kinds: possible
+   ...
+   obj:*/dri/iris_dri.so
+   ...
+}
+{
+   <X11_LEAKS>
+   Memcheck:Leak
+   match-leak-kinds: reachable,possible
+   ...
+   obj:*/libX11.so*
+   ...
+}
+{
+   <GLX_LEAKS>
+   Memcheck:Leak
+   match-leak-kinds: possible,reachable
+   ...
+   obj:*/libGLX*.so*
+   ...
+}
+{
+   <GLFW_LEAKS>
+   Memcheck:Leak
+   match-leak-kinds: possible,reachable
+   ...
+   obj:*/libglfw.so*
+   ...
+}
+{
+   <MLX_IMAGE_LEAKS>
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   ...
+   fun:mlx_new_image
+   ...
+}
+{
+   <MLX_FLUSH_LEAKS>
+   Memcheck:Leak
+   match-leak-kinds: possible,reachable
+   ...
+   fun:mlx_flush_batch
+   ...
+}
+{
+   <IRIS_DRI_CALLOC_REACHABLE>
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:calloc
+   ...
+   obj:*/dri/iris_dri.so
+   ...
+   fun:mlx_loop
+   ...
+}
+{
+   <IRIS_DRI_CALLOC_REACHABLE_2>
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:calloc
+   ...
+   obj:*/dri/iris_dri.so
+   ...
+}
+{
+   <IRIS_DRI_INTERNAL_POOLS>
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   ...
+   fun:*EF0B10*
+   ...
+   obj:*/dri/iris_dri.so
+   ...
+}
+{
+   <IRIS_DRI_LOOP_LEAKS>
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   ...
+   obj:*/dri/iris_dri.so
+   ...
+   fun:mlx_loop
+   ...
+}
+{
+   <FILE_DESCRIPTOR_LEAKS>
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:fcntl
+   ...
+   obj:*/dri/iris_dri.so
+   ...
+}
+{
+   <MLX_IMAGE_TO_WINDOW_LEAKS>
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   ...
+   fun:mlx_image_to_window
+   ...
+}
+{
+   <MLX_LOOP_HOOK_LEAKS>
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   ...
+   fun:mlx_loop_hook
+   ...
+}
+{
+   <MLX_LSTNEW_LEAKS>
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   ...
+   fun:mlx_lstnew
+   ...
+}
+{
+   <IRIS_MALLOC_LEAKS>
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   ...
+   obj:*/dri/iris_dri.so
+   ...
+}
+{
    <dl_zero_byte_leak_exact>
    Memcheck:Leak
    match-leak-kinds: definite

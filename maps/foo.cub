@@ -1,10 +1,10 @@
-NO ./textures/pattern4.png
+NO ./assets/textures/walls/1-16/Asset14.png
 
-SO ./textures/pattern3.png
+SO ./assets/textures/walls/1-16/Asset14.png
 
-WE ./textures/pattern2.png
+WE ./assets/textures/walls/1-16/Asset16.png
 
-EA ./textures/pattern1.png
+EA ./assets/textures/walls/1-16/Asset16.png
 
 F 220,100,0
 
