@@ -6,7 +6,7 @@
 /*   By: nasser <nasser@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 23:55:48 by fcaldas-          #+#    #+#             */
-/*   Updated: 2025/05/11 16:32:45 by nasser           ###   ########.fr       */
+/*   Updated: 2025/05/12 14:56:28 by nasser           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,16 @@ void	free_texture_paths(t_game *game)
 		free(game->data->direction[2]);
 	if (game->data->direction[3])
 		free(game->data->direction[3]);
+	if (game->health_text_path)
+		free(game->health_text_path);
+	if (game->hit_text_path)
+		free(game->hit_text_path);
+	if (game->item_text_path)
+		free(game->item_text_path);
+	if (game->idle_text_path)
+		free(game->idle_text_path);
+	if (game->shooting_text_path)
+		free(game->shooting_text_path);
 }
 
 void	free_and_exit(t_game *game, int code)

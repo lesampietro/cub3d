@@ -1,6 +1,6 @@
 NO ./assets/windows_maze/wall.png
 
-SO ./assets/windows_maze/wall.png
+SO ./assets/windows_maze/wall.png a
 
 WE ./assets/windows_maze/wall.png
 
