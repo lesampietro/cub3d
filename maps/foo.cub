@@ -6,9 +6,9 @@ WE ./assets/textures/walls/1-16/Asset16.png
 
 EA ./assets/textures/walls/1-16/Asset16.png
 
-F 220,100,0
+C 130,0,50
 
-C 225,30,0
+F 40,10,40
 
 1111111111111
 1100001000011
