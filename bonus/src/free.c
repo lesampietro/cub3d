@@ -6,7 +6,7 @@
 /*   By: nasser <nasser@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 23:55:48 by fcaldas-          #+#    #+#             */
-/*   Updated: 2025/05/12 14:56:28 by nasser           ###   ########.fr       */
+/*   Updated: 2025/05/12 16:26:50 by nasser           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	free_color_array(t_data *data)
 	data->f = NULL;
 }
 
-void	free_texture_paths(t_game *game)
+static void	delete_mlx_textures(t_game *game)
 {
 	int	i;
 
@@ -52,6 +52,10 @@ void	free_texture_paths(t_game *game)
 			mlx_delete_texture(game->element[i].hit_texture);
 		i++;
 	}
+}
+
+static void	free_texture_paths(t_game *game)
+{
 	if (game->data->direction[0])
 		free(game->data->direction[0]);
 	if (game->data->direction[1])
@@ -78,6 +82,7 @@ void	free_and_exit(t_game *game, int code)
 	free_map(game->data->map);
 	free_color_array(game->data);
 	free_texture_paths(game);
+	delete_mlx_textures(game);
 	if (game->data->fd)
 		close(game->data->fd);
 	if (game->mlx)
