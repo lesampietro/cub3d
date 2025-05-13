@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_cub3d.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fcaldas- <fcaldas-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nasser <nasser@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 23:55:21 by fcaldas-          #+#    #+#             */
-/*   Updated: 2025/05/12 20:33:43 by fcaldas-         ###   ########.fr       */
+/*   Updated: 2025/05/12 23:40:48 by nasser           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ static void	define_initial_plane(t_game *game)
 
 void	init_default_values(t_game *game)
 {
+	game->minimap = true;
 	game->player_health = 100;
 }
 

@@ -1,0 +1,45 @@
+SO ./assets/textures/walls/33-50/Asset4.png
+NO ./assets/textures/walls/33-50/Asset14.png
+WE ./assets/textures/walls/1-16/Asset15.png
+EA ./assets/textures/walls/17-32/Asset4.png
+
+EH ./assets/windows_maze/smiley_hit.png
+ES ./assets/windows_maze/smiley_attack.png
+EI ./assets/windows_maze/smiley.png
+
+IT ./assets/windows_maze/rat.png
+HE ./assets/windows_maze/opengl.png
+
+C 130,0,50
+F 40,10,40
+
+
+                11111111
+           1111100000X0I111
+     11111100100010000100001111
+   1100000X100000000100010X0000111
+  1000010010010000000000001000100011
+ 110001001000000100000000X0010X0H0001
+1000010001100H0000000001000000001001
+ 10N01X000000010000001000100100X001
+  11111111111111111111X0I010010111
+                      1111111001
+                         1110001
+                           10001
+                           1001
+                          10001
+                           1001
+                           10001
+                            1001
+                            10001
+                             1001
+                            10001
+                             1001
+                           110X01
+                          1000001
+                         100011111
+                   11111100111X0H01
+                  1000000000000000I1
+                 100001111111111111
+                10XX00I1
+                 111111

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   types.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fcaldas- <fcaldas-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nasser <nasser@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 18:12:34 by fcaldas-          #+#    #+#             */
-/*   Updated: 2025/05/12 18:12:35 by fcaldas-         ###   ########.fr       */
+/*   Updated: 2025/05/12 23:28:52 by nasser           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ typedef struct s_keys
 	bool	a;
 	bool	s;
 	bool	d;
+	bool	m;
 	bool	left;
 	bool	right;
 	bool	shift;

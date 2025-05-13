@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fcaldas- <fcaldas-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nasser <nasser@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 23:52:23 by fcaldas-          #+#    #+#             */
-/*   Updated: 2025/05/12 18:12:31 by fcaldas-         ###   ########.fr       */
+/*   Updated: 2025/05/12 23:39:25 by nasser           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,6 +118,7 @@ typedef struct s_game
 	t_element		element[35];
 	int				total_items;
 	int				item_count;
+	bool			minimap;
 }	t_game;
 
 int32_t		init_game(char *argv, t_game *game);

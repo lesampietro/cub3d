@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ui.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fcaldas- <fcaldas-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nasser <nasser@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 23:54:12 by fcaldas-          #+#    #+#             */
-/*   Updated: 2025/05/10 23:54:26 by fcaldas-         ###   ########.fr       */
+/*   Updated: 2025/05/12 23:32:47 by nasser           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,8 @@ static void	draw_health_bar(t_game *game)
 
 void	ui_init(t_game *game)
 {
+	if (game->minimap)
+		draw_minimap(game);
 	draw_aim_circle(game);
 	draw_health_bar(game);
 	if (game->total_items > 0)

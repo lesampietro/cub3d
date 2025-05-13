@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   frame_loop.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fcaldas- <fcaldas-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nasser <nasser@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 23:54:04 by fcaldas-          #+#    #+#             */
-/*   Updated: 2025/05/12 20:07:41 by fcaldas-         ###   ########.fr       */
+/*   Updated: 2025/05/12 23:33:04 by nasser           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ void	frame_loop(void *param)
 	draw_background(game, game->data);
 	draw_raycasting(game);
 	render_elements(game);
-	draw_minimap(game);
 	draw_weapon(game);
 	mouse_rotation(game);
 	ui_init(game);
