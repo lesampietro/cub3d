@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   action_key_hook.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nasser <nasser@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lsampiet <lsampiet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 23:53:02 by fcaldas-          #+#    #+#             */
-/*   Updated: 2025/05/13 02:53:42 by nasser           ###   ########.fr       */
+/*   Updated: 2025/05/13 15:14:22 by lsampiet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,14 +48,12 @@ static void	released(mlx_key_data_t keydata, t_game *game)
 		game->keys.shift = false;
 }
 
-void minimap_hook(mlx_key_data_t keydata, t_game *game)
+void	minimap_hook(mlx_key_data_t keydata, t_game *game)
 {
-
 	if (keydata.key == MLX_KEY_M && keydata.action == MLX_PRESS)
 		game->minimap = !game->minimap;
 	if (keydata.key == MLX_KEY_I && keydata.action == MLX_PRESS)
 		game->minimap_enemies = !game->minimap_enemies;
-	
 }
 
 void	key_hook(mlx_key_data_t keydata, void *param)

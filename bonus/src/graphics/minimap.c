@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minimap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nasser <nasser@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lsampiet <lsampiet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 23:54:06 by fcaldas-          #+#    #+#             */
-/*   Updated: 2025/05/13 11:48:08 by nasser           ###   ########.fr       */
+/*   Updated: 2025/05/13 15:15:36 by lsampiet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,7 @@ void	draw_minimap(void *param)
 		}
 		coord.y++;
 	}
-	print_tile(game, (t_coord){(int)game->player_pos.x, (int)game->player_pos.y},
+	print_tile(game, (t_coord){(int)game->player_pos.x, \
+		(int)game->player_pos.y},
 		convert_rgb(255, 255, 0));
 }
