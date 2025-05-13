@@ -1,11 +1,14 @@
 # cub3d
 (DOOM like FPS)
+
 SUGGESTION:
 
 enter:
+
 make bonus
 
 run the Column Map, or any other map at /maps/bonus/:
+
 ./cub3D_bonus ./maps/labyrinth.cub 
 
 # OBJECTIVE:
