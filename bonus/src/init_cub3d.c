@@ -6,7 +6,7 @@
 /*   By: nasser <nasser@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 23:55:21 by fcaldas-          #+#    #+#             */
-/*   Updated: 2025/05/13 02:58:53 by nasser           ###   ########.fr       */
+/*   Updated: 2025/05/13 11:19:51 by nasser           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,8 @@ static void	define_initial_plane(t_game *game)
 
 void	init_default_values(t_game *game)
 {
-	game->minimap = true;
-	game->minimap_enemies = true;
+	game->minimap = false;
+	game->minimap_enemies = false;
 	game->player_health = 100;
 }
 
