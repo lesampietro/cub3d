@@ -1,14 +1,16 @@
 # cub3d
+(DOOM like FPS)
+SUGGESTION:
 
-SUGGESTION: run the Labyrinth Map:
-./cub3D ./maps/labyrinth.cub 
+enter:
+make bonus
 
-Let's build a doom-like map and interface from sketch.
-This projects is based on Wolfenstein 3D, the first FPS game ever.
+run the Column Map, or any other map at /maps/bonus/:
+./cub3D_bonus ./maps/labyrinth.cub 
 
 # OBJECTIVE:
 
-Collect all souls and don't die.
+Collect all souls, kill all enemies and don't die.
 
 # CONTROLS:
 
@@ -24,3 +26,9 @@ Mouse or Arrow Keys
 ## SPRINT
 
 Left SHIFT
+
+## MINIMAP
+
+M - Toggle Minimap ON / OFF
+
+E - Toggle Enemies ON / OFF

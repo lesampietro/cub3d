@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minimap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fcaldas- <fcaldas-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nasser <nasser@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 23:54:06 by fcaldas-          #+#    #+#             */
-/*   Updated: 2025/05/10 23:54:07 by fcaldas-         ###   ########.fr       */
+/*   Updated: 2025/05/13 02:56:21 by nasser           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,15 @@ void	found_element(t_game *game, t_coord coord, int pixel)
 {
 	if (game->data->map[coord.y][coord.x] == '1')
 		print_tile(game, coord, pixel, convert_rgb(255, 255, 255));
+	else if (game->data->map[coord.y][coord.x] == 'X')
+	{
+		if (game->minimap_enemies)
+			print_tile(game, coord, pixel, convert_rgb(255, 0, 0));
+		else
+			print_tile(game, coord, pixel, convert_rgb(0, 0, 0));
+	}
 	else if (game->data->map[coord.y][coord.x] == 'I')
-		print_tile(game, coord, pixel, convert_rgb(0, 0, 255));
+		print_tile(game, coord, pixel, convert_rgb(20, 130, 255));
 	else if (game->data->map[coord.y][coord.x] == 'H')
 		print_tile(game, coord, pixel, convert_rgb(0, 255, 0));
 	else

@@ -6,7 +6,7 @@
 /*   By: nasser <nasser@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 23:52:23 by fcaldas-          #+#    #+#             */
-/*   Updated: 2025/05/12 23:39:25 by nasser           ###   ########.fr       */
+/*   Updated: 2025/05/13 02:53:04 by nasser           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,6 +119,7 @@ typedef struct s_game
 	int				total_items;
 	int				item_count;
 	bool			minimap;
+	bool			minimap_enemies;
 }	t_game;
 
 int32_t		init_game(char *argv, t_game *game);
