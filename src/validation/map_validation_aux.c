@@ -6,7 +6,7 @@
 /*   By: nasser <nasser@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 23:58:10 by lsampiet          #+#    #+#             */
-/*   Updated: 2025/05/11 15:30:54 by nasser           ###   ########.fr       */
+/*   Updated: 2025/05/13 02:23:43 by nasser           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	check_map_info(t_data *data)
 		{
 			if (!is_valid_char(data->map[i][j]))
 			{
-				printf(BPINK"Error: invalid character in map\n"RST);
+				printf(BPINK"Error: invalid character <%c> in map\n"RST, data->map[i][j]);
 				free_and_exit(data->game, EXIT_FAILURE);
 			}
 			j++;

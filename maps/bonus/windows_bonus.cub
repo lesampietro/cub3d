@@ -6,7 +6,7 @@ WE ./assets/windows_maze/wall.png
 
 EA ./assets/windows_maze/wall.png
 
-EH ./assets/windows_maze/smiley_hit.png
+EH ./assets/windows_maze/smiley_hit2.png
 ES ./assets/windows_maze/smiley_attack2.png
 EI ./assets/windows_maze/smiley.png
 
