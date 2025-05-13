@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   objective.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fcaldas- <fcaldas-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nasser <nasser@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 23:53:32 by fcaldas-          #+#    #+#             */
-/*   Updated: 2025/05/12 20:13:38 by fcaldas-         ###   ########.fr       */
+/*   Updated: 2025/05/13 00:36:37 by nasser           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,5 +78,5 @@ void	objective_check(void *param)
 	printf(BGRN"-------------------------------------\n"RST);
 	printf(BGRN"|          MISSION COMPLETE         |\n"RST);
 	printf(BGRN"-------------------------------------\n"RST);
-	free_and_exit(game, 0);
+	free_and_exit(game, EXIT_SUCCESS);
 }

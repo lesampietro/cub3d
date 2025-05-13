@@ -6,7 +6,7 @@
 /*   By: nasser <nasser@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 23:53:02 by fcaldas-          #+#    #+#             */
-/*   Updated: 2025/05/12 23:51:42 by nasser           ###   ########.fr       */
+/*   Updated: 2025/05/13 00:35:54 by nasser           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void	key_hook(mlx_key_data_t keydata, void *param)
 	game = (t_game *)param;
 	minimap_hook(keydata, game);
 	if (keydata.key == MLX_KEY_ESCAPE)
-		free_and_exit(game, 0);
+		free_and_exit(game, EXIT_SUCCESS);
 	if (mlx_is_mouse_down(game->mlx, MLX_MOUSE_BUTTON_LEFT))
 		game->keys.mouse_left = true;
 	else

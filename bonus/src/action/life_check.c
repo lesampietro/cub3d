@@ -6,7 +6,7 @@
 /*   By: nasser <nasser@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 23:53:14 by fcaldas-          #+#    #+#             */
-/*   Updated: 2025/05/11 17:09:07 by nasser           ###   ########.fr       */
+/*   Updated: 2025/05/13 00:36:21 by nasser           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,6 @@ void	check_player_life(void *param)
 	printf(BRED"---------------------------\n"RST);
 	printf(BRED"| GAME OVER! You are dead |\n"RST);
 	printf(BRED"---------------------------\n"RST);
-	free_and_exit(game, 0);
+	free_and_exit(game, EXIT_SUCCESS);
 	return ;
 }

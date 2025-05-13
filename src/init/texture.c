@@ -6,7 +6,7 @@
 /*   By: nasser <nasser@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 23:54:31 by fcaldas-          #+#    #+#             */
-/*   Updated: 2025/05/11 15:33:00 by nasser           ###   ########.fr       */
+/*   Updated: 2025/05/13 00:37:40 by nasser           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static void	load_wall_textures(t_game *game)
 		{
 			printf(BPINK"Error loading texture: %s\n"RST,
 				game->data->direction[i]);
-			free_and_exit(game, 1);
+			free_and_exit(game, EXIT_FAILURE);
 		}
 		i++;
 	}

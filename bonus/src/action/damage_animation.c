@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   damage_animation.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fcaldas- <fcaldas-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nasser <nasser@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 23:53:07 by fcaldas-          #+#    #+#             */
-/*   Updated: 2025/05/10 23:53:08 by fcaldas-         ###   ########.fr       */
+/*   Updated: 2025/05/13 00:09:48 by nasser           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	enemy_texture_reset(t_game *game)
 	now = get_time_in_ms();
 	while (i < game->element_count)
 	{
-		if (now - game->element[i].last_hit_time > 250)
+		if (now - game->element[i].last_hit_time > 100)
 		{
 			game->element[i].got_hit = false;
 			if (game->element[i].current_texture

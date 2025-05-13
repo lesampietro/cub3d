@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   texture.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fcaldas- <fcaldas-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nasser <nasser@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 23:54:31 by fcaldas-          #+#    #+#             */
-/*   Updated: 2025/05/10 23:56:56 by fcaldas-         ###   ########.fr       */
+/*   Updated: 2025/05/13 00:37:15 by nasser           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static void	load_weapon_textures(t_game *game)
 	if (!game->weapon_texture || !game->weapon_shooting_texture)
 	{
 		printf(BPINK"Error loading weapon textures\n"RST);
-		free_and_exit(game, 1);
+		free_and_exit(game, EXIT_FAILURE);
 	}
 }
 
@@ -36,7 +36,7 @@ static void	load_wall_textures(t_game *game)
 		{
 			printf(BPINK"Error loading texture: %s\n"RST,
 				game->data->direction[i]);
-			free_and_exit(game, 1);
+			free_and_exit(game, EXIT_FAILURE);
 		}
 		i++;
 	}
@@ -52,7 +52,7 @@ static void	load_enemy_textures(t_game *game, t_element *element)
 		!element->hit_texture)
 	{
 		printf(BPINK"Error loading texture for ENEMY element\n"RST);
-		free_and_exit(game, 1);
+		free_and_exit(game, EXIT_FAILURE);
 	}
 }
 
@@ -66,7 +66,7 @@ static void	load_pickup_textures(t_game *game, t_element *element, int type)
 			printf(BPINK"Error loading texture for ITEM element\n"RST);
 		else
 			printf(BPINK"Error loading texture for HEALTH element\n"RST);
-		free_and_exit(game, 1);
+		free_and_exit(game, EXIT_FAILURE);
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: nasser <nasser@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 23:55:21 by fcaldas-          #+#    #+#             */
-/*   Updated: 2025/05/12 23:40:48 by nasser           ###   ########.fr       */
+/*   Updated: 2025/05/13 00:35:46 by nasser           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,6 @@ int32_t	init_game(char *argv, t_game *game)
 	mlx_mouse_hook(game->mlx, mouse_hook, game);
 	mlx_loop_hook(game->mlx, frame_loop, game);
 	mlx_loop(game->mlx);
-	free_and_exit(game, 0);
+	free_and_exit(game, EXIT_SUCCESS);
 	return (EXIT_SUCCESS);
 }

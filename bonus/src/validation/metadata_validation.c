@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   metadata_validation.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fcaldas- <fcaldas-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nasser <nasser@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 23:58:24 by lsampiet          #+#    #+#             */
-/*   Updated: 2025/05/12 18:17:15 by fcaldas-         ###   ########.fr       */
+/*   Updated: 2025/05/13 00:37:53 by nasser           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ static void	check_invalid_count(t_data *data, int count, char *line)
 	printf(BPINK"Error: missing or duplicated texture/colour info\n"RST);
 	free(line);
 	line = NULL;
-	free_and_exit(data->game, 1);
+	free_and_exit(data->game, EXIT_FAILURE);
 }
 
 bool	is_map_line(char *line)

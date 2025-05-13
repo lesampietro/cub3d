@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_cub3d.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fcaldas- <fcaldas-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nasser <nasser@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 23:55:21 by fcaldas-          #+#    #+#             */
-/*   Updated: 2025/05/12 20:32:27 by fcaldas-         ###   ########.fr       */
+/*   Updated: 2025/05/13 00:38:18 by nasser           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,6 @@ int32_t	init_game(char *argv, t_game *game)
 	mlx_key_hook(game->mlx, key_hook, game);
 	mlx_loop_hook(game->mlx, frame_loop, game);
 	mlx_loop(game->mlx);
-	free_and_exit(game, 0);
+	free_and_exit(game, EXIT_SUCCESS);
 	return (EXIT_SUCCESS);
 }

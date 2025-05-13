@@ -7,16 +7,16 @@ WE ./assets/windows_maze/wall.png
 EA ./assets/windows_maze/wall.png
 
 EH ./assets/windows_maze/smiley_hit.png
-ES ./assets/windows_maze/smiley_attack.png
+ES ./assets/windows_maze/smiley_attack2.png
 EI ./assets/windows_maze/smiley.png
 
-IT ./assets/windows_maze/rat.png
-HE ./assets/windows_maze/opengl.png
+IT ./assets/windows_maze/opengl.png
+HE ./assets/windows_maze/rat.png
 
 
-C 200,200,200
+C 190,190,190
 
-F 130,100,0
+F 225,150,0
 
 11111111111111111111
 1S1X0I100X100H0000I1
