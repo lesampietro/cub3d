@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   action.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fcaldas- <fcaldas-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nasser <nasser@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 18:12:28 by fcaldas-          #+#    #+#             */
-/*   Updated: 2025/05/12 18:12:44 by fcaldas-         ###   ########.fr       */
+/*   Updated: 2025/05/15 23:44:19 by nasser           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define ACTION_H
 
 # define ENEMY_DAMAGE 11
-# define ENEMY_SHOOT_INTERVAL 1000
+# define ENEMY_ATKSPEED 1300
 
 # define PLAYER_DAMAGE 14
 # define POTION_HEALTH 25

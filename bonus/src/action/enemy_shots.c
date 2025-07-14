@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   enemy_shots.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fcaldas- <fcaldas-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nasser <nasser@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 23:53:10 by fcaldas-          #+#    #+#             */
-/*   Updated: 2025/05/10 23:53:11 by fcaldas-         ###   ########.fr       */
+/*   Updated: 2025/05/15 23:44:19 by nasser           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,9 +59,9 @@ void	update_enemy_shooting(t_game *game, t_element *enemy)
 		enemy->first_visible_time = now;
 		return ;
 	}
-	if (now - enemy->first_visible_time < ENEMY_SHOOT_INTERVAL)
+	if (now - enemy->first_visible_time < ENEMY_ATKSPEED)
 		return ;
-	if (now - enemy->last_shot_time >= ENEMY_SHOOT_INTERVAL)
+	if (now - enemy->last_shot_time >= ENEMY_ATKSPEED)
 	{
 		enemy_shoot_at_player(game, enemy);
 		enemy->last_shot_time = now;
