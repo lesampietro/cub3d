@@ -6,7 +6,7 @@
 /*   By: nasser <nasser@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 23:53:10 by fcaldas-          #+#    #+#             */
-/*   Updated: 2025/05/15 23:44:19 by nasser           ###   ########.fr       */
+/*   Updated: 2025/07/15 00:09:21 by nasser           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,8 @@ void	update_enemy_shooting(t_game *game, t_element *enemy)
 		return ;
 	if (now - enemy->last_shot_time >= ENEMY_ATKSPEED)
 	{
+		if (game->menu_active || game->game_won || game->game_lost)
+			return ;
 		enemy_shoot_at_player(game, enemy);
 		enemy->last_shot_time = now;
 	}

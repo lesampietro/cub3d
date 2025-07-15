@@ -227,3 +227,35 @@
    fun:_dl_map_object_deps
    ...
 }
+{
+   <LIBDRM_LEAKS>
+   Memcheck:Leak
+   match-leak-kinds: possible,definite,indirect,reachable
+   ...
+   obj:*/libdrm.so*
+   ...
+}
+{
+   <LIBNVIDIA_LEAKS>
+   Memcheck:Leak
+   match-leak-kinds: possible,definite,indirect,reachable
+   ...
+   obj:*/libnvidia*.so*
+   ...
+}
+{
+   <LIBGLX_LEAKS>
+   Memcheck:Leak
+   match-leak-kinds: possible,definite,indirect,reachable
+   ...
+   obj:*/libGLX*.so*
+   ...
+}
+{
+   <LIBEXEC_LEAKS>
+   Memcheck:Leak
+   match-leak-kinds: possible,definite,indirect,reachable
+   ...
+   obj:*/libexec/*
+   ...
+}

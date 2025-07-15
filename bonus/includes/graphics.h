@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   graphics.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fcaldas- <fcaldas-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nasser <nasser@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 18:12:32 by fcaldas-          #+#    #+#             */
-/*   Updated: 2025/05/12 18:12:33 by fcaldas-         ###   ########.fr       */
+/*   Updated: 2025/07/15 00:06:04 by nasser           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ typedef struct s_raycasting
 void		ui_init(t_game *game);
 void		frame_loop(void *param);
 void		draw_background(t_game *game, t_data *data);
+void		fill_with_black(t_game *game);
 void		draw_raycasting(t_game *game);
 uint32_t	convert_rgb(int r, int g, int b);
 t_vector	multiply_vector(t_vector vector, double factor);
@@ -103,5 +104,6 @@ void		render_elements(t_game *game);
 void		compute_sprite_data(t_game *game, t_element *e,
 				t_element_raycast *d);
 void		sort_elements(t_game *game);
+void		draw_game_finish(t_game *game);
 
 #endif

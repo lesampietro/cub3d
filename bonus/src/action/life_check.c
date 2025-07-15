@@ -6,7 +6,7 @@
 /*   By: nasser <nasser@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 23:53:14 by fcaldas-          #+#    #+#             */
-/*   Updated: 2025/05/13 00:36:21 by nasser           ###   ########.fr       */
+/*   Updated: 2025/07/15 00:52:54 by nasser           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,9 +57,12 @@ void	check_player_life(void *param)
 	if (game->player_health > 0)
 		return ;
 	game->player_health = 0;
-	printf(BRED"---------------------------\n"RST);
-	printf(BRED"| GAME OVER! You are dead |\n"RST);
-	printf(BRED"---------------------------\n"RST);
-	free_and_exit(game, EXIT_SUCCESS);
+	if (game->phrase_image)
+		mlx_delete_image(game->mlx, game->phrase_image);
+	game->phrase_image = mlx_put_string(game->mlx, "GAME OVER", WINDOW_WIDTH / 2 - 40, WINDOW_HEIGHT / 2 - 10);
+	if (game->continue_phrase_image)
+		mlx_delete_image(game->mlx, game->continue_phrase_image);
+	game->continue_phrase_image = mlx_put_string(game->mlx, "Press ENTER to continue", WINDOW_WIDTH / 2 - 80, WINDOW_HEIGHT - WINDOW_HEIGHT / 10);
+	game->game_lost = true;
 	return ;
 }

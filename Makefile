@@ -53,6 +53,7 @@ BONUS_FILES = main.c \
 			graphics/first_person.c \
 			graphics/ui.c \
 			graphics/progress_bar.c \
+			graphics/menu.c \
 			action/action_key_hook.c \
 			action/move_logic.c \
 			action/mouse_hook.c \

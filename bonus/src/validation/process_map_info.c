@@ -6,7 +6,7 @@
 /*   By: nasser <nasser@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 23:58:27 by lsampiet          #+#    #+#             */
-/*   Updated: 2025/05/11 16:49:42 by nasser           ###   ########.fr       */
+/*   Updated: 2025/07/14 22:54:24 by nasser           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ void	process_info(t_data *data)
 				data->pov = c;
 				data->game->player_pos.x = x + 0.5f;
 				data->game->player_pos.y = y + 0.5f;
+				data->game->player_initial_pos = data->game->player_pos;
 				data->map[y][x] = '0';
 			}
 			if (c == 'X' || c == 'I' || c == 'H')

@@ -6,7 +6,7 @@
 /*   By: nasser <nasser@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 23:52:23 by fcaldas-          #+#    #+#             */
-/*   Updated: 2025/05/13 02:53:04 by nasser           ###   ########.fr       */
+/*   Updated: 2025/07/15 00:45:43 by nasser           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,9 @@ typedef struct s_game
 {
 	mlx_t			*mlx;
 	mlx_image_t		*mlx_image;
+	mlx_image_t		*phrase_image;
+	mlx_image_t		*continue_phrase_image;
+	mlx_image_t		*start_phrase_image;
 	mlx_texture_t	*texture_buf;
 	mlx_texture_t	*texture[4];
 	mlx_texture_t	*weapon_texture;
@@ -109,6 +112,9 @@ typedef struct s_game
 	t_raycasting	*raycasting;
 	t_keys			keys;
 	int				player_health;
+	t_vector		player_initial_pos;
+	t_vector		player_initial_dir;
+	t_vector		player_initial_plane;
 	t_vector		player_pos;
 	t_vector		player_dir;
 	t_vector		camera_plane;
@@ -120,6 +126,9 @@ typedef struct s_game
 	int				item_count;
 	bool			minimap;
 	bool			minimap_enemies;
+	bool			menu_active;
+	bool			game_won;
+	bool			game_lost;
 }	t_game;
 
 int32_t		init_game(char *argv, t_game *game);

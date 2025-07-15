@@ -6,7 +6,7 @@
 /*   By: nasser <nasser@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 18:12:28 by fcaldas-          #+#    #+#             */
-/*   Updated: 2025/05/15 23:44:19 by nasser           ###   ########.fr       */
+/*   Updated: 2025/07/15 00:22:11 by nasser           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # define ENEMY_DAMAGE 11
 # define ENEMY_ATKSPEED 1300
 
-# define PLAYER_DAMAGE 14
+# define PLAYER_DAMAGE 50
 # define POTION_HEALTH 25
 
 # include "cub3d.h"
@@ -39,5 +39,7 @@ bool		is_close(t_game *game, int i);
 bool		check_target(t_game *g, int i, int *hit_index, float *min_dist);
 void		enemy_shots(t_game *game);
 void		enemy_texture_reset(t_game *game);
+
+void		reset_game(t_game *game);
 
 #endif
